@@ -538,8 +538,19 @@ Accoppiatre
             if (selected_component != null)
             {
                 FillGrid(selected_component);
-                CompNum.Text = SqlDatabaseHelper.SelectComponentNumber(selected_component, selected_machine);
-                SelectMachineNumber(SelectedMachineType);
+                try
+                {
+                    CompNum.Text = SqlDatabaseHelper.SelectComponentNumber(selected_component, selected_machine);
+                    SelectMachineNumber(SelectedMachineType);
+
+
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }       
+                
 
             }
         }

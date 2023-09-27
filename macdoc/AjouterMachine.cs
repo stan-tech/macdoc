@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -483,12 +484,20 @@ Accoppiatre
 
         private void Addfile_Click(object sender, EventArgs e)
         {
-            
+            openFileDialog1.Filter = "Pdf files (*.pdf)|Image files (*.jpg)|Image files (*.png)|Image files (*.jpeg)";
+            string FilePath = "";
+            string appFile = "";
             DialogResult  dr = openFileDialog1.ShowDialog();
             if(dr == DialogResult.OK)
             {
-
+                FilePath = openFileDialog1.FileName;
+                
                 Voir.Visible = true;
+               appFile = System.Reflection.Assembly.GetEntryAssembly().Location;
+
+                File.Copy(FilePath,appFile);
+
+
             }
         }
 
