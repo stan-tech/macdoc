@@ -340,6 +340,7 @@
     <Compile Include="SignUp.Designer.cs">
       <DependentUpon>SignUp.cs</DependentUpon>
     </Compile>
+    <Compile Include="SqlDatabaseHelper.cs" />
     <Compile Include="Suppression.cs">
       <SubType>Form</SubType>
     </Compile>

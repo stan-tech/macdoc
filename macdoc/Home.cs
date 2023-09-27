@@ -236,7 +236,7 @@ namespace macdoc
             if (selected_machine != null)
             {
                 FillGrid(selected_component);
-                SelectComponentNumber();
+                CompNum.Text = SqlDatabaseHelper.SelectComponentNumber(selected_component,selected_machine);
                 SelectMachineNumber(SelectedMachineType);
 
             }
@@ -376,7 +376,7 @@ Accoppiatre
 
                 }
 
-                SelectComponentNumber();
+                CompNum.Text = SqlDatabaseHelper.SelectComponentNumber(selected_component, selected_machine);
                 SelectMachineNumber(type);
                 FillGrid(selected_component);
 
@@ -538,7 +538,7 @@ Accoppiatre
             if (selected_component != null)
             {
                 FillGrid(selected_component);
-                SelectComponentNumber();
+                CompNum.Text = SqlDatabaseHelper.SelectComponentNumber(selected_component, selected_machine);
                 SelectMachineNumber(SelectedMachineType);
 
             }
