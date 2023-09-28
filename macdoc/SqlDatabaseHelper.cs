@@ -15,7 +15,7 @@ namespace macdoc
         public static string Users = "users";
         public static string Machine = "machine";
         public static string Staff_activity = "staff_activity";
-
+        public static string Files = "files";
 
         public static string SelectComponentNumber(string selected_component, string selected_machine)
         {
@@ -54,7 +54,27 @@ namespace macdoc
             return compnum;
 
         }
+        public static int InsertIntoFiles(string name, string user_id , string path
+            ,DateTime time,string id_machine)
+        {
 
+            int file_id = 0;
+
+            using (SQLiteConnection connection = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
+            {
+                connection.Open();
+                SQLiteCommand insert_cmd = new SQLiteCommand("insert into files(id,path,id_machine,created_at,created_by)"
+                    +" values('"+name+"','"+path+"',"+id_machine+",'"+time+"',"+user_id+")",connection);
+
+
+                file_id =  insert_cmd.ExecuteNonQuery();
+
+                connection.Close();
+            }
+
+            
+            return file_id;
+        }
 
 
     }

@@ -233,6 +233,7 @@
             // Voir
             // 
             this.Voir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(51)))), ((int)(((byte)(79)))));
+            this.Voir.Enabled = false;
             this.Voir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Voir.Font = new System.Drawing.Font("Calibri", 8.875F, System.Drawing.FontStyle.Bold);
             this.Voir.ForeColor = System.Drawing.Color.White;

@@ -484,20 +484,72 @@ Accoppiatre
 
         private void Addfile_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "Pdf files (*.pdf)|Image files (*.jpg)|Image files (*.png)|Image files (*.jpeg)";
+            openFileDialog1.FileName = "Selectionnez un fichier pdf";
+            openFileDialog1.Filter = "Pdf files |*.pdf";
             string FilePath = "";
-            string appFile = "";
-            DialogResult  dr = openFileDialog1.ShowDialog();
-            if(dr == DialogResult.OK)
+            string directory = AppDomain.CurrentDomain.BaseDirectory + "\\Manuals", appFile = "";
+            
+            string file_id = Guid.NewGuid().ToString();
+
+
+            if (Added)
             {
-                FilePath = openFileDialog1.FileName;
-                
-                Voir.Visible = true;
-               appFile = System.Reflection.Assembly.GetEntryAssembly().Location;
 
-                File.Copy(FilePath,appFile);
+                DialogResult dr = openFileDialog1.ShowDialog();
+
+                if (dr == DialogResult.OK)
+                {
+                    FilePath = openFileDialog1.FileName;
 
 
+                    appFile = directory +"\\"+file_id+".pdf";
+
+                    
+
+                    if(SqlDatabaseHelper.InsertIntoFiles(file_id, "1",appFile, DateTime.Now, last_id) > 0)
+                    {
+
+                        if (!Directory.Exists(directory))
+                        {
+                            Directory.CreateDirectory(directory);
+
+                        }
+
+
+                        File.Copy(FilePath, appFile);
+
+                    }
+                    else
+                    {
+                       DialogResult result = MessageBox.Show("Une erreur se produite , reéssayer  ", "    Erreur"
+                           ,MessageBoxButtons.RetryCancel);
+
+                        while(result == DialogResult.Retry)
+                        {
+                            if (SqlDatabaseHelper.InsertIntoFiles(file_id, "1", appFile, DateTime.Now, last_id)>0)
+                            {
+                                Voir.Visible = true;
+                                Voir.Enabled=true;
+
+                                break;
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        }
+
+                    }
+
+
+                    Voir.Visible = true;
+                    Voir.Enabled = true;
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("veuillez d'abord confimer l'ajout de la machine ");
             }
         }
 
