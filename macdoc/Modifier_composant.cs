@@ -82,7 +82,6 @@ namespace macdoc
         private void Ok_Click(object sender, EventArgs e)
         {
 
-            string sql = "";
 
             string date = "";
 
@@ -101,7 +100,7 @@ namespace macdoc
 
 
             if (DBHelper.PerformModification(compon.ID.ToString(), compon.Type, 
-                CapName.Text, CapRef.Text, date, notes.Text, "1"))
+                CapName.Text, CapRef.Text, inst.Value.ToString(), date, notes.Text, "1"))
             {
                 OnRefreshRequested(EventArgs.Empty);
 

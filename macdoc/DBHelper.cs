@@ -187,7 +187,7 @@ namespace macdoc
             return done;
         }
 
-        public static bool PerformModification(string id, string component, string name, string reference, 
+        public static bool PerformModification(string id, string component, string name, string reference, string date_inst,
             string date_modif, string notes,string modificateur)
         {
             bool done = false;
