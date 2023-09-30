@@ -187,7 +187,7 @@ namespace macdoc
             return done;
         }
 
-        public static bool PerformModification(string id, string component, string name, string reference, string date_inst,
+        public static bool PerformModification(string id, string component, string name, string reference, string date_ins,
             string date_modif, string notes,string modificateur)
         {
             bool done = false;
@@ -233,7 +233,7 @@ namespace macdoc
                             {
 
                                 string insertSql = "insert into modification (date,id_composant,modificateur,notes)" +
-                                    " values ('"+date_modif+"', "+id_composant+","+ modificateur+ ",'"+notes+"') ";
+                                    " values ('"+date_modif+"', "+id_composant+","+ modificateur+",'"+notes+"');";
                                 SQLiteCommand cmd = new SQLiteCommand(insertSql, conn);
 
 
