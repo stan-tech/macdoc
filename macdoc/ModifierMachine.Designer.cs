@@ -51,6 +51,9 @@
             this.CompNum = new macdoc.RoundedLabel();
             this.label4 = new System.Windows.Forms.Label();
             this.Ref = new macdoc.RoundedLabel();
+            this.Addfile = new macdoc.RoundedButton();
+            this.Voir = new macdoc.RoundedButton();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.Compos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,11 +85,12 @@
             this.Composants.AutoSize = true;
             this.Composants.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
             this.Composants.ForeColor = System.Drawing.Color.White;
-            this.Composants.Location = new System.Drawing.Point(404, 238);
+            this.Composants.Location = new System.Drawing.Point(414, 328);
             this.Composants.Name = "Composants";
             this.Composants.Size = new System.Drawing.Size(158, 45);
             this.Composants.TabIndex = 30;
             this.Composants.Text = "Capteurs";
+            this.Composants.Click += new System.EventHandler(this.Composants_Click);
             // 
             // Compos
             // 
@@ -124,12 +128,12 @@
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.Compos.DefaultCellStyle = dataGridViewCellStyle3;
             this.Compos.EnableHeadersVisualStyles = false;
             this.Compos.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.Compos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.Compos.Location = new System.Drawing.Point(412, 303);
+            this.Compos.Location = new System.Drawing.Point(412, 388);
             this.Compos.Name = "Compos";
             this.Compos.ReadOnly = true;
             this.Compos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -145,16 +149,17 @@
             this.Compos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.Compos.RowTemplate.Height = 33;
             this.Compos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.Compos.Size = new System.Drawing.Size(1435, 674);
+            this.Compos.Size = new System.Drawing.Size(1435, 777);
             this.Compos.Style = MetroFramework.MetroColorStyle.Silver;
             this.Compos.TabIndex = 29;
+            this.Compos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Compos_CellContentClick);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(1383, 194);
+            this.label1.Location = new System.Drawing.Point(1383, 284);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(211, 45);
             this.label1.TabIndex = 32;
@@ -176,7 +181,7 @@
             "Reducteurs",
             "Vérins",
             "Courroies"});
-            this.caps.Location = new System.Drawing.Point(1391, 247);
+            this.caps.Location = new System.Drawing.Point(1391, 337);
             this.caps.Name = "caps";
             this.caps.Size = new System.Drawing.Size(317, 36);
             this.caps.TabIndex = 31;
@@ -192,7 +197,7 @@
             this.Ajout_button.IconColor = System.Drawing.Color.WhiteSmoke;
             this.Ajout_button.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.Ajout_button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Ajout_button.Location = new System.Drawing.Point(33, 303);
+            this.Ajout_button.Location = new System.Drawing.Point(33, 527);
             this.Ajout_button.Name = "Ajout_button";
             this.Ajout_button.Size = new System.Drawing.Size(346, 84);
             this.Ajout_button.TabIndex = 34;
@@ -260,7 +265,7 @@
             this.Ajout_motor.IconColor = System.Drawing.Color.WhiteSmoke;
             this.Ajout_motor.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.Ajout_motor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Ajout_motor.Location = new System.Drawing.Point(33, 455);
+            this.Ajout_motor.Location = new System.Drawing.Point(33, 665);
             this.Ajout_motor.Name = "Ajout_motor";
             this.Ajout_motor.Size = new System.Drawing.Size(346, 84);
             this.Ajout_motor.TabIndex = 34;
@@ -281,7 +286,7 @@
             this.Ajout_reduc.IconColor = System.Drawing.Color.WhiteSmoke;
             this.Ajout_reduc.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.Ajout_reduc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Ajout_reduc.Location = new System.Drawing.Point(33, 604);
+            this.Ajout_reduc.Location = new System.Drawing.Point(33, 808);
             this.Ajout_reduc.Name = "Ajout_reduc";
             this.Ajout_reduc.Size = new System.Drawing.Size(346, 84);
             this.Ajout_reduc.TabIndex = 34;
@@ -302,7 +307,7 @@
             this.ajout_verin.IconColor = System.Drawing.Color.WhiteSmoke;
             this.ajout_verin.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ajout_verin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ajout_verin.Location = new System.Drawing.Point(33, 749);
+            this.ajout_verin.Location = new System.Drawing.Point(33, 947);
             this.ajout_verin.Name = "ajout_verin";
             this.ajout_verin.Size = new System.Drawing.Size(346, 84);
             this.ajout_verin.TabIndex = 34;
@@ -323,7 +328,7 @@
             this.ajout_courr.IconColor = System.Drawing.Color.WhiteSmoke;
             this.ajout_courr.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ajout_courr.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ajout_courr.Location = new System.Drawing.Point(33, 893);
+            this.ajout_courr.Location = new System.Drawing.Point(33, 1081);
             this.ajout_courr.Name = "ajout_courr";
             this.ajout_courr.Size = new System.Drawing.Size(346, 84);
             this.ajout_courr.TabIndex = 34;
@@ -354,7 +359,7 @@
             // 
             // Ok
             // 
-            this.Ok.BackColor = System.Drawing.Color.GreenYellow;
+            this.Ok.BackColor = System.Drawing.Color.DarkTurquoise;
             this.Ok.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Ok.Font = new System.Drawing.Font("Calibri", 10.875F, System.Drawing.FontStyle.Bold);
             this.Ok.IconChar = FontAwesome.Sharp.IconChar.Check;
@@ -376,7 +381,7 @@
             this.CompNum.BackColor = System.Drawing.Color.Gold;
             this.CompNum.Font = new System.Drawing.Font("Lucida Console", 15.125F, System.Drawing.FontStyle.Bold);
             this.CompNum.ForeColor = System.Drawing.Color.Black;
-            this.CompNum.Location = new System.Drawing.Point(1767, 203);
+            this.CompNum.Location = new System.Drawing.Point(1767, 293);
             this.CompNum.Name = "CompNum";
             this.CompNum.Size = new System.Drawing.Size(80, 80);
             this.CompNum.TabIndex = 40;
@@ -407,12 +412,64 @@
             this.Ref.Text = "23";
             this.Ref.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // Addfile
+            // 
+            this.Addfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(51)))), ((int)(((byte)(79)))));
+            this.Addfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Addfile.Font = new System.Drawing.Font("Calibri", 8.875F, System.Drawing.FontStyle.Bold);
+            this.Addfile.ForeColor = System.Drawing.Color.White;
+            this.Addfile.IconChar = FontAwesome.Sharp.IconChar.File;
+            this.Addfile.IconColor = System.Drawing.Color.White;
+            this.Addfile.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.Addfile.IconSize = 40;
+            this.Addfile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Addfile.Location = new System.Drawing.Point(33, 388);
+            this.Addfile.Name = "Addfile";
+            this.Addfile.Padding = new System.Windows.Forms.Padding(15, 10, 0, 10);
+            this.Addfile.Size = new System.Drawing.Size(346, 74);
+            this.Addfile.TabIndex = 48;
+            this.Addfile.Tag = "Triage";
+            this.Addfile.Text = "Ajouter un manuel";
+            this.Addfile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Addfile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.Addfile.UseVisualStyleBackColor = false;
+            this.Addfile.Click += new System.EventHandler(this.Addfile_Click);
+            // 
+            // Voir
+            // 
+            this.Voir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(51)))), ((int)(((byte)(79)))));
+            this.Voir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Voir.Font = new System.Drawing.Font("Calibri", 8.875F, System.Drawing.FontStyle.Bold);
+            this.Voir.ForeColor = System.Drawing.Color.White;
+            this.Voir.IconChar = FontAwesome.Sharp.IconChar.Eye;
+            this.Voir.IconColor = System.Drawing.Color.White;
+            this.Voir.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.Voir.IconSize = 40;
+            this.Voir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Voir.Location = new System.Drawing.Point(790, 299);
+            this.Voir.Name = "Voir";
+            this.Voir.Padding = new System.Windows.Forms.Padding(15, 10, 0, 10);
+            this.Voir.Size = new System.Drawing.Size(264, 74);
+            this.Voir.TabIndex = 49;
+            this.Voir.Tag = "Triage";
+            this.Voir.Text = "Voir les manuels";
+            this.Voir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Voir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.Voir.UseVisualStyleBackColor = false;
+            this.Voir.Click += new System.EventHandler(this.Voir_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // ModifierMachine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
-            this.ClientSize = new System.Drawing.Size(1886, 1003);
+            this.ClientSize = new System.Drawing.Size(1886, 1191);
+            this.Controls.Add(this.Voir);
+            this.Controls.Add(this.Addfile);
             this.Controls.Add(this.Ref);
             this.Controls.Add(this.CompNum);
             this.Controls.Add(this.Ok);
@@ -462,5 +519,8 @@
         private FlatCombo TypeCom;
         private System.Windows.Forms.Label label4;
         private RoundedLabel Ref;
+        private RoundedButton Addfile;
+        private RoundedButton Voir;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

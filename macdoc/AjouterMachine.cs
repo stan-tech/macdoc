@@ -489,7 +489,7 @@ Accoppiatre
             string FilePath = "";
             string directory = AppDomain.CurrentDomain.BaseDirectory + "\\Manuals", appFile = "";
             
-            string file_id = Guid.NewGuid().ToString();
+            string fileName,file_id = Guid.NewGuid().ToString();
 
 
             if (Added)
@@ -501,12 +501,13 @@ Accoppiatre
                 {
                     FilePath = openFileDialog1.FileName;
 
-
-                    appFile = directory +"\\"+file_id+".pdf";
-
                     
+                    appFile = directory +"\\"+file_id+".pdf";
+                    fileName = Path.GetFileName(FilePath)+Path.GetFileName(appFile);
 
-                    if(SqlDatabaseHelper.InsertIntoFiles(file_id, "1",appFile, DateTime.Now, last_id) > 0)
+
+
+                    if (DBHelper.InsertIntoFiles(file_id, fileName, "1",appFile, DateTime.Now, last_id) > 0)
                     {
 
                         if (!Directory.Exists(directory))
@@ -526,7 +527,7 @@ Accoppiatre
 
                         while(result == DialogResult.Retry)
                         {
-                            if (SqlDatabaseHelper.InsertIntoFiles(file_id, "1", appFile, DateTime.Now, last_id)>0)
+                            if (DBHelper.InsertIntoFiles(file_id, fileName, "1", appFile, DateTime.Now, last_id)>0)
                             {
                                 Voir.Visible = true;
                                 Voir.Enabled=true;
@@ -555,7 +556,7 @@ Accoppiatre
 
         private void Voir_Click(object sender, EventArgs e)
         {
-            new List_fichiers().ShowDialog();
+            new List_fichiers(MacName.Text,last_id).ShowDialog();
         }
     }
 }

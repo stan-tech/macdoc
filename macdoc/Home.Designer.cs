@@ -60,10 +60,10 @@ namespace macdoc
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             Zeroit.Framework.Transitions.AnimatorWithEditor.ZeroitAnimate_Animation zeroitAnimate_Animation1 = new Zeroit.Framework.Transitions.AnimatorWithEditor.ZeroitAnimate_Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             this.panel1 = new System.Windows.Forms.Panel();
@@ -97,7 +97,6 @@ namespace macdoc
             this.excelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pdfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supprimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uneMachineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unCapteurToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -109,6 +108,7 @@ namespace macdoc
             this.NC = new FontAwesome.Sharp.IconButton();
             this.panel4 = new System.Windows.Forms.Panel();
             this.roundedButton1 = new macdoc.RoundedButton();
+            this.Machines = new macdoc.RoundedButton();
             this.Profile = new macdoc.RoundedButton();
             this.expand = new Zeroit.Framework.Transitions.SpecAnimator.ZeroitSpecBoundsAnimator(this.components);
             this.collapse = new Zeroit.Framework.Transitions.SpecAnimator.ZeroitSpecBoundsAnimator(this.components);
@@ -123,7 +123,6 @@ namespace macdoc
             this.zeroitAnimatorEdit1 = new Zeroit.Framework.Transitions.AnimatorWithEditor.ZeroitAnimatorEdit(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.Account_tip = new System.Windows.Forms.ToolTip(this.components);
-            this.Machines = new macdoc.RoundedButton();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -446,37 +445,37 @@ namespace macdoc
             this.metroGrid1.AllowUserToOrderColumns = true;
             this.metroGrid1.AllowUserToResizeColumns = false;
             this.metroGrid1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.Gray;
-            this.metroGrid1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Gray;
+            this.metroGrid1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.metroGrid1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.metroGrid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.metroGrid1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.metroGrid1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.metroGrid1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.metroGrid1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.metroGrid1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.metroGrid1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metroGrid1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGrid1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.metroGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.metroGrid1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.zeroitAnimatorEdit1.SetDecoration(this.metroGrid1, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.metroGrid1.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGrid1.DefaultCellStyle = dataGridViewCellStyle3;
             this.metroGrid1.EnableHeadersVisualStyles = false;
             this.metroGrid1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.metroGrid1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -484,14 +483,14 @@ namespace macdoc
             this.metroGrid1.Name = "metroGrid1";
             this.metroGrid1.ReadOnly = true;
             this.metroGrid1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metroGrid1.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGrid1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.metroGrid1.RowHeadersWidth = 82;
             this.metroGrid1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.metroGrid1.RowTemplate.Height = 33;
@@ -591,7 +590,7 @@ namespace macdoc
             // 
             // MacNum
             // 
-            this.MacNum.BackColor = System.Drawing.Color.Gold;
+            this.MacNum.BackColor = System.Drawing.Color.DarkTurquoise;
             this.zeroitAnimatorEdit1.SetDecoration(this.MacNum, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
             this.MacNum.Font = new System.Drawing.Font("Lucida Console", 15.125F, System.Drawing.FontStyle.Bold);
             this.MacNum.ForeColor = System.Drawing.Color.Black;
@@ -605,7 +604,7 @@ namespace macdoc
             // 
             // CompNum
             // 
-            this.CompNum.BackColor = System.Drawing.Color.Gold;
+            this.CompNum.BackColor = System.Drawing.Color.DarkTurquoise;
             this.zeroitAnimatorEdit1.SetDecoration(this.CompNum, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
             this.CompNum.Font = new System.Drawing.Font("Lucida Console", 15.125F, System.Drawing.FontStyle.Bold);
             this.CompNum.ForeColor = System.Drawing.Color.Black;
@@ -704,8 +703,7 @@ namespace macdoc
             // 
             this.fichierToolStripMenuItem.AutoSize = false;
             this.fichierToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportToolStripMenuItem,
-            this.importerToolStripMenuItem});
+            this.exportToolStripMenuItem});
             this.fichierToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.fichierToolStripMenuItem.Name = "fichierToolStripMenuItem";
             this.fichierToolStripMenuItem.Size = new System.Drawing.Size(104, 40);
@@ -718,7 +716,7 @@ namespace macdoc
             this.pdfToolStripMenuItem,
             this.wordToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(214, 44);
             this.exportToolStripMenuItem.Text = "Export";
             // 
             // excelToolStripMenuItem
@@ -740,12 +738,6 @@ namespace macdoc
             this.wordToolStripMenuItem.Size = new System.Drawing.Size(204, 44);
             this.wordToolStripMenuItem.Text = "Word";
             // 
-            // importerToolStripMenuItem
-            // 
-            this.importerToolStripMenuItem.Name = "importerToolStripMenuItem";
-            this.importerToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
-            this.importerToolStripMenuItem.Text = "Importer";
-            // 
             // supprimerToolStripMenuItem
             // 
             this.supprimerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -763,32 +755,32 @@ namespace macdoc
             // uneMachineToolStripMenuItem
             // 
             this.uneMachineToolStripMenuItem.Name = "uneMachineToolStripMenuItem";
-            this.uneMachineToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.uneMachineToolStripMenuItem.Size = new System.Drawing.Size(255, 44);
             this.uneMachineToolStripMenuItem.Text = "Capteur";
             this.uneMachineToolStripMenuItem.Click += new System.EventHandler(this.uneMachineToolStripMenuItem_Click);
             // 
             // unCapteurToolStripMenuItem
             // 
             this.unCapteurToolStripMenuItem.Name = "unCapteurToolStripMenuItem";
-            this.unCapteurToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.unCapteurToolStripMenuItem.Size = new System.Drawing.Size(255, 44);
             this.unCapteurToolStripMenuItem.Text = "Moteur";
             // 
             // unMoteurToolStripMenuItem
             // 
             this.unMoteurToolStripMenuItem.Name = "unMoteurToolStripMenuItem";
-            this.unMoteurToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.unMoteurToolStripMenuItem.Size = new System.Drawing.Size(255, 44);
             this.unMoteurToolStripMenuItem.Text = "Reducteur";
             // 
             // unToolStripMenuItem
             // 
             this.unToolStripMenuItem.Name = "unToolStripMenuItem";
-            this.unToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.unToolStripMenuItem.Size = new System.Drawing.Size(255, 44);
             this.unToolStripMenuItem.Text = "Vérin";
             // 
             // courroieToolStripMenuItem
             // 
             this.courroieToolStripMenuItem.Name = "courroieToolStripMenuItem";
-            this.courroieToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.courroieToolStripMenuItem.Size = new System.Drawing.Size(255, 44);
             this.courroieToolStripMenuItem.Text = "Courroie";
             // 
             // Composants
@@ -871,6 +863,30 @@ namespace macdoc
             this.roundedButton1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.roundedButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.roundedButton1.UseVisualStyleBackColor = false;
+            // 
+            // Machines
+            // 
+            this.Machines.AccessibleDescription = "Account";
+            this.Machines.BackColor = System.Drawing.Color.DarkGray;
+            this.zeroitAnimatorEdit1.SetDecoration(this.Machines, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.Machines.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Machines.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.Machines.ForeColor = System.Drawing.Color.Transparent;
+            this.Machines.IconChar = FontAwesome.Sharp.IconChar.Map;
+            this.Machines.IconColor = System.Drawing.Color.White;
+            this.Machines.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.Machines.IconSize = 80;
+            this.Machines.Location = new System.Drawing.Point(23, 23);
+            this.Machines.Name = "Machines";
+            this.Machines.Padding = new System.Windows.Forms.Padding(10);
+            this.Machines.Size = new System.Drawing.Size(80, 80);
+            this.Machines.TabIndex = 10;
+            this.Machines.Tag = "Synthesis";
+            this.Machines.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Machines.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.Account_tip.SetToolTip(this.Machines, "Liste des machines");
+            this.Machines.UseVisualStyleBackColor = false;
+            this.Machines.Click += new System.EventHandler(this.ProfileButton_Click_1);
             // 
             // Profile
             // 
@@ -1022,30 +1038,6 @@ namespace macdoc
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // Machines
-            // 
-            this.Machines.AccessibleDescription = "Account";
-            this.Machines.BackColor = System.Drawing.Color.DarkGray;
-            this.zeroitAnimatorEdit1.SetDecoration(this.Machines, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.Machines.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Machines.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.Machines.ForeColor = System.Drawing.Color.Transparent;
-            this.Machines.IconChar = FontAwesome.Sharp.IconChar.Map;
-            this.Machines.IconColor = System.Drawing.Color.White;
-            this.Machines.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.Machines.IconSize = 80;
-            this.Machines.Location = new System.Drawing.Point(23, 23);
-            this.Machines.Name = "Machines";
-            this.Machines.Padding = new System.Windows.Forms.Padding(10);
-            this.Machines.Size = new System.Drawing.Size(80, 80);
-            this.Machines.TabIndex = 10;
-            this.Machines.Tag = "Synthesis";
-            this.Machines.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Machines.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.Account_tip.SetToolTip(this.Machines, "Liste des machines");
-            this.Machines.UseVisualStyleBackColor = false;
-            this.Machines.Click += new System.EventHandler(this.ProfileButton_Click_1);
-            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -1128,7 +1120,6 @@ namespace macdoc
         private RoundedLabel CompNum;
         private RoundedLabel MacNum;
         private RoundedTextBox Search;
-        private ToolStripMenuItem importerToolStripMenuItem;
         private FontAwesome.Sharp.IconButton Tecnoferrari;
         private FontAwesome.Sharp.IconButton Banc;
         private FontAwesome.Sharp.IconButton CPK;

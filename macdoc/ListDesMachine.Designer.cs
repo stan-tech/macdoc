@@ -55,7 +55,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.CompNum = new macdoc.RoundedLabel();
-            this.roundedButton1 = new macdoc.RoundedButton();
             ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -230,7 +229,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(1165, 109);
+            this.label2.Location = new System.Drawing.Point(1164, 109);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(162, 45);
             this.label2.TabIndex = 49;
@@ -241,32 +240,13 @@
             this.CompNum.BackColor = System.Drawing.Color.Gold;
             this.CompNum.Font = new System.Drawing.Font("Lucida Console", 13.125F, System.Drawing.FontStyle.Bold);
             this.CompNum.ForeColor = System.Drawing.Color.Black;
-            this.CompNum.Location = new System.Drawing.Point(1352, 101);
+            this.CompNum.Location = new System.Drawing.Point(1351, 101);
             this.CompNum.Name = "CompNum";
             this.CompNum.Padding = new System.Windows.Forms.Padding(10);
             this.CompNum.Size = new System.Drawing.Size(116, 53);
             this.CompNum.TabIndex = 50;
             this.CompNum.Text = "23";
             this.CompNum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // roundedButton1
-            // 
-            this.roundedButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(51)))), ((int)(((byte)(79)))));
-            this.roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundedButton1.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.roundedButton1.ForeColor = System.Drawing.Color.Black;
-            this.roundedButton1.IconChar = FontAwesome.Sharp.IconChar.File;
-            this.roundedButton1.IconColor = System.Drawing.Color.White;
-            this.roundedButton1.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.roundedButton1.IconSize = 40;
-            this.roundedButton1.Location = new System.Drawing.Point(941, 100);
-            this.roundedButton1.Name = "roundedButton1";
-            this.roundedButton1.Padding = new System.Windows.Forms.Padding(10);
-            this.roundedButton1.Size = new System.Drawing.Size(98, 55);
-            this.roundedButton1.TabIndex = 46;
-            this.roundedButton1.Tag = "Triage";
-            this.roundedButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.roundedButton1.UseVisualStyleBackColor = false;
             // 
             // ListDesMachine
             // 
@@ -276,7 +256,6 @@
             this.ClientSize = new System.Drawing.Size(1480, 1079);
             this.Controls.Add(this.CompNum);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.roundedButton1);
             this.Controls.Add(this.iconButton2);
             this.Controls.Add(this.Search);
             this.Controls.Add(this.label3);
@@ -304,6 +283,5 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private RoundedLabel CompNum;
-        private RoundedButton roundedButton1;
     }
 }

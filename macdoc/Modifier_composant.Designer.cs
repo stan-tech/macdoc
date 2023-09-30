@@ -40,13 +40,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.CapName = new macdoc.RoundedTextBox();
             this.CapRef = new macdoc.RoundedTextBox();
+            this.roundedTextBox1 = new macdoc.RoundedTextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // inst
             // 
             this.inst.Checked = true;
             this.inst.CustomFormat = "dd/MM/yyyy";
-            this.inst.FillColor = System.Drawing.Color.LightGray;
+            this.inst.FillColor = System.Drawing.Color.DarkTurquoise;
             this.inst.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.inst.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.inst.HoverState.FillColor = System.Drawing.Color.GreenYellow;
@@ -63,7 +65,7 @@
             // 
             this.modif.Checked = true;
             this.modif.CustomFormat = "dd/MM/yyyy";
-            this.modif.FillColor = System.Drawing.Color.LightGray;
+            this.modif.FillColor = System.Drawing.Color.DarkTurquoise;
             this.modif.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.modif.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.modif.HoverState.BorderColor = System.Drawing.Color.Transparent;
@@ -85,7 +87,7 @@
             this.Annuler.IconColor = System.Drawing.Color.Black;
             this.Annuler.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.Annuler.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Annuler.Location = new System.Drawing.Point(33, 690);
+            this.Annuler.Location = new System.Drawing.Point(33, 891);
             this.Annuler.Name = "Annuler";
             this.Annuler.Size = new System.Drawing.Size(182, 76);
             this.Annuler.TabIndex = 9;
@@ -97,14 +99,14 @@
             // 
             // Ok
             // 
-            this.Ok.BackColor = System.Drawing.Color.GreenYellow;
+            this.Ok.BackColor = System.Drawing.Color.DarkTurquoise;
             this.Ok.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Ok.Font = new System.Drawing.Font("Calibri", 10.875F, System.Drawing.FontStyle.Bold);
             this.Ok.IconChar = FontAwesome.Sharp.IconChar.Check;
             this.Ok.IconColor = System.Drawing.Color.Black;
             this.Ok.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.Ok.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Ok.Location = new System.Drawing.Point(395, 690);
+            this.Ok.Location = new System.Drawing.Point(395, 891);
             this.Ok.Name = "Ok";
             this.Ok.Size = new System.Drawing.Size(191, 76);
             this.Ok.TabIndex = 9;
@@ -218,17 +220,53 @@
             this.CapRef.Size = new System.Drawing.Size(362, 60);
             this.CapRef.TabIndex = 42;
             // 
+            // roundedTextBox1
+            // 
+            this.roundedTextBox1.Animated = true;
+            this.roundedTextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.roundedTextBox1.DefaultText = "";
+            this.roundedTextBox1.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.roundedTextBox1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.roundedTextBox1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.roundedTextBox1.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.roundedTextBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.roundedTextBox1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.roundedTextBox1.ForeColor = System.Drawing.Color.Black;
+            this.roundedTextBox1.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.roundedTextBox1.Location = new System.Drawing.Point(224, 625);
+            this.roundedTextBox1.Margin = new System.Windows.Forms.Padding(5);
+            this.roundedTextBox1.Name = "roundedTextBox1";
+            this.roundedTextBox1.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
+            this.roundedTextBox1.PasswordChar = '\0';
+            this.roundedTextBox1.PlaceholderText = "";
+            this.roundedTextBox1.SelectedText = "";
+            this.roundedTextBox1.Size = new System.Drawing.Size(362, 236);
+            this.roundedTextBox1.TabIndex = 42;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(25, 625);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(111, 45);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "Notes";
+            // 
             // Modifier_composant
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
-            this.ClientSize = new System.Drawing.Size(616, 796);
+            this.ClientSize = new System.Drawing.Size(616, 992);
             this.Controls.Add(this.CapRef);
+            this.Controls.Add(this.roundedTextBox1);
             this.Controls.Add(this.CapName);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.Ok);
@@ -257,5 +295,7 @@
         private RoundedTextBox CapRef;
         private RoundedButton Annuler;
         private RoundedButton Ok;
+        private RoundedTextBox roundedTextBox1;
+        private System.Windows.Forms.Label label5;
     }
 }

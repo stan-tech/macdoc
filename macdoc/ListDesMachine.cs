@@ -37,49 +37,17 @@ namespace macdoc
         private void types_SelectedIndexChanged(object sender, EventArgs e)
         {
             //SelectedType = types.SelectedItem.ToString();
-            FillGrid();
-
+           DBHelper.SelectMachineByType(metroGrid1, SelectedType);
         }
 
-        public void FillGrid()
-        {
-
-            string sqlcommand = "select nom ,type , reference, date_installation as \"date d'installation\" from machine"
-                + " where type = '"+SelectedType+"';";
-
-            
-            using (SQLiteConnection connection = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
-            {
-
-                connection.Open();
-
-
-
-
-                SQLiteCommand cmd = new SQLiteCommand(sqlcommand, connection);
-
-                
-
-                metroGrid1.Refresh();
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlcommand, connection);
-
-                DataTable dataTable = new DataTable();
-                adapter.Fill(dataTable);
-                metroGrid1.DataSource = dataTable;
-              
-                connection.Close();
-
-
-            }
-
-        }
+     
 
         private void ListDesMachine_Load(object sender, EventArgs e)
         {
             treeView1.ExpandAll();
             treeView1.SelectedNode = treeView1.Nodes[0] ;
 
-            FillGrid();
+            DBHelper.SelectMachineByType(metroGrid1, SelectedType);
         }
 
         private void metroGrid1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -121,7 +89,7 @@ namespace macdoc
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
            SelectedType = treeView1.SelectedNode.Text;
-            FillGrid();
+            DBHelper.SelectMachineByType(metroGrid1, SelectedType);
             CompNum.Text = metroGrid1.RowCount.ToString();
         }
 

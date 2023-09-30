@@ -30,6 +30,12 @@ using iTextSharp.text.html.simpleparser;
 using System.Web.UI;
 using System.Web;
 
+using System.Windows.Documents;
+using DevExpress.XtraExport.Implementation;
+using Spire.Pdf.Tables;
+using static DevExpress.Utils.Svg.CommonSvgImages;
+using iTextSharp.text.pdf.draw;
+
 namespace macdoc
 {
     public partial class Home : Form
@@ -63,17 +69,6 @@ namespace macdoc
         private string SelectedMachineType;
 
 
-        //protected override CreateParams CreateParams
-        //{
-
-        //    get
-        //    {
-        //        CreateParams cp = base.CreateParams;
-        //        cp.ExStyle |= 0x02000000;
-        //        return cp;
-        //    }
-
-        //}
 
         protected override void OnPaint(PaintEventArgs e) { }
 
@@ -91,13 +86,7 @@ namespace macdoc
             
 
             InitializeComponent();
-           // Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
-            //skinManager = MaterialSkinManager.Instance;
-
-            //skinManager.AddFormToManage(this);
-            //skinManager.Theme = MaterialSkinManager.Themes.DARK;
-            //skinManager.ColorScheme = new ColorScheme(Primary.Green600, Primary.Green900,
-            //    Primary.Green900, Accent.LightBlue200, TextShade.WHITE);
+        
 
         }
 
@@ -128,7 +117,9 @@ namespace macdoc
                 await Task.Run(()=> Synth_Click(this, null));
 
 
-                await Task.Run(()=>FillGrid(selected_component));
+                await Task.Run(()=> DBHelper.FillHomeGrid(metroGrid1,
+                selected_component,
+                selected_machine));
 
             }
             
@@ -136,46 +127,10 @@ namespace macdoc
         private void Home_Load(object sender, EventArgs e)
         {
 
-
             SelectItems();
 
         }
 
-        public void FillGrid(string selection)
-        {
-
-            selection = caps.SelectedItem.ToString().Substring(0, caps.SelectedItem.ToString().Length - 1);
-            string sqlcommand = "select "+selection+".id, " + selection+ ".nom , "+selection+".reference , date_insertion as \"date d'insertion\", date_modification as \"date " +
-                    "de modification\" , life_duration as \"durée de vie\" , num_modification as \"nombre de modifications \"  from " + selection + " inner join machine on machine.id = " +
-                    selection+".id_machine where machine.nom = '"+selected_machine+"';";
-
-            if (Equals(selection, "Vérin")){
-
-                selection = "verin";
-                sqlcommand = "select nom , reference , dernier_vidange as \"dernier vidange\" , huil_durée as \"huile longevité\" from "+selection+";";
-
-            }
-
-
-            using (SQLiteConnection connection = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
-            {
-
-                connection.Open(); 
-
-               
-                SQLiteCommand cmd = new SQLiteCommand(sqlcommand, connection);
-
-                metroGrid1.Refresh();
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlcommand, connection);
-                DataTable dataTable = new DataTable();
-                adapter.Fill(dataTable);
-                metroGrid1.DataSource = dataTable;
-                connection.Close();
-
-
-            }
-
-        }
         public void CollapseMenu()
         {
             var start = 5;
@@ -235,8 +190,10 @@ namespace macdoc
 
             if (selected_machine != null)
             {
-                FillGrid(selected_component);
-                CompNum.Text = SqlDatabaseHelper.SelectComponentNumber(selected_component,selected_machine);
+                DBHelper.FillHomeGrid(metroGrid1,
+                                selected_component,
+                                selected_machine); 
+                CompNum.Text = DBHelper.SelectComponentNumber(selected_component,selected_machine);
                 SelectMachineNumber(SelectedMachineType);
 
             }
@@ -272,16 +229,6 @@ namespace macdoc
 
         }
 
-        /*
-Techno-ferrari
-Banc
-   Triage
-   New-check
-CPK
-Accoppiatre
-    Extra-pack
-    Maxi
-         */
 
         public void selectMachines(string type)
         {
@@ -376,9 +323,11 @@ Accoppiatre
 
                 }
 
-                CompNum.Text = SqlDatabaseHelper.SelectComponentNumber(selected_component, selected_machine);
+                CompNum.Text = DBHelper.SelectComponentNumber(selected_component, selected_machine);
                 SelectMachineNumber(type);
-                FillGrid(selected_component);
+                DBHelper.FillHomeGrid(metroGrid1,
+                 selected_component,
+                 selected_machine);
 
             }
         }
@@ -427,7 +376,9 @@ Accoppiatre
 
         public void CapChanged(object sender, EventArgs e)
         {
-            FillGrid(selected_component);
+            DBHelper.FillHomeGrid(metroGrid1,
+                 selected_component,
+                 selected_machine);
 
         }
         private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -537,10 +488,12 @@ Accoppiatre
 
             if (selected_component != null)
             {
-                FillGrid(selected_component);
+                DBHelper.FillHomeGrid(metroGrid1,
+                                selected_component,
+                                selected_machine);
                 try
                 {
-                    CompNum.Text = SqlDatabaseHelper.SelectComponentNumber(selected_component, selected_machine);
+                    CompNum.Text = DBHelper.SelectComponentNumber(selected_component, selected_machine);
                     SelectMachineNumber(SelectedMachineType);
 
 
@@ -558,7 +511,9 @@ Accoppiatre
         private void Home_Shown(object sender, EventArgs e)
         {
             Synth_Click(this, e);
-            FillGrid("capteur");
+            DBHelper.FillHomeGrid(metroGrid1,
+                caps.SelectedItem.ToString().Substring(0, caps.SelectedItem.ToString().Length - 1),
+                selected_machine);
 
         }
 
@@ -617,7 +572,6 @@ Accoppiatre
                         ", huile_durée as \"huile longevité\" from verin full join machine on machine.id=verin.id_machine where machine.nom = " + machine + ";";
 
                 }
-               // SQLiteCommand sQLite = new SQLiteCommand(command,connection);
 
                 connection.Open();
 
@@ -641,11 +595,11 @@ Accoppiatre
             panel1.Width = 421;
             MenuButton.Dock = DockStyle.None;
             MenuButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            MenuButton.Padding = new Padding(0);
+            MenuButton.Padding = new System.Windows.Forms.Padding(0);
             modif_button.IconSize = 48;
             Ajout_button.IconSize = 48;
-            Ajout_button.Padding = new Padding(10, 0, 10, 0);
-            modif_button.Padding = new Padding(10, 0, 10, 0);
+            Ajout_button.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            modif_button.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             Synth.IconSize = 140;
             Tecnoferrari.IconSize = 140;
             Banc.IconSize = 140;
@@ -653,17 +607,11 @@ Accoppiatre
             accoppiatore.IconSize = 140;
             Palettiseur.IconSize = 140;
 
-//            metroGrid1.Location = new Point(
-//metroGrid1.Location.X + 132, metroGrid1.Location.Y);
-//            Composants.Location = new Point(
-//Composants.Location.X + 132, Composants.Location.Y);
-//            comboBoxes.Location = new Point(
-//comboBoxes.Location.X + 132, comboBoxes.Location.Y);
             foreach (IconButton button in panel1.Controls.OfType<IconButton>())
             {
                 button.Text = button.Tag.ToString();
                 button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-                button.Padding = new Padding(10, 0, 10, 0);
+                button.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
 
                 pictureBox1.Visible = true;
 
@@ -675,7 +623,7 @@ Accoppiatre
             panel1.Width = 102;
             MenuButton.Dock = DockStyle.Top;
             MenuButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            MenuButton.Padding = new Padding(0);
+            MenuButton.Padding = new System.Windows.Forms.Padding(0);
             modif_button.IconSize = 70;
             Ajout_button.IconSize = 70;
             Synth.IconSize = 70;
@@ -685,18 +633,13 @@ Accoppiatre
             accoppiatore.IconSize = 70;
             Palettiseur.IconSize = 70;
 
-//            metroGrid1.Location = new Point(
-//metroGrid1.Location.X - 132, metroGrid1.Location.Y);
-//            Composants.Location = new Point(
-// Composants.Location.X - 132, Composants.Location.Y);
-//            comboBoxes.Location = new Point(
-//comboBoxes.Location.X - 132, comboBoxes.Location.Y);
+
 
             foreach (IconButton button in panel1.Controls.OfType<IconButton>())
             {
                 button.Text = "";
                 button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-                button.Padding = new Padding(8);
+                button.Padding = new System.Windows.Forms.Padding(8);
                 pictureBox1.Visible = false;
 
             }
@@ -838,6 +781,203 @@ Accoppiatre
         private void pdfToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+            PdfPTable table = new PdfPTable(metroGrid1.ColumnCount);
+            PdfPCell pdfPCell = null;
+            Chunk glue = new Chunk(new VerticalPositionMark());
+
+            Document document = new Document(PageSize.A4,0f,0f,0f,0f);
+            document.SetMargins(20f, 20f, 20f, 20f);
+
+            string id = Guid.NewGuid().ToString();
+
+            string path = AppDomain.CurrentDomain.BaseDirectory + "MacDoc_file_" + id + ".pdf";
+
+
+            PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(path, FileMode.Create));
+
+            document.Open();
+
+            table.WidthPercentage = 100;
+            table.HorizontalAlignment = Element.ALIGN_LEFT;
+            iTextSharp.text.Font FS = FontFactory.GetFont("Calibri",12,iTextSharp.text.Font.BOLD,
+            BaseColor.BLACK);
+
+
+
+            iTextSharp.text.Paragraph lineSeparator = new iTextSharp.text.Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator
+                (0.0F, 100.0F, BaseColor.BLACK,
+                Element.ALIGN_LEFT, 1)));
+
+            document.Add(lineSeparator);
+
+            document.Add(new iTextSharp.text.Paragraph(""));
+            iTextSharp.text.Image picture = iTextSharp.text.Image.GetInstance(AppDomain.CurrentDomain.BaseDirectory + "\\Logo.png");
+
+            picture.ScaleToFit(80f, 80f);
+            picture.Alignment = Element.ALIGN_LEFT;
+            picture.SpacingAfter = 1;
+
+            document.Add(picture);
+
+            document.Add(new Phrase("\t     MacDoc", FS));
+
+            document.Add(lineSeparator);
+
+            document.Add(new iTextSharp.text.Paragraph(""));
+
+
+     
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            document.Add(new Phrase("Redigé le: " + DateTime.Now, FS));
+
+            document.Add(lineSeparator);
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            document.Add(new Phrase("Executant: " + "Aymen", FS));
+
+
+            document.Add(lineSeparator);
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+
+            Chunk machineTitle = new Chunk(machineCombo.SelectedItem.ToString(), FS);
+
+            Phrase machine_phrase = new Phrase();
+            Chunk machineT = new Chunk("Machine: ", FS);
+
+            machine_phrase.Add(machineT);
+
+            FS = FontFactory.GetFont("Calibri", 10, 
+            BaseColor.BLACK);
+
+            machine_phrase.Add(new Chunk(machineCombo.SelectedItem.ToString(), FS));
+
+            machine_phrase.Add(glue);
+
+            FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
+            BaseColor.BLACK);
+
+            Chunk reference = new Chunk("Reference: ", FS);
+
+            machine_phrase.Add(reference);
+
+            FS = FontFactory.GetFont("Calibri", 10,
+          BaseColor.BLACK);
+
+            machine_phrase.Add(new Chunk("ORITNF000", FS));
+
+
+
+            document.Add(machine_phrase);
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            Phrase machineType = new Phrase();
+
+            FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
+           BaseColor.BLACK);
+
+            Chunk macType = new Chunk("Machine type: ", FS);
+            machineType.Add(macType);
+
+            FS = FontFactory.GetFont("Calibri", 10, 
+         BaseColor.BLACK);
+
+             macType = new Chunk(SelectedMachineType, FS);
+
+            machineType.Add(macType);
+
+
+            document.Add(machineType);
+
+
+
+            Phrase CompoType = new Phrase();
+
+            FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
+           BaseColor.BLACK);
+
+            Chunk CType = new Chunk("Composants: ", FS);
+
+            CompoType.Add(CType);
+
+            FS = FontFactory.GetFont("Calibri", 10,
+         BaseColor.BLACK);
+
+            CType = new Chunk(Composants.Text, FS);
+
+            CompoType.Add(CType);
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            document.Add(CompoType);
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+
+            //table.SetWidths(new float[] { 20f, 150f, 100f});
+
+            #region Write table
+
+
+            FS = FontFactory.GetFont("Calibri", 10,
+           BaseColor.BLACK);
+
+            foreach (DataGridViewColumn header in metroGrid1.Columns)
+            {
+
+                pdfPCell = new PdfPCell(new Phrase(header.HeaderText, FS));
+                pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                table.AddCell(pdfPCell);
+
+            }
+
+            foreach (DataGridViewRow row in metroGrid1.Rows)
+            {
+                foreach (DataGridViewCell column in row.Cells)
+                {
+
+                    pdfPCell = new PdfPCell(new Phrase(column.Value.ToString(), FS));
+                    pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                    pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                    table.AddCell(pdfPCell);
+
+                }
+            }
+
+            #endregion
+
+
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+
+            Phrase phrase = new Phrase("Responsable: ", FS);
+            phrase.Add(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator
+                (0.0F, 40.0F, BaseColor.BLACK,
+                Element.ALIGN_LEFT, 1)));
+
+           
+
+            document.Add(table);
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+            document.Add(new iTextSharp.text.Paragraph(""));
+
+
+            document.Add(phrase);
+
+            document.Close();
+
+        
+                System.Diagnostics.Process.Start(path);
+            
+
 
         }
 
@@ -845,26 +985,6 @@ Accoppiatre
         {
 
         }
-        //private void ExportGridToPDF()
-        //{
-
-        //    Response.ContentType = "application/pdf";
-        //    Response.AddHeader("content-disposition", "attachment;filename=Vithal_Wadje.pdf");
-        //    Response.Cache.SetCacheability(HttpCacheability.NoCache);
-        //    StringWriter sw = new StringWriter();
-        //    HtmlTextWriter hw = new HtmlTextWriter(sw);
-        //    metroGrid1.RenderControl(hw);
-        //    StringReader sr = new StringReader(sw.ToString());
-        //    Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
-        //    HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
-        //    PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
-        //    pdfDoc.Open();
-        //    htmlparser.Parse(sr);
-        //    pdfDoc.Close();
-        //    Response.Write(pdfDoc);
-        //    Response.End();
-        //    GridView1.AllowPaging = true;
-        //    GridView1.DataBind();
-        //}
+  
     }
 }

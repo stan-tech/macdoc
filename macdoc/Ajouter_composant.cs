@@ -49,7 +49,17 @@ namespace macdoc
         public void Ok_Click(object sender, EventArgs e)
         {
 
-            Date_insertion.Value = DateTime.Now;
+            DateTime date_insertion;
+
+            if(checkBox1.Checked)
+            {
+                date_insertion = DateTime.Now;
+            }
+            else
+            {
+                date_insertion = Date_insertion.Value;
+            }
+            
 
             using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
             {
@@ -65,8 +75,8 @@ namespace macdoc
                         {
                             string sql = "insert into "+component+" (nom,reference,date_insertion,date_modification,id_machine,life_duration) values('" 
                                 + CapName.Text + "','"+CapRef.Text+"','"
-                                + Date_insertion.Value.ToString() + "','"
-                                +Date_insertion.Value.ToString()+"','"+id+"','"+duration+"');";
+                                + date_insertion.ToString() + "','"
+                                + date_insertion.ToString() + "','"+id+"','"+duration+"');";
 
 
                             SQLiteCommand command = new SQLiteCommand(sql, conn);
@@ -158,6 +168,17 @@ namespace macdoc
 
         }
 
-       
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                Date_insertion.Enabled = false;
+
+            }
+            else
+            {
+                Date_insertion.Enabled = true;
+            }
+        }
     }
 }

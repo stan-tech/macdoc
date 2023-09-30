@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
@@ -273,6 +274,86 @@ Maxi
             caps.SelectedIndex = 0;
             component = caps.SelectedItem.ToString().Substring(0, caps.SelectedItem.ToString().Length - 1);
 
+
+        }
+
+        private void Addfile_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.FileName = "Selectionnez un fichier pdf";
+            openFileDialog1.Filter = "Pdf files |*.pdf";
+            string FilePath = "";
+            string directory = AppDomain.CurrentDomain.BaseDirectory + "\\Manuals", appFile = "";
+
+            string fileName, file_id = Guid.NewGuid().ToString();
+
+            DialogResult dr = openFileDialog1.ShowDialog();
+
+            if (dr == DialogResult.OK)
+            {
+                FilePath = openFileDialog1.FileName;
+
+
+                appFile = directory + "\\" + file_id + ".pdf";
+                fileName = Path.GetFileName(FilePath) + Path.GetFileName(appFile);
+
+
+
+                if (DBHelper.InsertIntoFiles(file_id, fileName, "1", appFile, DateTime.Now, machine.ID) > 0)
+                {
+
+                    if (!Directory.Exists(directory))
+                    {
+                        Directory.CreateDirectory(directory);
+
+                    }
+
+
+                    File.Copy(FilePath, appFile);
+
+                }
+                else
+                {
+                    DialogResult result = MessageBox.Show("Une erreur se produite , reéssayer  ", "    Erreur"
+                        , MessageBoxButtons.RetryCancel);
+
+                    while (result == DialogResult.Retry)
+                    {
+                        if (DBHelper.InsertIntoFiles(file_id, fileName, "1", appFile, DateTime.Now, machine.ID) > 0)
+                        {
+                            Voir.Visible = true;
+                            Voir.Enabled = true;
+
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+
+                }
+
+
+                Voir.Visible = true;
+                Voir.Enabled = true;
+
+            }
+
+        }
+
+        private void Voir_Click(object sender, EventArgs e)
+        {
+            new List_fichiers(MacName.Text, machine.ID).ShowDialog();
+
+        }
+
+        private void Compos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Composants_Click(object sender, EventArgs e)
+        {
 
         }
     }

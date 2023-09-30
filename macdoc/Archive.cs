@@ -10,20 +10,11 @@ using System.Windows.Forms;
 
 namespace macdoc
 {
-    public partial class PDFViewer : Form
+    public partial class Archive : Form
     {
-        string filePath;
-        public PDFViewer(string filePath)
+        public Archive()
         {
             InitializeComponent();
-            this.filePath = filePath;
-        }
-
-        private void PDFViewer_Load(object sender, EventArgs e)
-        {
-
-            pdfViewer1.DocumentFilePath = filePath;
-
         }
     }
 }

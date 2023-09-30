@@ -99,12 +99,13 @@
             this.checkBox1.TabIndex = 25;
             this.checkBox1.Text = "Aujourd\'hui";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // Date_insertion
             // 
             this.Date_insertion.Checked = true;
             this.Date_insertion.CustomFormat = "dd/MM/yyyy";
-            this.Date_insertion.FillColor = System.Drawing.Color.LightGray;
+            this.Date_insertion.FillColor = System.Drawing.Color.DarkTurquoise;
             this.Date_insertion.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Date_insertion.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.Date_insertion.HoverState.BorderColor = System.Drawing.Color.Transparent;
@@ -134,7 +135,7 @@
             "Ans"});
             this.cap_vie.Location = new System.Drawing.Point(437, 367);
             this.cap_vie.Name = "cap_vie";
-            this.cap_vie.Size = new System.Drawing.Size(191, 36);
+            this.cap_vie.Size = new System.Drawing.Size(218, 36);
             this.cap_vie.TabIndex = 44;
             // 
             // dureeDeVie
@@ -180,7 +181,7 @@
             this.CapRef.PasswordChar = '\0';
             this.CapRef.PlaceholderText = "";
             this.CapRef.SelectedText = "";
-            this.CapRef.Size = new System.Drawing.Size(362, 46);
+            this.CapRef.Size = new System.Drawing.Size(389, 46);
             this.CapRef.TabIndex = 42;
             // 
             // CapName
@@ -203,12 +204,12 @@
             this.CapName.PasswordChar = '\0';
             this.CapName.PlaceholderText = "";
             this.CapName.SelectedText = "";
-            this.CapName.Size = new System.Drawing.Size(362, 46);
+            this.CapName.Size = new System.Drawing.Size(389, 46);
             this.CapName.TabIndex = 41;
             // 
             // Ok
             // 
-            this.Ok.BackColor = System.Drawing.Color.GreenYellow;
+            this.Ok.BackColor = System.Drawing.Color.DarkTurquoise;
             this.Ok.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Ok.Font = new System.Drawing.Font("Calibri", 10.875F, System.Drawing.FontStyle.Bold);
             this.Ok.IconChar = FontAwesome.Sharp.IconChar.Check;

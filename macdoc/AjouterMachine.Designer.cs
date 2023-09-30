@@ -85,7 +85,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Compos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.Compos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.Compos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.Compos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.Compos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Compos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -106,7 +106,7 @@
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.Compos.DefaultCellStyle = dataGridViewCellStyle3;
             this.Compos.EnableHeadersVisualStyles = false;
             this.Compos.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -242,7 +242,7 @@
             this.Voir.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.Voir.IconSize = 40;
             this.Voir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Voir.Location = new System.Drawing.Point(705, 360);
+            this.Voir.Location = new System.Drawing.Point(964, 360);
             this.Voir.Name = "Voir";
             this.Voir.Padding = new System.Windows.Forms.Padding(15, 10, 0, 10);
             this.Voir.Size = new System.Drawing.Size(264, 74);

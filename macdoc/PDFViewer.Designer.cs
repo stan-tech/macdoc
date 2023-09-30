@@ -29,13 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PDFViewer));
             this.pdfViewer1 = new DevExpress.XtraPdfViewer.PdfViewer();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
-            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.pdfBarController1 = new DevExpress.XtraPdfViewer.Bars.PdfBarController(this.components);
             this.pdfCommandBar1 = new DevExpress.XtraPdfViewer.Bars.PdfCommandBar();
             this.pdfFileOpenBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfFileOpenBarItem();
             this.pdfFileSaveAsBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfFileSaveAsBarItem();
@@ -47,6 +43,7 @@
             this.repositoryItemPageNumberEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPageNumberEdit();
             this.pdfZoomOutBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfZoomOutBarItem();
             this.pdfZoomInBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfZoomInBarItem();
+            this.pdfExactZoomListBarSubItem1 = new DevExpress.XtraPdfViewer.Bars.PdfExactZoomListBarSubItem();
             this.pdfZoom10CheckItem1 = new DevExpress.XtraPdfViewer.Bars.PdfZoom10CheckItem();
             this.pdfZoom25CheckItem1 = new DevExpress.XtraPdfViewer.Bars.PdfZoom25CheckItem();
             this.pdfZoom50CheckItem1 = new DevExpress.XtraPdfViewer.Bars.PdfZoom50CheckItem();
@@ -61,17 +58,21 @@
             this.pdfSetPageLevelZoomModeCheckItem1 = new DevExpress.XtraPdfViewer.Bars.PdfSetPageLevelZoomModeCheckItem();
             this.pdfSetFitWidthZoomModeCheckItem1 = new DevExpress.XtraPdfViewer.Bars.PdfSetFitWidthZoomModeCheckItem();
             this.pdfSetFitVisibleZoomModeCheckItem1 = new DevExpress.XtraPdfViewer.Bars.PdfSetFitVisibleZoomModeCheckItem();
-            this.pdfExactZoomListBarSubItem1 = new DevExpress.XtraPdfViewer.Bars.PdfExactZoomListBarSubItem();
+            this.pdfExportFormDataBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfExportFormDataBarItem();
+            this.pdfImportFormDataBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfImportFormDataBarItem();
             this.pdfCommentBar1 = new DevExpress.XtraPdfViewer.Bars.PdfCommentBar();
             this.pdfTextHighlightBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfTextHighlightBarItem();
             this.pdfTextStrikethroughBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfTextStrikethroughBarItem();
             this.pdfTextUnderlineBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfTextUnderlineBarItem();
             this.pdfStickyNoteBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfStickyNoteBarItem();
-            this.pdfExportFormDataBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfExportFormDataBarItem();
-            this.pdfImportFormDataBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfImportFormDataBarItem();
+            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.pdfBarController1 = new DevExpress.XtraPdfViewer.Bars.PdfBarController(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pdfBarController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPageNumberEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pdfBarController1)).BeginInit();
             this.SuspendLayout();
             // 
             // pdfViewer1
@@ -128,72 +129,6 @@
             this.barManager1.MaxItemId = 30;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPageNumberEdit1});
-            // 
-            // barDockControlTop
-            // 
-            this.barDockControlTop.CausesValidation = false;
-            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(1799, 46);
-            // 
-            // barDockControlBottom
-            // 
-            this.barDockControlBottom.CausesValidation = false;
-            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 1227);
-            this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1799, 0);
-            // 
-            // barDockControlLeft
-            // 
-            this.barDockControlLeft.CausesValidation = false;
-            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 46);
-            this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 1181);
-            // 
-            // barDockControlRight
-            // 
-            this.barDockControlRight.CausesValidation = false;
-            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1799, 46);
-            this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 1181);
-            // 
-            // pdfBarController1
-            // 
-            this.pdfBarController1.BarItems.Add(this.pdfFileOpenBarItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfFileSaveAsBarItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfFilePrintBarItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfFindTextBarItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfPreviousPageBarItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfNextPageBarItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfSetPageNumberBarItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfZoomOutBarItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfZoomInBarItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfZoom10CheckItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfZoom25CheckItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfZoom50CheckItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfZoom75CheckItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfZoom100CheckItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfZoom125CheckItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfZoom150CheckItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfZoom200CheckItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfZoom400CheckItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfZoom500CheckItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfSetActualSizeZoomModeCheckItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfSetPageLevelZoomModeCheckItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfSetFitWidthZoomModeCheckItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfSetFitVisibleZoomModeCheckItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfExactZoomListBarSubItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfTextHighlightBarItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfTextStrikethroughBarItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfTextUnderlineBarItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfStickyNoteBarItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfExportFormDataBarItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfImportFormDataBarItem1);
-            this.pdfBarController1.Control = this.pdfViewer1;
             // 
             // pdfCommandBar1
             // 
@@ -272,6 +207,27 @@
             this.pdfZoomInBarItem1.Id = 8;
             this.pdfZoomInBarItem1.Name = "pdfZoomInBarItem1";
             // 
+            // pdfExactZoomListBarSubItem1
+            // 
+            this.pdfExactZoomListBarSubItem1.Id = 9;
+            this.pdfExactZoomListBarSubItem1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom10CheckItem1, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom25CheckItem1),
+            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom50CheckItem1),
+            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom75CheckItem1),
+            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom100CheckItem1),
+            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom125CheckItem1),
+            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom150CheckItem1),
+            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom200CheckItem1),
+            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom400CheckItem1),
+            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom500CheckItem1),
+            new DevExpress.XtraBars.LinkPersistInfo(this.pdfSetActualSizeZoomModeCheckItem1, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.pdfSetPageLevelZoomModeCheckItem1),
+            new DevExpress.XtraBars.LinkPersistInfo(this.pdfSetFitWidthZoomModeCheckItem1),
+            new DevExpress.XtraBars.LinkPersistInfo(this.pdfSetFitVisibleZoomModeCheckItem1)});
+            this.pdfExactZoomListBarSubItem1.Name = "pdfExactZoomListBarSubItem1";
+            this.pdfExactZoomListBarSubItem1.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionInMenu;
+            // 
             // pdfZoom10CheckItem1
             // 
             this.pdfZoom10CheckItem1.Id = 10;
@@ -342,26 +298,15 @@
             this.pdfSetFitVisibleZoomModeCheckItem1.Id = 23;
             this.pdfSetFitVisibleZoomModeCheckItem1.Name = "pdfSetFitVisibleZoomModeCheckItem1";
             // 
-            // pdfExactZoomListBarSubItem1
+            // pdfExportFormDataBarItem1
             // 
-            this.pdfExactZoomListBarSubItem1.Id = 9;
-            this.pdfExactZoomListBarSubItem1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom10CheckItem1, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom25CheckItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom50CheckItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom75CheckItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom100CheckItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom125CheckItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom150CheckItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom200CheckItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom400CheckItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom500CheckItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.pdfSetActualSizeZoomModeCheckItem1, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.pdfSetPageLevelZoomModeCheckItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.pdfSetFitWidthZoomModeCheckItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.pdfSetFitVisibleZoomModeCheckItem1)});
-            this.pdfExactZoomListBarSubItem1.Name = "pdfExactZoomListBarSubItem1";
-            this.pdfExactZoomListBarSubItem1.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionInMenu;
+            this.pdfExportFormDataBarItem1.Id = 24;
+            this.pdfExportFormDataBarItem1.Name = "pdfExportFormDataBarItem1";
+            // 
+            // pdfImportFormDataBarItem1
+            // 
+            this.pdfImportFormDataBarItem1.Id = 25;
+            this.pdfImportFormDataBarItem1.Name = "pdfImportFormDataBarItem1";
             // 
             // pdfCommentBar1
             // 
@@ -399,15 +344,71 @@
             this.pdfStickyNoteBarItem1.Id = 29;
             this.pdfStickyNoteBarItem1.Name = "pdfStickyNoteBarItem1";
             // 
-            // pdfExportFormDataBarItem1
+            // barDockControlTop
             // 
-            this.pdfExportFormDataBarItem1.Id = 24;
-            this.pdfExportFormDataBarItem1.Name = "pdfExportFormDataBarItem1";
+            this.barDockControlTop.CausesValidation = false;
+            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlTop.Manager = this.barManager1;
+            this.barDockControlTop.Size = new System.Drawing.Size(1799, 46);
             // 
-            // pdfImportFormDataBarItem1
+            // barDockControlBottom
             // 
-            this.pdfImportFormDataBarItem1.Id = 25;
-            this.pdfImportFormDataBarItem1.Name = "pdfImportFormDataBarItem1";
+            this.barDockControlBottom.CausesValidation = false;
+            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 1227);
+            this.barDockControlBottom.Manager = this.barManager1;
+            this.barDockControlBottom.Size = new System.Drawing.Size(1799, 0);
+            // 
+            // barDockControlLeft
+            // 
+            this.barDockControlLeft.CausesValidation = false;
+            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 46);
+            this.barDockControlLeft.Manager = this.barManager1;
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 1181);
+            // 
+            // barDockControlRight
+            // 
+            this.barDockControlRight.CausesValidation = false;
+            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.barDockControlRight.Location = new System.Drawing.Point(1799, 46);
+            this.barDockControlRight.Manager = this.barManager1;
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 1181);
+            // 
+            // pdfBarController1
+            // 
+            this.pdfBarController1.BarItems.Add(this.pdfFileOpenBarItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfFileSaveAsBarItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfFilePrintBarItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfFindTextBarItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfPreviousPageBarItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfNextPageBarItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfSetPageNumberBarItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfZoomOutBarItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfZoomInBarItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfZoom10CheckItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfZoom25CheckItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfZoom50CheckItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfZoom75CheckItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfZoom100CheckItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfZoom125CheckItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfZoom150CheckItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfZoom200CheckItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfZoom400CheckItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfZoom500CheckItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfSetActualSizeZoomModeCheckItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfSetPageLevelZoomModeCheckItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfSetFitWidthZoomModeCheckItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfSetFitVisibleZoomModeCheckItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfExactZoomListBarSubItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfTextHighlightBarItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfTextStrikethroughBarItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfTextUnderlineBarItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfStickyNoteBarItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfExportFormDataBarItem1);
+            this.pdfBarController1.BarItems.Add(this.pdfImportFormDataBarItem1);
+            this.pdfBarController1.Control = this.pdfViewer1;
             // 
             // PDFViewer
             // 
@@ -419,11 +420,13 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PDFViewer";
             this.Text = "PDFViewer";
+            this.Load += new System.EventHandler(this.PDFViewer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pdfBarController1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPageNumberEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pdfBarController1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
