@@ -61,90 +61,20 @@ namespace macdoc
             }
             
 
-            using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
+
+            if (DBHelper.InsertComponent(id,component, CapName.Text, CapRef.Text,date_insertion.ToString(),
+                date_insertion.ToString(),
+                dureeDeVie.Text + " " + cap_vie.SelectedItem.ToString()))
             {
-
-                if (conn.State == ConnectionState.Closed)
-                {
-                    conn.Open();
-                    try
-                    {
-                        string duration = dureeDeVie.Text +" "+cap_vie.SelectedItem.ToString();
-
-                        if (!(Equals(CapName.Text, "") || Equals(CapRef, "")))
-                        {
-                            string sql = "insert into "+component+" (nom,reference,date_insertion,date_modification,id_machine,life_duration) values('" 
-                                + CapName.Text + "','"+CapRef.Text+"','"
-                                + date_insertion.ToString() + "','"
-                                + date_insertion.ToString() + "','"+id+"','"+duration+"');";
-
-
-                            SQLiteCommand command = new SQLiteCommand(sql, conn);
-
-
-                            if (command.ExecuteNonQuery() > 0)
-                            {
-
-                                conn.Close();
-
-
-                                OnRefreshRequested(EventArgs.Empty);
-
-                                this.Close();
-
-
-                            }
-                            else
-                            {
-                                MessageBox.Show("Echec !", "Ajout", MessageBoxButtons.OK);
-
-
-                            }
-
-                        }
-                        else
-                        {
-
-                            MessageBox.Show("Echec !", "Ajout", MessageBoxButtons.OK);
-
-
-                        }
-
-
-
-
-                    }
-                    catch(Exception ex)
-                    {
-                        if (ex.Message.ToLower().Contains("unique"))
-                        {
-                            MessageBox.Show("Echec ! Un "+component+" avec le meme reference s'existe déjà", "Ajout", MessageBoxButtons.OK);
-
-                        }
-                        else
-                        {
-                            MessageBox.Show("Echec ! ", "Echec d'ajouter un "+component, MessageBoxButtons.OK,MessageBoxIcon.Error);
-
-                        }
-
-
-
-                    }
-                }
-                else
-                {
-
-
-                    conn.Close();
-
-
-                }
-
-
-
+                OnRefreshRequested(EventArgs.Empty);
+                this.Close();
 
             }
+            else
+            {
+                MessageBox.Show("Echec ! ", "Ajout", MessageBoxButtons.OK,MessageBoxIcon.Error);
 
+            }
 
         }
 

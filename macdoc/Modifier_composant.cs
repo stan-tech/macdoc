@@ -53,6 +53,7 @@ namespace macdoc
 
         private void Modifier_Load(object sender, EventArgs e)
         {
+
             if (checkBox1.Checked)
             {
                 modif.Enabled = false;
@@ -81,12 +82,9 @@ namespace macdoc
         private void Ok_Click(object sender, EventArgs e)
         {
 
+            string sql = "";
 
-            using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
-            {
-                string sql = "";
-
-                string date = "";
+            string date = "";
 
                 if (checkBox1.Checked)
                 {
@@ -99,81 +97,17 @@ namespace macdoc
                     date = modif.Value.ToString();
                 }
 
-
-                if (conn.State == ConnectionState.Closed)
-                {
-                    conn.Open();
-                    try
-                    {
-
-                        if (!(Equals(CapName.Text, "") || Equals(CapRef, "")))
-                        {
-
-                                sql = "update  " + compon.Type + " set nom = '" + CapName.Text + "'" +
-                                    ",reference = '" + CapRef.Text + "',date_insertion = '" + inst.Value.ToString() +
-                                    "',date_modification = '" +date+ "' , num_modification = num_modification + 1 " +
-                                    "where id = "+compon.ID+";";
-                            
-                        
+            
 
 
-                            SQLiteCommand command = new SQLiteCommand(sql, conn);
+            if (DBHelper.PerformModification(compon.ID.ToString(), compon.Type, 
+                CapName.Text, CapRef.Text, date, notes.Text, "1"))
+            {
+                OnRefreshRequested(EventArgs.Empty);
 
-
-                            if (command.ExecuteNonQuery() > 0)
-                            {
-
-                                conn.Close();
-
-
-                                OnRefreshRequested(EventArgs.Empty);
-
-                                this.Close();
-
-
-                            }
-                            else
-                            {
-                                MessageBox.Show("Echec !", "Ajout", MessageBoxButtons.OK);
-
-
-                            }
-
-                        }
-                        else
-                        {
-
-                            MessageBox.Show("Echec !", "Ajout", MessageBoxButtons.OK);
-
-
-                        }
-
-
-
-
-                    }
-                    catch (Exception ex)
-                    {
-                        
-                        
-                            MessageBox.Show("Echec ! "+ex.Message, "Echec d'ajouter un composant", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                        
-                    }
-                }
-                else
-                {
-
-
-                    conn.Close();
-
-
-                }
-
-
-
-
+                this.Close(); 
             }
+
 
         }
 

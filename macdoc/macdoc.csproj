@@ -358,6 +358,9 @@
     <Compile Include="RoundedLabel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="RoundedRichTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="RoundedTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>

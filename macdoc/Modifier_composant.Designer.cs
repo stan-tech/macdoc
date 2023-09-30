@@ -31,17 +31,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Modifier_composant));
             this.inst = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.modif = new Guna.UI2.WinForms.Guna2DateTimePicker();
-            this.Annuler = new macdoc.RoundedButton();
-            this.Ok = new macdoc.RoundedButton();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.CapName = new macdoc.RoundedTextBox();
-            this.CapRef = new macdoc.RoundedTextBox();
-            this.roundedTextBox1 = new macdoc.RoundedTextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.CapRef = new macdoc.RoundedTextBox();
+            this.CapName = new macdoc.RoundedTextBox();
+            this.Ok = new macdoc.RoundedButton();
+            this.Annuler = new macdoc.RoundedButton();
+            this.notes = new macdoc.RoundedTextBox();
             this.SuspendLayout();
             // 
             // inst
@@ -77,44 +77,6 @@
             this.modif.Size = new System.Drawing.Size(213, 36);
             this.modif.TabIndex = 7;
             this.modif.Value = new System.DateTime(2023, 9, 11, 16, 38, 48, 810);
-            // 
-            // Annuler
-            // 
-            this.Annuler.BackColor = System.Drawing.Color.Red;
-            this.Annuler.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Annuler.Font = new System.Drawing.Font("Calibri", 10.875F, System.Drawing.FontStyle.Bold);
-            this.Annuler.IconChar = FontAwesome.Sharp.IconChar.Xmark;
-            this.Annuler.IconColor = System.Drawing.Color.Black;
-            this.Annuler.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.Annuler.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Annuler.Location = new System.Drawing.Point(33, 891);
-            this.Annuler.Name = "Annuler";
-            this.Annuler.Size = new System.Drawing.Size(182, 76);
-            this.Annuler.TabIndex = 9;
-            this.Annuler.Text = "Annuler";
-            this.Annuler.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Annuler.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.Annuler.UseVisualStyleBackColor = false;
-            this.Annuler.Click += new System.EventHandler(this.Annuler_Click);
-            // 
-            // Ok
-            // 
-            this.Ok.BackColor = System.Drawing.Color.DarkTurquoise;
-            this.Ok.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Ok.Font = new System.Drawing.Font("Calibri", 10.875F, System.Drawing.FontStyle.Bold);
-            this.Ok.IconChar = FontAwesome.Sharp.IconChar.Check;
-            this.Ok.IconColor = System.Drawing.Color.Black;
-            this.Ok.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.Ok.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Ok.Location = new System.Drawing.Point(395, 891);
-            this.Ok.Name = "Ok";
-            this.Ok.Size = new System.Drawing.Size(191, 76);
-            this.Ok.TabIndex = 9;
-            this.Ok.Text = "Confimer";
-            this.Ok.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Ok.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.Ok.UseVisualStyleBackColor = false;
-            this.Ok.Click += new System.EventHandler(this.Ok_Click);
             // 
             // checkBox1
             // 
@@ -174,28 +136,16 @@
             this.label4.TabIndex = 20;
             this.label4.Text = "derniére modification";
             // 
-            // CapName
+            // label5
             // 
-            this.CapName.Animated = true;
-            this.CapName.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.CapName.DefaultText = "";
-            this.CapName.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.CapName.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.CapName.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CapName.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CapName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CapName.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.CapName.ForeColor = System.Drawing.Color.Black;
-            this.CapName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CapName.Location = new System.Drawing.Point(224, 94);
-            this.CapName.Margin = new System.Windows.Forms.Padding(5);
-            this.CapName.Name = "CapName";
-            this.CapName.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.CapName.PasswordChar = '\0';
-            this.CapName.PlaceholderText = "";
-            this.CapName.SelectedText = "";
-            this.CapName.Size = new System.Drawing.Size(362, 60);
-            this.CapName.TabIndex = 42;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(25, 625);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(111, 45);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "Notes";
             // 
             // CapRef
             // 
@@ -220,39 +170,90 @@
             this.CapRef.Size = new System.Drawing.Size(362, 60);
             this.CapRef.TabIndex = 42;
             // 
-            // roundedTextBox1
+            // CapName
             // 
-            this.roundedTextBox1.Animated = true;
-            this.roundedTextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.roundedTextBox1.DefaultText = "";
-            this.roundedTextBox1.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.roundedTextBox1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.roundedTextBox1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.roundedTextBox1.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.roundedTextBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.roundedTextBox1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.roundedTextBox1.ForeColor = System.Drawing.Color.Black;
-            this.roundedTextBox1.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.roundedTextBox1.Location = new System.Drawing.Point(224, 625);
-            this.roundedTextBox1.Margin = new System.Windows.Forms.Padding(5);
-            this.roundedTextBox1.Name = "roundedTextBox1";
-            this.roundedTextBox1.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.roundedTextBox1.PasswordChar = '\0';
-            this.roundedTextBox1.PlaceholderText = "";
-            this.roundedTextBox1.SelectedText = "";
-            this.roundedTextBox1.Size = new System.Drawing.Size(362, 236);
-            this.roundedTextBox1.TabIndex = 42;
+            this.CapName.Animated = true;
+            this.CapName.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.CapName.DefaultText = "";
+            this.CapName.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.CapName.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.CapName.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.CapName.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.CapName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CapName.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.CapName.ForeColor = System.Drawing.Color.Black;
+            this.CapName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CapName.Location = new System.Drawing.Point(224, 94);
+            this.CapName.Margin = new System.Windows.Forms.Padding(5);
+            this.CapName.Name = "CapName";
+            this.CapName.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
+            this.CapName.PasswordChar = '\0';
+            this.CapName.PlaceholderText = "";
+            this.CapName.SelectedText = "";
+            this.CapName.Size = new System.Drawing.Size(362, 60);
+            this.CapName.TabIndex = 42;
             // 
-            // label5
+            // Ok
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(25, 625);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(111, 45);
-            this.label5.TabIndex = 20;
-            this.label5.Text = "Notes";
+            this.Ok.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.Ok.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Ok.Font = new System.Drawing.Font("Calibri", 10.875F, System.Drawing.FontStyle.Bold);
+            this.Ok.IconChar = FontAwesome.Sharp.IconChar.Check;
+            this.Ok.IconColor = System.Drawing.Color.Black;
+            this.Ok.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.Ok.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Ok.Location = new System.Drawing.Point(395, 891);
+            this.Ok.Name = "Ok";
+            this.Ok.Size = new System.Drawing.Size(191, 76);
+            this.Ok.TabIndex = 9;
+            this.Ok.Text = "Confimer";
+            this.Ok.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Ok.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.Ok.UseVisualStyleBackColor = false;
+            this.Ok.Click += new System.EventHandler(this.Ok_Click);
+            // 
+            // Annuler
+            // 
+            this.Annuler.BackColor = System.Drawing.Color.Red;
+            this.Annuler.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Annuler.Font = new System.Drawing.Font("Calibri", 10.875F, System.Drawing.FontStyle.Bold);
+            this.Annuler.IconChar = FontAwesome.Sharp.IconChar.Xmark;
+            this.Annuler.IconColor = System.Drawing.Color.Black;
+            this.Annuler.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.Annuler.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Annuler.Location = new System.Drawing.Point(33, 891);
+            this.Annuler.Name = "Annuler";
+            this.Annuler.Size = new System.Drawing.Size(182, 76);
+            this.Annuler.TabIndex = 9;
+            this.Annuler.Text = "Annuler";
+            this.Annuler.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Annuler.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.Annuler.UseVisualStyleBackColor = false;
+            this.Annuler.Click += new System.EventHandler(this.Annuler_Click);
+            // 
+            // notes
+            // 
+            this.notes.Animated = true;
+            this.notes.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.notes.DefaultText = "";
+            this.notes.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.notes.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.notes.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.notes.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.notes.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.notes.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.notes.ForeColor = System.Drawing.Color.Black;
+            this.notes.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.notes.Location = new System.Drawing.Point(154, 615);
+            this.notes.Margin = new System.Windows.Forms.Padding(5);
+            this.notes.Multiline = true;
+            this.notes.Name = "notes";
+            this.notes.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
+            this.notes.PasswordChar = '\0';
+            this.notes.PlaceholderText = "";
+            this.notes.SelectedText = "";
+            this.notes.Size = new System.Drawing.Size(431, 240);
+            this.notes.TabIndex = 42;
             // 
             // Modifier_composant
             // 
@@ -260,8 +261,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
             this.ClientSize = new System.Drawing.Size(616, 992);
+            this.Controls.Add(this.notes);
             this.Controls.Add(this.CapRef);
-            this.Controls.Add(this.roundedTextBox1);
             this.Controls.Add(this.CapName);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -295,7 +296,7 @@
         private RoundedTextBox CapRef;
         private RoundedButton Annuler;
         private RoundedButton Ok;
-        private RoundedTextBox roundedTextBox1;
         private System.Windows.Forms.Label label5;
+        private RoundedTextBox notes;
     }
 }

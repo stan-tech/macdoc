@@ -7,6 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MetroFramework.Controls;
+using System.Windows.Media.Animation;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using System.ComponentModel;
+using System.Windows.Forms;
+using Org.BouncyCastle.Crypto.IO;
+using DevExpress.XtraEditors.Filtering.Templates;
 
 namespace macdoc
 {
@@ -77,6 +83,221 @@ namespace macdoc
             return file_id;
         }
 
+        public static bool InsertComponent(string id,string component,string name,string reference, string date_ins, 
+            string date_modif,string duration)
+        {
+            bool done = false;
+
+
+            using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
+            {
+
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                    try
+                    {
+                       
+
+                        if (!(Equals(name, "") || Equals(reference, "")))
+                        {
+                            
+                            string component_insert = "insert into component (type) values('" + component + "')";
+                            
+                            SQLiteCommand compoCommand = new SQLiteCommand(component_insert, conn);
+
+                            if (compoCommand.ExecuteNonQuery() > 0)
+                            {
+                                string lastComponentID = new SQLiteCommand("select max(id) from component;", conn).ExecuteScalar().ToString();
+
+                                if (!Equals(lastComponentID,""))
+                                {
+                                    string sql = "insert into " + component + " (nom,reference,date_insertion,date_modification,id_machine,life_duration,id_composant) values('"
+                                                                                            + name + "','" + reference + "','"
+                                                                                            + date_ins + "','"
+                                                                                            + date_modif + "','" + id + "','" + duration + "'," + lastComponentID + ");";
+
+                                    SQLiteCommand command = new SQLiteCommand(sql, conn);
+
+
+                                    if (command.ExecuteNonQuery() > 0)
+                                    {
+
+                                        conn.Close();
+
+                                        done = true;
+
+
+
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Echec !", "Ajout", MessageBoxButtons.OK);
+
+                                }
+                            }
+    
+                         
+
+                        }
+                        else
+                        {
+
+                            MessageBox.Show("Veuillez remplisser les champs  !", "Ajout", MessageBoxButtons.OK);
+
+
+                        }
+
+
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message.ToLower().Contains("unique"))
+                        {
+                            MessageBox.Show("Echec ! Un " + component + " avec le meme reference s'existe déjà", "Ajout", MessageBoxButtons.OK);
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Echec ! ", "Echec d'ajouter un " + component, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+
+
+
+                    }
+                }
+                else
+                {
+
+
+                    conn.Close();
+
+
+                }
+
+
+
+
+            }
+
+            return done;
+        }
+
+        public static bool PerformModification(string id, string component, string name, string reference, 
+            string date_modif, string notes,string modificateur)
+        {
+            bool done = false;
+
+            using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
+            {
+               
+
+
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                    try
+                    {
+
+                        if (!(Equals(name, "") || Equals(reference, "")))
+                        {
+
+                           string  updateSql = "update  " + component + " set nom = '" + name + "'" +
+                                ",reference = '" + reference + "',date_insertion = '" +date_ins +
+                                "',date_modification = '" + date_modif + "' , num_modification = num_modification + 1 " +
+                                "where id = " +id + ";";
+
+                            string id_composant = "";
+                            SQLiteCommand id_composantQuery = new SQLiteCommand("select id_composant from " + component +
+                                                        " where reference = '" + reference + "';", conn);
+
+                            try
+                            {
+
+                               id_composant =  id_composantQuery.ExecuteScalar().ToString();
+                            }
+                            catch (Exception)
+                            {
+
+                                MessageBox.Show("Couldn't select component id !", "", MessageBoxButtons.OK);
+                            }
+
+                            SQLiteCommand command = new SQLiteCommand(updateSql, conn);
+
+
+                            if (command.ExecuteNonQuery() > 0)
+                            {
+
+                                string insertSql = "insert into modification (date,id_composant,modificateur,notes)" +
+                                    " values ('"+date_modif+"', "+id_composant+","+ modificateur+ ",'"+notes+"') ";
+                                SQLiteCommand cmd = new SQLiteCommand(insertSql, conn);
+
+
+                                if (cmd.ExecuteNonQuery() > 0)
+                                {
+
+                                    done = true;
+                                }
+
+
+                                conn.Close();
+
+
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("Echec !", "Ajout", MessageBoxButtons.OK);
+
+
+                            }
+
+                        }
+                        else
+                        {
+
+                            MessageBox.Show("Echec !", "Ajout", MessageBoxButtons.OK);
+
+
+                        }
+
+
+
+
+                    }
+                    catch (Exception ex)
+                    {
+
+
+                        MessageBox.Show("Echec ! " + ex.Message, "Echec d'ajouter un composant", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+                    }
+                }
+                else
+                {
+
+
+                    conn.Close();
+
+
+                }
+
+
+
+
+            }
+
+
+
+
+
+            return done;
+        }
         public static void SelectFilesByID(MetroGrid grid, string id_machine)
         {
 
