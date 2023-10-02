@@ -79,11 +79,19 @@ namespace macdoc
             metroGrid1.SelectedRows[0].Cells[1].Value.ToString(),id, metroGrid1.SelectedRows[0].Cells[2].Value.ToString());
 
             Form OP;
-            OP =  Equals(operation,Edit) ? (Form) new ModifierMachine(machine) :  new Suppression(machine) ;
 
+            if(Equals(operation,Con))
+            {
+                OP = new ModifierMachine(machine);
+            }
+            else
+            {
+                OP = Equals(operation, Edit) ? (Form)new ModifierMachine(machine) : new Suppression(machine);
+            }
 
             OP.ShowDialog();
-            
+
+
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)

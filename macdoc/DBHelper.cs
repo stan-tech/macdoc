@@ -13,6 +13,10 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using Org.BouncyCastle.Crypto.IO;
 using DevExpress.XtraEditors.Filtering.Templates;
+using Guna.UI2.WinForms;
+using System.Windows.Controls;
+using System.Reflection.Emit;
+using System.Web.UI.WebControls;
 
 namespace macdoc
 {
@@ -23,6 +27,7 @@ namespace macdoc
         public static string Machine = "machine";
         public static string Staff_activity = "staff_activity";
         public static string Files = "files";
+        public static string SelectedMachine;
 
         public static string SelectComponentNumber(string selected_component, string selected_machine)
         {
@@ -40,8 +45,8 @@ namespace macdoc
                     connection.Open();
 
                     string composants_num = "select" +
-                               " count(id_machine) as counts from " + selected_component + " inner join machine on id_machine =" +
-                                "machine.id  where machine.nom = '" + selected_machine + "'; ";
+                               " count(id_machine) as counts from component inner join machine on id_machine =" +
+                                "machine.id  where machine.nom = '" + selected_machine + "' and component.type = '"+selected_component+"'; ";
 
                     SQLiteCommand cmd = new SQLiteCommand(composants_num, connection);
 
@@ -102,20 +107,15 @@ namespace macdoc
                         if (!(Equals(name, "") || Equals(reference, "")))
                         {
                             
-                            string component_insert = "insert into component (type) values('" + component + "')";
                             
-                            SQLiteCommand compoCommand = new SQLiteCommand(component_insert, conn);
 
-                            if (compoCommand.ExecuteNonQuery() > 0)
-                            {
-                                string lastComponentID = new SQLiteCommand("select max(id) from component;", conn).ExecuteScalar().ToString();
-
-                                if (!Equals(lastComponentID,""))
-                                {
-                                    string sql = "insert into " + component + " (nom,reference,date_insertion,date_modification,id_machine,life_duration,id_composant) values('"
-                                                                                            + name + "','" + reference + "','"
-                                                                                            + date_ins + "','"
-                                                                                            + date_modif + "','" + id + "','" + duration + "'," + lastComponentID + ");";
+                        string sql = "insert into component  (nom,reference,date_insertion,date_modification,id_machine,life_duration,type,modificateur) values('"
+                                                        + name + "','" + reference + "','"
+                                                        + date_ins + "','"
+                                                        + date_modif + "','" + id + "','"
+                                                        + duration + "','"
+                                                        + component + "'," +
+                                                        "1);";
 
                                     SQLiteCommand command = new SQLiteCommand(sql, conn);
 
@@ -130,15 +130,7 @@ namespace macdoc
 
 
                                     }
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Echec !", "Ajout", MessageBoxButtons.OK);
-
-                                }
-                            }
-    
-                         
+                              
 
                         }
                         else
@@ -206,34 +198,21 @@ namespace macdoc
                         if (!(Equals(name, "") || Equals(reference, "")))
                         {
 
-                           string  updateSql = "update  " + component + " set nom = '" + name + "'" +
-                                ",reference = '" + reference + "',date_insertion = '" +date_ins +
-                                "',date_modification = '" + date_modif + "' , num_modification = num_modification + 1 " +
-                                "where id = " +id + ";";
-
-                            string id_composant = "";
-                            SQLiteCommand id_composantQuery = new SQLiteCommand("select id_composant from " + component +
-                                                        " where reference = '" + reference + "';", conn);
-
-                            try
-                            {
-
-                               id_composant =  id_composantQuery.ExecuteScalar().ToString();
-                            }
-                            catch (Exception)
-                            {
-
-                                MessageBox.Show("Couldn't select component id !", "", MessageBoxButtons.OK);
-                            }
+                            string updateSql = "update  component set nom = '" + name + "'" +
+                                 ",reference = '" + reference + "',date_insertion = '" + date_ins +
+                                 "',date_modification = '" + date_modif + "' , num_modification = num_modification + 1 " +
+                                 "where id = " + id + " and type = '" + component + "';";
 
                             SQLiteCommand command = new SQLiteCommand(updateSql, conn);
 
 
                             if (command.ExecuteNonQuery() > 0)
                             {
+                                string id_machine = new SQLiteCommand("select id_machine from component where reference = '"+reference+"';", conn).ExecuteScalar().ToString();
 
-                                string insertSql = "insert into modification (date,id_composant,modificateur,notes)" +
-                                    " values ('"+date_modif+"', "+id_composant+","+ modificateur+",'"+notes+"');";
+
+                                string insertSql = "insert into modification (date,id_composant,modificateur,notes,id_machine)" +
+                                    " values ('"+date_modif+"', "+id+","+ modificateur+",'"+notes+"',"+id_machine+");";
                                 SQLiteCommand cmd = new SQLiteCommand(insertSql, conn);
 
 
@@ -350,18 +329,62 @@ namespace macdoc
             }
         }
 
+        public static void FillAddMachineComponentGrid(string component,DataTable dataTable,MetroGrid Compos,string machineID)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"]
+                 .ConnectionString))
+            {
+
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                    try
+                    {
+                        string sql = "select nom , reference , date_insertion as \"date d'insertion\", "
+                            + "date_modification as \" derniére modification\" ," +
+                "life_duration as \"durée de vie\" , num_modification as \"nombre de modification\" from  component  where id_machine = " + machineID + " and type = '"+component+"';";
+                        SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, conn);
+                        dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        Compos.Refresh();
+
+                        Compos.DataSource = dataTable;
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Exception " + ex.Message);
+
+                    }
+                    conn.Close();
+
+                }
+                else
+                {
+
+
+                    conn.Close();
+
+
+                }
+
+            }
+        }
         public static void FillHomeGrid(MetroGrid metroGrid1,string selection,string selected_machine)
         {
 
-            string sqlcommand = "select " + selection + ".id, " + selection + ".nom , " + selection + ".reference , date_insertion as \"date d'insertion\", date_modification as \"date " +
-                    "de modification\" , life_duration as \"durée de vie\" , num_modification as \"nombre de modifications \"  from " + selection + " inner join machine on machine.id = " +
-                    selection + ".id_machine where machine.nom = '" + selected_machine + "';";
+            string sqlcommand = "select component.id, component.nom , component.reference , date_insertion as \"date d'insertion\", date_modification as \"date " +
+                    "de modification\" , life_duration as \"durée de vie\" , num_modification as \"nombre de modifications \"  from" +
+                    " component inner join machine on machine.id = component.id_machine where machine.nom = '" 
+                    + selected_machine + "' and component.type ='"+selection+"';";
 
             if (Equals(selection, "Vérin"))
             {
 
                 selection = "verin";
-                sqlcommand = "select nom , reference , dernier_vidange as \"dernier vidange\" , huil_durée as \"huile longevité\" from " + selection + ";";
+                sqlcommand = "select nom , reference , dernier_vidange as \"dernier vidange\" , huil_durée as \"huile longevité\" from verin inner join component on verin.id_component = " +
+                    "component.id where component.type = 'verin';";
 
             }
 
@@ -386,8 +409,313 @@ namespace macdoc
 
         }
 
+        public static void FillArchiveModifications(MetroGrid machineGrid,string orderBy,string id_machine,string ComponentType)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
+            {
+
+                if (conn.State == ConnectionState.Closed)
+                {
+                    try
+                    {
+                        string sql = "";
+
+                            switch (ComponentType)
+                            {
+                                case "Capteurs":
+                                    ComponentType = "Capteur";
+                                    break;
+                                case "Moteurs":
+                                    ComponentType = "Moteur";
+
+                                    break;
+                                case "Reducteur":
+                                    ComponentType= "Reducteur";
+
+                                    break;
+                                case "Vérins":
+                                    ComponentType = "Verin";
+
+                                    break;
+                                case "Courroies":
+                                    ComponentType = "Courroie";
+
+                                    break;
+                                case "Tout":
+                                    ComponentType = "Tout";
+
+                                
+                                    break;
+                            }
+
+                            
+
+                        if (!Equals(id_machine, "")&&!Equals(ComponentType, "Tout"))
+                        {
+                            sql = "select machine.nom as machine , component.type , component.nom as nom, component.reference, users.nom as modificateur ," +
+                                                       " date_modification as \"derniére modification\" , notes from modification inner join component" +
+                                                   " on modification.id_composant = component.id  inner join users on users.id = component.modificateur inner join machine on machine.id = component.id_machine  " +
+                                                   " where component.type = '" + ComponentType + "' and component.id_machine = "+id_machine+ " order by component.type," + orderBy + "  ;";
+                        }
+                        else if(Equals(id_machine,"")&& !Equals(ComponentType, "Tout")){
 
 
+                            sql = "select machine.nom as machine , component.type , component.nom as nom, component.reference, users.nom as modificateur ," +
+                                                     " date_modification as \"derniére modification\" , notes from modification inner join component" +
+                                                 " on modification.id_composant = component.id  inner join users on users.id = component.modificateur  inner join machine on machine.id = component.id_machine" +
+                                                 " where component.type = '" + ComponentType + "' order by component.type," + orderBy + "  ;";
+
+                        }else if(Equals(id_machine, "") && Equals(ComponentType, "Tout"))
+                        {
+                            sql = "select machine.nom as machine , component.type , component.nom as nom, component.reference, users.nom as modificateur ," +
+                                    " date_modification as \"derniére modification\" , notes from modification inner join component" +
+                                        " on modification.id_composant = component.id  inner join users on" +
+                                        " users.id = component.modificateur  inner join machine on machine.id = component.id_machine order by component.type, " + orderBy + "  ;";
+                        }
+                        else if (!Equals(id_machine, "") && Equals(ComponentType, "Tout"))
+                        {
+                            sql = "select machine.nom as machine , component.type , component.nom as nom, component.reference, users.nom as modificateur ," +
+                                                       " date_modification as \"derniére modification\" , notes from modification inner join component" +
+                                                   " on modification.id_composant = component.id  inner join users on users.id = component.modificateur inner join machine on machine.id = component.id_machine " +
+                                                   "  where component.id_machine = " + id_machine + " order by component.type," + orderBy + "  ;";
+                        }
+
+
+
+
+                        conn.Open();
+
+                        SQLiteCommand command = new SQLiteCommand(sql, conn);
+                        SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
+
+                        DataTable table = new DataTable();
+                        adapter.Fill(table);
+
+                        machineGrid.DataSource = table;
+
+                }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show("Couldn't select component id !"+ex.Message, "", MessageBoxButtons.OK);
+
+                    }
+                    conn.Close();
+
+                }
+                else
+                {
+
+
+                    conn.Close();
+
+
+                }
+
+            }
+
+        }
+        public static void FillMachines(int machine,string type , Guna2ComboBox machineCombo)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
+            {
+
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                    try
+                    {
+                        string sql = "select nom from machine where type = '" + type + "';";
+                        SQLiteCommand command = new SQLiteCommand(sql, conn);
+                        SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
+
+                        SQLiteDataReader data = command.ExecuteReader();
+
+                        machineCombo.Items.Clear();
+
+                        while (data.Read())
+                        {
+                            machineCombo.Items.Add(data.GetValue(0));
+                        }
+                        machineCombo.SelectedIndex = 0;
+
+                    }
+                    catch
+                    {
+                        Form ajout = new AjouterMachine("", machine, false);
+                        ajout.Text = "Ajouter votre premiere machine de " + type;
+                        ajout.ShowDialog();
+
+
+                    }
+                    conn.Close();
+
+                }
+                else
+                {
+
+
+                    conn.Close();
+
+
+                }
+
+                
+
+            }
+
+        }
+        public static string InsertMachine(string machine ,string SelectedType ,string reference,
+            string date,string component)
+        {
+
+            bool added = false;
+            string machineID = "0";
+            using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
+            {
+
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                    try
+                    {
+
+
+                        if (!(Equals(machine, "") || Equals(SelectedType, null)))
+                        {
+                            string sql = "insert into machine (nom,type,reference,date_installation) values('" + machine + "','" + SelectedType.Trim() + "','" + reference + "','" + date + "');";
+                            string idQ = "select id from machine where nom = '" + machine + "';";
+
+                            SQLiteCommand command = new SQLiteCommand(sql, conn);
+                            SQLiteCommand id_comm = new SQLiteCommand(idQ, conn);
+
+
+
+                            if (command.ExecuteNonQuery() > 0)
+                            {
+                                added = true;
+                                MessageBox.Show("La machine a été ajoutée avec succès", "Ajout", MessageBoxButtons.OK);
+
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("Echec !", "Ajout", MessageBoxButtons.OK);
+
+
+                            }
+                            machineID = id_comm.ExecuteScalar().ToString();
+
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Le nom et le type sont obligatoires", "Ajout", MessageBoxButtons.OK);
+                        }
+                        conn.Close();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message.ToLower().Contains("unique"))
+                        {
+                            MessageBox.Show("Echec ! Un " + component + " avec le meme reference s'existe déjà", "Ajout", MessageBoxButtons.OK);
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Echec ! ", "Echec d'ajouter une machine", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+
+
+                    }
+                }
+                else
+                {
+
+
+                    conn.Close();
+
+
+                }
+
+                return machineID;
+
+
+            }
+
+        }
+        public static void FillModifGrid(Machine machine, string component,MetroGrid Compos,DataTable dataTable,RoundedLabel CompNum)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"]
+                .ConnectionString))
+            {
+
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                    try
+                    {
+                        string sql = "select component.nom , component.reference ,component.date_insertion as \"date d'insertion\", component.date_modification as \" derniére modification\" ," +
+                 "component.life_duration as \"durée de vie\" , num_modification as \"nombre de modification\" from component where component.id_machine = " + machine.ID + " and type ='" + component+ "' ;";
+                        SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, conn);
+                        dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        Compos.Refresh();
+
+                        Compos.DataSource = dataTable;
+                        CompNum.Text = Compos.RowCount.ToString();
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Exception " + ex.Message);
+
+                    }
+                    conn.Close();
+
+                }
+                else
+                {
+
+
+                    conn.Close();
+
+
+                }
+
+            }
+        }
+
+        public static void SelectAllUsers(Guna2ComboBox users)
+        {
+
+            using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
+            {
+                conn.Open();
+
+                string command = "select nom from users ;";
+
+                SQLiteCommand sQLiteCommand = new SQLiteCommand(command, conn);
+
+                SQLiteDataReader reader = sQLiteCommand.ExecuteReader();
+                users.Items.Clear();
+
+                users.Items.Add("Tout");
+
+                while (reader.Read())
+                {
+                    users.Items.Add(reader.GetString(0));
+
+                }
+
+                conn.Close();
+
+
+            }
+        }
     }
 }
 

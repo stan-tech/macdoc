@@ -82,8 +82,12 @@ namespace macdoc
             this.Tri = new FontAwesome.Sharp.IconButton();
             this.metroGrid1 = new MetroFramework.Controls.MetroGrid();
             this.comboBoxes = new System.Windows.Forms.Panel();
+            this.iconButton2 = new macdoc.RoundedButton();
+            this.Search = new macdoc.RoundedTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.MacNum = new macdoc.RoundedLabel();
+            this.CompNum = new macdoc.RoundedLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.machineCombo = new Guna.UI2.WinForms.Guna2ComboBox();
             this.caps = new Guna.UI2.WinForms.Guna2ComboBox();
@@ -103,6 +107,10 @@ namespace macdoc
             this.Syn_types = new System.Windows.Forms.Panel();
             this.NC = new FontAwesome.Sharp.IconButton();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.roundedButton1 = new macdoc.RoundedButton();
+            this.History = new macdoc.RoundedButton();
+            this.Machines = new macdoc.RoundedButton();
+            this.Profile = new macdoc.RoundedButton();
             this.expand = new Zeroit.Framework.Transitions.SpecAnimator.ZeroitSpecBoundsAnimator(this.components);
             this.collapse = new Zeroit.Framework.Transitions.SpecAnimator.ZeroitSpecBoundsAnimator(this.components);
             this.GridAnim = new Zeroit.Framework.Transitions.SpecAnimator.ZeroitSpecBoundsAnimator(this.components);
@@ -116,13 +124,6 @@ namespace macdoc
             this.zeroitAnimatorEdit1 = new Zeroit.Framework.Transitions.AnimatorWithEditor.ZeroitAnimatorEdit(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.Account_tip = new System.Windows.Forms.ToolTip(this.components);
-            this.roundedButton1 = new macdoc.RoundedButton();
-            this.Machines = new macdoc.RoundedButton();
-            this.Profile = new macdoc.RoundedButton();
-            this.iconButton2 = new macdoc.RoundedButton();
-            this.Search = new macdoc.RoundedTextBox();
-            this.MacNum = new macdoc.RoundedLabel();
-            this.CompNum = new macdoc.RoundedLabel();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -177,9 +178,9 @@ namespace macdoc
             this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.iconButton1.IconSize = 58;
             this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton1.Location = new System.Drawing.Point(27, 1512);
+            this.iconButton1.Location = new System.Drawing.Point(19, 1512);
             this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(406, 84);
+            this.iconButton1.Size = new System.Drawing.Size(414, 84);
             this.iconButton1.TabIndex = 11;
             this.iconButton1.Tag = "Supprimer une machine";
             this.iconButton1.Text = "Supprimer une machine";
@@ -205,7 +206,7 @@ namespace macdoc
             this.MenuButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.MenuButton.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
             this.MenuButton.ForeColor = System.Drawing.Color.Transparent;
-            this.MenuButton.IconChar = FontAwesome.Sharp.IconChar.AlignRight;
+            this.MenuButton.IconChar = FontAwesome.Sharp.IconChar.AlignJustify;
             this.MenuButton.IconColor = System.Drawing.Color.White;
             this.MenuButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.MenuButton.IconSize = 80;
@@ -382,9 +383,9 @@ namespace macdoc
             this.modif_button.IconColor = System.Drawing.Color.WhiteSmoke;
             this.modif_button.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.modif_button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.modif_button.Location = new System.Drawing.Point(27, 1403);
+            this.modif_button.Location = new System.Drawing.Point(19, 1403);
             this.modif_button.Name = "modif_button";
-            this.modif_button.Size = new System.Drawing.Size(406, 84);
+            this.modif_button.Size = new System.Drawing.Size(414, 84);
             this.modif_button.TabIndex = 5;
             this.modif_button.Tag = "Modifier une machine";
             this.modif_button.Text = "Modifier une machine";
@@ -404,9 +405,9 @@ namespace macdoc
             this.Ajout_button.IconColor = System.Drawing.Color.WhiteSmoke;
             this.Ajout_button.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.Ajout_button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Ajout_button.Location = new System.Drawing.Point(27, 1299);
+            this.Ajout_button.Location = new System.Drawing.Point(19, 1299);
             this.Ajout_button.Name = "Ajout_button";
-            this.Ajout_button.Size = new System.Drawing.Size(406, 84);
+            this.Ajout_button.Size = new System.Drawing.Size(414, 84);
             this.Ajout_button.TabIndex = 3;
             this.Ajout_button.Tag = "Ajouter une machine";
             this.Ajout_button.Text = "Ajouter une machine";
@@ -426,9 +427,9 @@ namespace macdoc
             this.Tri.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.Tri.IconSize = 140;
             this.Tri.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.Tri.Location = new System.Drawing.Point(838, 24);
+            this.Tri.Location = new System.Drawing.Point(719, 24);
             this.Tri.Name = "Tri";
-            this.Tri.Size = new System.Drawing.Size(851, 126);
+            this.Tri.Size = new System.Drawing.Size(845, 126);
             this.Tri.TabIndex = 8;
             this.Tri.Tag = "Triage";
             this.Tri.Text = "Triage";
@@ -498,7 +499,6 @@ namespace macdoc
             this.metroGrid1.Size = new System.Drawing.Size(1954, 1267);
             this.metroGrid1.Style = MetroFramework.MetroColorStyle.Silver;
             this.metroGrid1.TabIndex = 11;
-            this.metroGrid1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.metroGrid1_CellContentClick);
             this.metroGrid1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.metroGrid1_CellMouseDoubleClick);
             // 
             // comboBoxes
@@ -518,6 +518,51 @@ namespace macdoc
             this.comboBoxes.Name = "comboBoxes";
             this.comboBoxes.Size = new System.Drawing.Size(1657, 152);
             this.comboBoxes.TabIndex = 12;
+            // 
+            // iconButton2
+            // 
+            this.iconButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
+            this.zeroitAnimatorEdit1.SetDecoration(this.iconButton2, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.iconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton2.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.iconButton2.ForeColor = System.Drawing.Color.Black;
+            this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
+            this.iconButton2.IconColor = System.Drawing.Color.White;
+            this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.iconButton2.IconSize = 40;
+            this.iconButton2.Location = new System.Drawing.Point(347, 82);
+            this.iconButton2.Name = "iconButton2";
+            this.iconButton2.Padding = new System.Windows.Forms.Padding(10);
+            this.iconButton2.Size = new System.Drawing.Size(80, 55);
+            this.iconButton2.TabIndex = 12;
+            this.iconButton2.Tag = "Triage";
+            this.iconButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton2.UseVisualStyleBackColor = false;
+            // 
+            // Search
+            // 
+            this.Search.Animated = true;
+            this.Search.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.zeroitAnimatorEdit1.SetDecoration(this.Search, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.Search.DefaultText = "";
+            this.Search.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.Search.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.Search.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.Search.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.Search.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.Search.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.Search.ForeColor = System.Drawing.Color.Black;
+            this.Search.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.Search.Location = new System.Drawing.Point(65, 85);
+            this.Search.Margin = new System.Windows.Forms.Padding(5);
+            this.Search.Name = "Search";
+            this.Search.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
+            this.Search.PasswordChar = '\0';
+            this.Search.PlaceholderText = "";
+            this.Search.SelectedText = "";
+            this.Search.Size = new System.Drawing.Size(362, 50);
+            this.Search.TabIndex = 41;
+            this.Search.TextChanged += new System.EventHandler(this.MacName_TextChanged);
             // 
             // label3
             // 
@@ -542,6 +587,32 @@ namespace macdoc
             this.label2.Size = new System.Drawing.Size(168, 45);
             this.label2.TabIndex = 22;
             this.label2.Text = "Machines";
+            // 
+            // MacNum
+            // 
+            this.MacNum.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.zeroitAnimatorEdit1.SetDecoration(this.MacNum, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.MacNum.Font = new System.Drawing.Font("Lucida Console", 15.125F, System.Drawing.FontStyle.Bold);
+            this.MacNum.ForeColor = System.Drawing.Color.Black;
+            this.MacNum.Location = new System.Drawing.Point(1558, 57);
+            this.MacNum.Name = "MacNum";
+            this.MacNum.Size = new System.Drawing.Size(80, 80);
+            this.MacNum.TabIndex = 20;
+            this.MacNum.Text = "23";
+            this.MacNum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // CompNum
+            // 
+            this.CompNum.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.zeroitAnimatorEdit1.SetDecoration(this.CompNum, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.CompNum.Font = new System.Drawing.Font("Lucida Console", 15.125F, System.Drawing.FontStyle.Bold);
+            this.CompNum.ForeColor = System.Drawing.Color.Black;
+            this.CompNum.Location = new System.Drawing.Point(1014, 57);
+            this.CompNum.Name = "CompNum";
+            this.CompNum.Size = new System.Drawing.Size(80, 80);
+            this.CompNum.TabIndex = 20;
+            this.CompNum.Text = "23";
+            this.CompNum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
             // 
@@ -658,7 +729,6 @@ namespace macdoc
             this.pdfToolStripMenuItem.Name = "pdfToolStripMenuItem";
             this.pdfToolStripMenuItem.Size = new System.Drawing.Size(204, 44);
             this.pdfToolStripMenuItem.Text = "Pdf";
-            this.pdfToolStripMenuItem.Click += new System.EventHandler(this.pdfToolStripMenuItem_Click);
             // 
             // wordToolStripMenuItem
             // 
@@ -730,9 +800,9 @@ namespace macdoc
             this.Syn_types.Controls.Add(this.NC);
             this.Syn_types.Controls.Add(this.Tri);
             this.zeroitAnimatorEdit1.SetDecoration(this.Syn_types, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.Syn_types.Location = new System.Drawing.Point(427, 27);
+            this.Syn_types.Location = new System.Drawing.Point(427, 24);
             this.Syn_types.Name = "Syn_types";
-            this.Syn_types.Size = new System.Drawing.Size(1689, 150);
+            this.Syn_types.Size = new System.Drawing.Size(1564, 153);
             this.Syn_types.TabIndex = 11;
             // 
             // NC
@@ -749,7 +819,7 @@ namespace macdoc
             this.NC.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.NC.Location = new System.Drawing.Point(0, 24);
             this.NC.Name = "NC";
-            this.NC.Size = new System.Drawing.Size(838, 126);
+            this.NC.Size = new System.Drawing.Size(724, 126);
             this.NC.TabIndex = 8;
             this.NC.Tag = "Triage";
             this.NC.Text = "Newcheck";
@@ -763,13 +833,106 @@ namespace macdoc
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.Transparent;
             this.panel4.Controls.Add(this.roundedButton1);
+            this.panel4.Controls.Add(this.History);
             this.panel4.Controls.Add(this.Machines);
             this.panel4.Controls.Add(this.Profile);
             this.zeroitAnimatorEdit1.SetDecoration(this.panel4, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.panel4.Location = new System.Drawing.Point(2151, 51);
+            this.panel4.Location = new System.Drawing.Point(1997, 51);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(249, 126);
+            this.panel4.Size = new System.Drawing.Size(403, 123);
             this.panel4.TabIndex = 12;
+            // 
+            // roundedButton1
+            // 
+            this.roundedButton1.BackColor = System.Drawing.Color.Silver;
+            this.zeroitAnimatorEdit1.SetDecoration(this.roundedButton1, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.roundedButton1.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.roundedButton1.ForeColor = System.Drawing.Color.Transparent;
+            this.roundedButton1.IconChar = FontAwesome.Sharp.IconChar.PersonChalkboard;
+            this.roundedButton1.IconColor = System.Drawing.Color.White;
+            this.roundedButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.roundedButton1.IconSize = 80;
+            this.roundedButton1.Location = new System.Drawing.Point(1871, 27);
+            this.roundedButton1.Name = "roundedButton1";
+            this.roundedButton1.Padding = new System.Windows.Forms.Padding(10);
+            this.roundedButton1.Size = new System.Drawing.Size(88, 88);
+            this.roundedButton1.TabIndex = 10;
+            this.roundedButton1.Tag = "Synthesis";
+            this.roundedButton1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.roundedButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.roundedButton1.UseVisualStyleBackColor = false;
+            // 
+            // History
+            // 
+            this.History.AccessibleDescription = "Account";
+            this.History.BackColor = System.Drawing.Color.DarkGray;
+            this.zeroitAnimatorEdit1.SetDecoration(this.History, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.History.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.History.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.History.ForeColor = System.Drawing.Color.Transparent;
+            this.History.IconChar = FontAwesome.Sharp.IconChar.ClockRotateLeft;
+            this.History.IconColor = System.Drawing.Color.White;
+            this.History.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.History.IconSize = 80;
+            this.History.Location = new System.Drawing.Point(70, 20);
+            this.History.Name = "History";
+            this.History.Padding = new System.Windows.Forms.Padding(10);
+            this.History.Size = new System.Drawing.Size(80, 80);
+            this.History.TabIndex = 10;
+            this.History.Tag = "Synthesis";
+            this.History.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.History.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.History.UseVisualStyleBackColor = false;
+            this.History.Click += new System.EventHandler(this.History_Click);
+            // 
+            // Machines
+            // 
+            this.Machines.AccessibleDescription = "Account";
+            this.Machines.BackColor = System.Drawing.Color.DarkGray;
+            this.zeroitAnimatorEdit1.SetDecoration(this.Machines, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.Machines.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Machines.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.Machines.ForeColor = System.Drawing.Color.Transparent;
+            this.Machines.IconChar = FontAwesome.Sharp.IconChar.List;
+            this.Machines.IconColor = System.Drawing.Color.White;
+            this.Machines.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.Machines.IconSize = 80;
+            this.Machines.Location = new System.Drawing.Point(194, 20);
+            this.Machines.Name = "Machines";
+            this.Machines.Padding = new System.Windows.Forms.Padding(10);
+            this.Machines.Size = new System.Drawing.Size(80, 80);
+            this.Machines.TabIndex = 10;
+            this.Machines.Tag = "Synthesis";
+            this.Machines.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Machines.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.Account_tip.SetToolTip(this.Machines, "Liste des machines");
+            this.Machines.UseVisualStyleBackColor = false;
+            this.Machines.Click += new System.EventHandler(this.Machines_Click);
+            // 
+            // Profile
+            // 
+            this.Profile.AccessibleDescription = "Account";
+            this.Profile.BackColor = System.Drawing.Color.DarkGray;
+            this.zeroitAnimatorEdit1.SetDecoration(this.Profile, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.Profile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Profile.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.Profile.ForeColor = System.Drawing.Color.Transparent;
+            this.Profile.IconChar = FontAwesome.Sharp.IconChar.AddressCard;
+            this.Profile.IconColor = System.Drawing.Color.White;
+            this.Profile.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.Profile.IconSize = 80;
+            this.Profile.Location = new System.Drawing.Point(304, 20);
+            this.Profile.Name = "Profile";
+            this.Profile.Padding = new System.Windows.Forms.Padding(10);
+            this.Profile.Size = new System.Drawing.Size(80, 80);
+            this.Profile.TabIndex = 10;
+            this.Profile.Tag = "Synthesis";
+            this.Profile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Profile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.Account_tip.SetToolTip(this.Profile, "Compte");
+            this.Profile.UseVisualStyleBackColor = false;
+            this.Profile.Click += new System.EventHandler(this.ProfileButton_Click_1);
             // 
             // expand
             // 
@@ -897,147 +1060,6 @@ namespace macdoc
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // roundedButton1
-            // 
-            this.roundedButton1.BackColor = System.Drawing.Color.Silver;
-            this.zeroitAnimatorEdit1.SetDecoration(this.roundedButton1, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.roundedButton1.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.roundedButton1.ForeColor = System.Drawing.Color.Transparent;
-            this.roundedButton1.IconChar = FontAwesome.Sharp.IconChar.PersonChalkboard;
-            this.roundedButton1.IconColor = System.Drawing.Color.White;
-            this.roundedButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.roundedButton1.IconSize = 80;
-            this.roundedButton1.Location = new System.Drawing.Point(1871, 27);
-            this.roundedButton1.Name = "roundedButton1";
-            this.roundedButton1.Padding = new System.Windows.Forms.Padding(10);
-            this.roundedButton1.Size = new System.Drawing.Size(88, 88);
-            this.roundedButton1.TabIndex = 10;
-            this.roundedButton1.Tag = "Synthesis";
-            this.roundedButton1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.roundedButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.roundedButton1.UseVisualStyleBackColor = false;
-            // 
-            // Machines
-            // 
-            this.Machines.AccessibleDescription = "Account";
-            this.Machines.BackColor = System.Drawing.Color.DarkGray;
-            this.zeroitAnimatorEdit1.SetDecoration(this.Machines, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.Machines.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Machines.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.Machines.ForeColor = System.Drawing.Color.Transparent;
-            this.Machines.IconChar = FontAwesome.Sharp.IconChar.Map;
-            this.Machines.IconColor = System.Drawing.Color.White;
-            this.Machines.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.Machines.IconSize = 80;
-            this.Machines.Location = new System.Drawing.Point(23, 23);
-            this.Machines.Name = "Machines";
-            this.Machines.Padding = new System.Windows.Forms.Padding(10);
-            this.Machines.Size = new System.Drawing.Size(80, 80);
-            this.Machines.TabIndex = 10;
-            this.Machines.Tag = "Synthesis";
-            this.Machines.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Machines.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.Account_tip.SetToolTip(this.Machines, "Liste des machines");
-            this.Machines.UseVisualStyleBackColor = false;
-            this.Machines.Click += new System.EventHandler(this.ProfileButton_Click_1);
-            // 
-            // Profile
-            // 
-            this.Profile.AccessibleDescription = "Account";
-            this.Profile.BackColor = System.Drawing.Color.DarkGray;
-            this.zeroitAnimatorEdit1.SetDecoration(this.Profile, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.Profile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Profile.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.Profile.ForeColor = System.Drawing.Color.Transparent;
-            this.Profile.IconChar = FontAwesome.Sharp.IconChar.PersonChalkboard;
-            this.Profile.IconColor = System.Drawing.Color.White;
-            this.Profile.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.Profile.IconSize = 80;
-            this.Profile.Location = new System.Drawing.Point(150, 23);
-            this.Profile.Name = "Profile";
-            this.Profile.Padding = new System.Windows.Forms.Padding(10);
-            this.Profile.Size = new System.Drawing.Size(80, 80);
-            this.Profile.TabIndex = 10;
-            this.Profile.Tag = "Synthesis";
-            this.Profile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Profile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.Account_tip.SetToolTip(this.Profile, "Compte");
-            this.Profile.UseVisualStyleBackColor = false;
-            this.Profile.Click += new System.EventHandler(this.ProfileButton_Click_1);
-            // 
-            // iconButton2
-            // 
-            this.iconButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
-            this.zeroitAnimatorEdit1.SetDecoration(this.iconButton2, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.iconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton2.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.iconButton2.ForeColor = System.Drawing.Color.Black;
-            this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
-            this.iconButton2.IconColor = System.Drawing.Color.White;
-            this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.iconButton2.IconSize = 40;
-            this.iconButton2.Location = new System.Drawing.Point(347, 82);
-            this.iconButton2.Name = "iconButton2";
-            this.iconButton2.Padding = new System.Windows.Forms.Padding(10);
-            this.iconButton2.Size = new System.Drawing.Size(80, 55);
-            this.iconButton2.TabIndex = 12;
-            this.iconButton2.Tag = "Triage";
-            this.iconButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton2.UseVisualStyleBackColor = false;
-            // 
-            // Search
-            // 
-            this.Search.Animated = true;
-            this.Search.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.zeroitAnimatorEdit1.SetDecoration(this.Search, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.Search.DefaultText = "";
-            this.Search.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.Search.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.Search.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.Search.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.Search.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.Search.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.Search.ForeColor = System.Drawing.Color.Black;
-            this.Search.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.Search.Location = new System.Drawing.Point(65, 85);
-            this.Search.Margin = new System.Windows.Forms.Padding(5);
-            this.Search.Name = "Search";
-            this.Search.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.Search.PasswordChar = '\0';
-            this.Search.PlaceholderText = "";
-            this.Search.SelectedText = "";
-            this.Search.Size = new System.Drawing.Size(362, 50);
-            this.Search.TabIndex = 41;
-            this.Search.TextChanged += new System.EventHandler(this.MacName_TextChanged);
-            // 
-            // MacNum
-            // 
-            this.MacNum.BackColor = System.Drawing.Color.DarkTurquoise;
-            this.zeroitAnimatorEdit1.SetDecoration(this.MacNum, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.MacNum.Font = new System.Drawing.Font("Lucida Console", 15.125F, System.Drawing.FontStyle.Bold);
-            this.MacNum.ForeColor = System.Drawing.Color.Black;
-            this.MacNum.Location = new System.Drawing.Point(1558, 57);
-            this.MacNum.Name = "MacNum";
-            this.MacNum.Size = new System.Drawing.Size(80, 80);
-            this.MacNum.TabIndex = 20;
-            this.MacNum.Text = "23";
-            this.MacNum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.MacNum.Click += new System.EventHandler(this.MacNum_Click);
-            // 
-            // CompNum
-            // 
-            this.CompNum.BackColor = System.Drawing.Color.DarkTurquoise;
-            this.zeroitAnimatorEdit1.SetDecoration(this.CompNum, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.CompNum.Font = new System.Drawing.Font("Lucida Console", 15.125F, System.Drawing.FontStyle.Bold);
-            this.CompNum.ForeColor = System.Drawing.Color.Black;
-            this.CompNum.Location = new System.Drawing.Point(1014, 57);
-            this.CompNum.Name = "CompNum";
-            this.CompNum.Size = new System.Drawing.Size(80, 80);
-            this.CompNum.TabIndex = 20;
-            this.CompNum.Text = "23";
-            this.CompNum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -1144,6 +1166,7 @@ namespace macdoc
         private OpenFileDialog openFileDialog1;
         private ToolTip Account_tip;
         private RoundedButton Machines;
+        private RoundedButton History;
     }
 }
 

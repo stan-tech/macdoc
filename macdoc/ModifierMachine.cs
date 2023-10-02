@@ -35,47 +35,7 @@ namespace macdoc
         {
 
            
-                using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"]
-                  .ConnectionString))
-                {
-
-                    if (conn.State == ConnectionState.Closed)
-                    {
-                        conn.Open();
-                        try
-                        {
-                            string sql = "select " + component + ".nom , " + component + ".reference ," +
-                    component + ".date_insertion as \"date d'insertion\", " + component + ".date_modification as \" derniére modification\" ," +
-                    component + ".life_duration as \"durée de vie\" , num_modification as \"nombre de modification\" from " + component + " where " + component + ".id_machine = " + machine.ID + ";";
-                            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, conn);
-                            dataTable = new DataTable();
-                            adapter.Fill(dataTable);
-
-                            Compos.Refresh();
-
-                            Compos.DataSource = dataTable;
-                             CompNum.Text = Compos.RowCount.ToString();
-
-
-                    }
-                    catch (Exception ex)
-                        {
-                            MessageBox.Show("Exception " + ex.Message);
-
-                        }
-                        conn.Close();
-
-                    }
-                    else
-                    {
-
-
-                        conn.Close();
-
-
-                    }
-
-                }
+              DBHelper.FillModifGrid(machine, component,Compos,dataTable,CompNum);
             
 
 

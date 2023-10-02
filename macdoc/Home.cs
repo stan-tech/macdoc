@@ -280,56 +280,13 @@ namespace macdoc
                     break;
 
             }
-            using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
-            {
 
-                if (conn.State == ConnectionState.Closed)
-                {
-                    conn.Open();
-                    try
-                    {
-                        string sql = "select nom from machine where type = '" +type +"';";
-                        SQLiteCommand command = new SQLiteCommand(sql, conn);
-                        SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
-
-                        SQLiteDataReader data = command.ExecuteReader();
-
-                        machineCombo.Items.Clear();
-
-                        while (data.Read())
-                        {
-                            machineCombo.Items.Add(data.GetValue(0));
-                        }
-                        machineCombo.SelectedIndex = 0;
-
-                    }
-                    catch
-                    {
-                        Form ajout = new AjouterMachine("",machine,false);
-                        ajout.Text = "Ajouter votre premiere machine de " + type;
-                        ajout.ShowDialog();
-
-
-                    }
-                    conn.Close();
-
-                        }
-                else
-                {
-
-
-                    conn.Close();
-
-
-                }
-
-                CompNum.Text = DBHelper.SelectComponentNumber(selected_component, selected_machine);
-                SelectMachineNumber(type);
-                DBHelper.FillHomeGrid(metroGrid1,
-                 selected_component,
-                 selected_machine);
-
-            }
+            DBHelper.FillMachines(machine, type, machineCombo);
+            CompNum.Text = DBHelper.SelectComponentNumber(selected_component, selected_machine);
+            SelectMachineNumber(type);
+            DBHelper.FillHomeGrid(metroGrid1,
+             selected_component,
+             selected_machine);
         }
         private void Tri_Click(object sender, EventArgs e)
         {
@@ -517,10 +474,7 @@ namespace macdoc
 
         }
 
-        private void metroGrid1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+      
 
         private void MacName_TextChanged(object sender, EventArgs e)
 
@@ -530,28 +484,29 @@ namespace macdoc
 
             string machine = machineCombo.SelectedItem.ToString();
 
+
             using(SQLiteConnection connection =new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
             {
 
                 switch (comp)
                 {
                     case 0:
-                        component = "capteur";
+                        component = "Capteur";
                         break;
                     case 1:
-                        component = "moteur";
+                        component = "Moteur";
 
                         break;
                     case 2:
-                        component = "reducteur";
+                        component = "Reducteur";
 
                         break;
                     case 3:
-                        component = "verin";
+                        component = "Verin";
 
                         break;
                     case 4:
-                        component = "courroie";
+                        component = "Courroie";
 
                         break;
                 }
@@ -559,29 +514,51 @@ namespace macdoc
                 
 
                
-                string command = "select "+component+".nom , "+ component +".reference ," +
-                    component+".date_insertion as \"date d'insertion\", "+ component+".date_modification as \"de modification\" ," +
-                    component+".life_duration as \"durée de vie\" from " + component+" inner join "+component+" on machine.id = "
-                    +component+".id_machine  where machine.nom = "+machine
-                    + " and ("+component+".nom = "+Search.Text+" or "+ component +".reference = "+Search.Text+");";
+                string command = "select component.nom , component.reference ," +
+                    "component.date_insertion as \"date d'insertion\", component.date_modification as \"de modification\" ," +
+                    "component.life_duration as \"durée de vie\" from  component inner join machine on machine.id = "+
+                    "component.id_machine  where machine.nom  like '%"+machine
+                    + "%' and (component.nom like '"+Search.Text.Trim()+"%' or component .reference like '"+Search.Text.Trim() + "%') and component.type = '"+component+"';";
 
-                if (Equals(component, "verin"))
+                if (Equals(component, "Verin"))
                 {
 
                     command = "select nom , reference , deriner_vidange as \"dernier vidange\"" +
-                        ", huile_durée as \"huile longevité\" from verin full join machine on machine.id=verin.id_machine where machine.nom = " + machine + ";";
+                        ", huile_durée as \"huile longevité\" from verin inner join machine on machine.id=verin.id_machine where machine.nom = " + machine + ";";
 
                 }
 
                 connection.Open();
 
-                metroGrid1.Refresh();
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter(command, connection);
-                DataTable dataTable = new DataTable();
-                adapter.Fill(dataTable);
-                metroGrid1.DataSource = dataTable;
+                try
+                {
+                    if (!Equals(Search.Text,""))
+                    {
+                        metroGrid1.Refresh();
+                        SQLiteDataAdapter adapter = new SQLiteDataAdapter(command, connection);
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        metroGrid1.DataSource = dataTable;
+                    }
+                    else
+                    {
+                        DBHelper.FillHomeGrid(metroGrid1,
+              caps.SelectedItem.ToString().Substring(0, caps.SelectedItem.ToString().Length - 1),
+              selected_machine);
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Echec !"+ex.Message, "Ajout", MessageBoxButtons.OK);
+                    
+                }
                 connection.Close();
             }
+
+            
         }
 
         private void ProfileButton_Click_1(object sender, EventArgs e)
@@ -769,222 +746,15 @@ namespace macdoc
             selectMachines(this.Controls["Syn_types"].Controls["NC"].Text);
         }
 
-        private void guna2ComboBox1_Enter(object sender, EventArgs e)
+        private void Machines_Click(object sender, EventArgs e)
         {
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
+            new ListDesMachine(ListDesMachine.Con).ShowDialog();
 
         }
 
-        private void pdfToolStripMenuItem_Click(object sender, EventArgs e)
+        private void History_Click(object sender, EventArgs e)
         {
-
-            PdfPTable table = new PdfPTable(metroGrid1.ColumnCount);
-            PdfPCell pdfPCell = null;
-            Chunk glue = new Chunk(new VerticalPositionMark());
-
-            Document document = new Document(PageSize.A4,0f,0f,0f,0f);
-            document.SetMargins(20f, 20f, 20f, 20f);
-
-            string id = Guid.NewGuid().ToString();
-
-            string path = AppDomain.CurrentDomain.BaseDirectory + "MacDoc_file_" + id + ".pdf";
-
-
-            PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(path, FileMode.Create));
-
-            document.Open();
-
-            table.WidthPercentage = 100;
-            table.HorizontalAlignment = Element.ALIGN_LEFT;
-            iTextSharp.text.Font FS = FontFactory.GetFont("Calibri",12,iTextSharp.text.Font.BOLD,
-            BaseColor.BLACK);
-
-
-
-            iTextSharp.text.Paragraph lineSeparator = new iTextSharp.text.Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator
-                (0.0F, 100.0F, BaseColor.BLACK,
-                Element.ALIGN_LEFT, 1)));
-
-            document.Add(lineSeparator);
-
-            document.Add(new iTextSharp.text.Paragraph(""));
-            iTextSharp.text.Image picture = iTextSharp.text.Image.GetInstance(AppDomain.CurrentDomain.BaseDirectory + "\\Logo.png");
-
-            picture.ScaleToFit(80f, 80f);
-            picture.Alignment = Element.ALIGN_LEFT;
-            picture.SpacingAfter = 1;
-
-            document.Add(picture);
-
-            document.Add(new Phrase("\t     MacDoc", FS));
-
-            document.Add(lineSeparator);
-
-            document.Add(new iTextSharp.text.Paragraph(""));
-
-
-     
-
-            document.Add(new iTextSharp.text.Paragraph("\n"));
-
-            document.Add(new Phrase("Redigé le: " + DateTime.Now, FS));
-
-            document.Add(lineSeparator);
-
-            document.Add(new iTextSharp.text.Paragraph("\n"));
-
-            document.Add(new Phrase("Executant: " + "Aymen", FS));
-
-
-            document.Add(lineSeparator);
-
-            document.Add(new iTextSharp.text.Paragraph("\n"));
-
-
-            Chunk machineTitle = new Chunk(machineCombo.SelectedItem.ToString(), FS);
-
-            Phrase machine_phrase = new Phrase();
-            Chunk machineT = new Chunk("Machine: ", FS);
-
-            machine_phrase.Add(machineT);
-
-            FS = FontFactory.GetFont("Calibri", 10, 
-            BaseColor.BLACK);
-
-            machine_phrase.Add(new Chunk(machineCombo.SelectedItem.ToString(), FS));
-
-            machine_phrase.Add(glue);
-
-            FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
-            BaseColor.BLACK);
-
-            Chunk reference = new Chunk("Reference: ", FS);
-
-            machine_phrase.Add(reference);
-
-            FS = FontFactory.GetFont("Calibri", 10,
-          BaseColor.BLACK);
-
-            machine_phrase.Add(new Chunk("ORITNF000", FS));
-
-
-
-            document.Add(machine_phrase);
-
-            document.Add(new iTextSharp.text.Paragraph("\n"));
-
-            Phrase machineType = new Phrase();
-
-            FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
-           BaseColor.BLACK);
-
-            Chunk macType = new Chunk("Machine type: ", FS);
-            machineType.Add(macType);
-
-            FS = FontFactory.GetFont("Calibri", 10, 
-         BaseColor.BLACK);
-
-             macType = new Chunk(SelectedMachineType, FS);
-
-            machineType.Add(macType);
-
-
-            document.Add(machineType);
-
-
-
-            Phrase CompoType = new Phrase();
-
-            FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
-           BaseColor.BLACK);
-
-            Chunk CType = new Chunk("Composants: ", FS);
-
-            CompoType.Add(CType);
-
-            FS = FontFactory.GetFont("Calibri", 10,
-         BaseColor.BLACK);
-
-            CType = new Chunk(Composants.Text, FS);
-
-            CompoType.Add(CType);
-
-            document.Add(new iTextSharp.text.Paragraph("\n"));
-
-            document.Add(CompoType);
-
-            document.Add(new iTextSharp.text.Paragraph("\n"));
-
-
-            //table.SetWidths(new float[] { 20f, 150f, 100f});
-
-            #region Write table
-
-
-            FS = FontFactory.GetFont("Calibri", 10,
-           BaseColor.BLACK);
-
-            foreach (DataGridViewColumn header in metroGrid1.Columns)
-            {
-
-                pdfPCell = new PdfPCell(new Phrase(header.HeaderText, FS));
-                pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
-                pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
-                table.AddCell(pdfPCell);
-
-            }
-
-            foreach (DataGridViewRow row in metroGrid1.Rows)
-            {
-                foreach (DataGridViewCell column in row.Cells)
-                {
-
-                    pdfPCell = new PdfPCell(new Phrase(column.Value.ToString(), FS));
-                    pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
-                    pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
-                    table.AddCell(pdfPCell);
-
-                }
-            }
-
-            #endregion
-
-
-
-            document.Add(new iTextSharp.text.Paragraph("\n"));
-
-
-            Phrase phrase = new Phrase("Responsable: ", FS);
-            phrase.Add(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator
-                (0.0F, 40.0F, BaseColor.BLACK,
-                Element.ALIGN_LEFT, 1)));
-
-           
-
-            document.Add(table);
-
-            document.Add(new iTextSharp.text.Paragraph("\n"));
-            document.Add(new iTextSharp.text.Paragraph(""));
-
-
-            document.Add(phrase);
-
-            document.Close();
-
-        
-                System.Diagnostics.Process.Start(path);
-            
-
-
+            new Archive().ShowDialog();
         }
-
-        private void MacNum_Click(object sender, EventArgs e)
-        {
-
-        }
-  
     }
 }
