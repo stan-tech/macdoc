@@ -409,8 +409,11 @@ namespace macdoc
 
         }
 
-        public static void FillArchiveModifications(MetroGrid machineGrid,string orderBy,string id_machine,string ComponentType)
+        public static void FillArchiveModifications(MetroGrid machineGrid,string orderBy,
+            string id_machine,string ComponentType,string user,string limit)
         {
+            bool withUsers = false ;
+
             using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
             {
 
@@ -452,35 +455,234 @@ namespace macdoc
 
                         if (!Equals(id_machine, "")&&!Equals(ComponentType, "Tout"))
                         {
-                            sql = "select machine.nom as machine , component.type , component.nom as nom, component.reference, users.nom as modificateur ," +
-                                                       " date_modification as \"derniére modification\" , notes from modification inner join component" +
-                                                   " on modification.id_composant = component.id  inner join users on users.id = component.modificateur inner join machine on machine.id = component.id_machine  " +
-                                                   " where component.type = '" + ComponentType + "' and component.id_machine = "+id_machine+ " order by component.type," + orderBy + "  ;";
+                            if(user != "Tout")
+                            {
+                                withUsers = true;
+
+                        
+                            }
+                            else
+                            {
+                                withUsers = false;
+
+                            }
+                            if (withUsers && limit != "Tout")
+                            {
+                                sql = "select machine.nom as machine , component.type , component.nom as nom, " +
+                                    "component.reference, users.nom as modificateur ," +
+                                                        " date_modification as \"derniére modification\" , " +
+                                                        "notes from modification inner join component" +
+                                 " on modification.id_composant = component.id  inner join users " +
+                                            "on users.id = modification.modificateur inner join machine on machine.id = component.id_machine  " +
+                                                    " where component.type = '" + ComponentType + "' and component.id_machine = "
+                                                    + id_machine + " and users.nom = '" + user + "' order by component.type," + orderBy + " limit " + limit + " ;";
+
+                            }
+                            else if(!withUsers && limit != "Tout")
+                            {
+                                sql = "select machine.nom as machine , component.type , component.nom as nom, " +
+                                    "component.reference, users.nom as modificateur ," +
+                                                        " date_modification as \"derniére modification\" , " +
+                                                        "notes from modification inner join component" +
+                                 " on modification.id_composant = component.id  inner join users " +
+                                            "on users.id = modification.modificateur inner join machine on machine.id = component.id_machine  " +
+                                                    " where component.type = '" + ComponentType + "' and component.id_machine = "
+                                                    + id_machine + "  order by component.type," + orderBy + " limit "+ limit +" ;";
+                            }
+                            else if (!withUsers && limit == "Tout")
+                            {
+
+                                sql = "select machine.nom as machine , component.type , component.nom as nom, " +
+                                    "component.reference, users.nom as modificateur ," +
+                                                        " date_modification as \"derniére modification\" , " +
+                                                        "notes from modification inner join component" +
+                                 " on modification.id_composant = component.id  inner join users " +
+                                            "on users.id = modification.modificateur inner join machine on machine.id = component.id_machine  " +
+                                                    " where component.type = '" + ComponentType + "' and component.id_machine = "
+                                                    + id_machine + "  order by component.type," + orderBy + " ;";
+                            }
+                            else if (withUsers && limit == "Tout")
+                            {
+
+                                sql = "select machine.nom as machine , component.type , component.nom as nom, " +
+                                   "component.reference, users.nom as modificateur ," +
+                                                       " date_modification as \"derniére modification\" , " +
+                                                       "notes from modification inner join component" +
+                                " on modification.id_composant = component.id  inner join users " +
+                                           "on users.id = modification.modificateur inner join machine on machine.id = component.id_machine  " +
+                                                   " where component.type = '" + ComponentType + "' and component.id_machine = "
+                                                   + id_machine + "  and users.nom = '" + user +"'  order by component.type," + orderBy +" ;";
+                            }
+
+
+
                         }
                         else if(Equals(id_machine,"")&& !Equals(ComponentType, "Tout")){
 
 
-                            sql = "select machine.nom as machine , component.type , component.nom as nom, component.reference, users.nom as modificateur ," +
-                                                     " date_modification as \"derniére modification\" , notes from modification inner join component" +
-                                                 " on modification.id_composant = component.id  inner join users on users.id = component.modificateur  inner join machine on machine.id = component.id_machine" +
-                                                 " where component.type = '" + ComponentType + "' order by component.type," + orderBy + "  ;";
+                            if (user != "Tout")
+                            {
+                                withUsers = true;
 
-                        }else if(Equals(id_machine, "") && Equals(ComponentType, "Tout"))
+                   
+
+                            }
+                            else
+                            {
+                                withUsers = false;
+
+                             
+                            }
+                            if (withUsers && limit != "Tout")
+                            {
+                                sql = "select machine.nom as machine , component.type , component.nom as nom, component.reference, users.nom as modificateur ," +
+                         " date_modification as \"derniére modification\" , notes from modification inner join component" +
+                     " on modification.id_composant = component.id  inner join users on users.id = modification.modificateur  inner join machine on machine.id = component.id_machine" +
+                     " where component.type = '" + ComponentType + "' and users.nom = '" + user + "'  order by component.type," + orderBy + " limit "+limit+";";
+
+                            }
+                            else if (!withUsers && limit != "Tout")
+                            {
+                                sql = "select machine.nom as machine , component.type , component.nom as nom, component.reference, " +
+                                    "users.nom as modificateur ," +
+                                            " date_modification as \"derniére modification\" , notes from modification inner join component" +
+                                            " on modification.id_composant = component.id  inner join users on users.id = modification.modificateur" +
+                                            "  inner join machine on machine.id = component.id_machine" +
+                                            " where component.type = '" + ComponentType + "'  order by component.type," + orderBy + " limit " + limit
+                                            + " ;";
+                            }
+                            else if (!withUsers && limit == "Tout")
+                            {
+
+                                sql = "select machine.nom as machine , component.type , component.nom as nom, component.reference, " +
+                                    "users.nom as modificateur ," +
+                                            " date_modification as \"derniére modification\" , notes from modification inner join component" +
+                                            " on modification.id_composant = component.id  inner join users on users.id = modification.modificateur" +
+                                            "  inner join machine on machine.id = component.id_machine" +
+                                            " where component.type = '" + ComponentType + "'  order by component.type," + orderBy +" ;";
+                            }
+                            else if (withUsers && limit == "Tout")
+                            {
+
+                                sql = "select machine.nom as machine , component.type , component.nom as nom, component.reference, " +
+                                     "users.nom as modificateur ," +
+                                             " date_modification as \"derniére modification\" , notes from modification inner join component" +
+                                             " on modification.id_composant = component.id  inner join users on users.id = modification.modificateur" +
+                                             "  inner join machine on machine.id = component.id_machine" +
+                                             " where component.type = '" + ComponentType + "'  and users.nom = '" + user + "'  order by component.type," + orderBy +" ;";
+                            }
+
+
+
+                        }
+                        else if(Equals(id_machine, "") && Equals(ComponentType, "Tout"))
                         {
-                            sql = "select machine.nom as machine , component.type , component.nom as nom, component.reference, users.nom as modificateur ," +
-                                    " date_modification as \"derniére modification\" , notes from modification inner join component" +
-                                        " on modification.id_composant = component.id  inner join users on" +
-                                        " users.id = component.modificateur  inner join machine on machine.id = component.id_machine order by component.type, " + orderBy + "  ;";
+                            if (user != "Tout")
+                            {
+                                withUsers = true;
+
+                        
+                            }
+                            else
+                            {
+                                withUsers = false;
+
+
+                            }
+                            if (withUsers && limit != "Tout")
+                            {
+
+                                sql = "select machine.nom as machine , component.type , component.nom as nom," +
+                                    " component.reference, users.nom as modificateur ," +
+                                " date_modification as \"derniére modification\" , notes from modification inner join component" +
+                                    " on modification.id_composant = component.id  inner join users on" +
+                                    " users.id = modification.modificateur  inner join machine on machine.id = " +
+                                    "component.id_machine where users.nom = '"+user+"' order by component.type, " + orderBy + " limit "+limit+" ;";
+
+                            }
+                            else if (!withUsers && limit != "Tout")
+                            {
+
+                                sql = "select machine.nom as machine , component.type , component.nom as nom," +
+                                    " component.reference, users.nom as modificateur ," +
+                                " date_modification as \"derniére modification\" , notes from modification inner join component" +
+                                    " on modification.id_composant = component.id  inner join users on" +
+                                    " users.id = modification.modificateur  inner join machine on machine.id = " +
+                                    "component.id_machine order by component.type, " + orderBy + " limit "+limit+";";
+                            }
+                            else if (!withUsers && limit == "Tout")
+                            {
+
+                                sql = "select machine.nom as machine , component.type , component.nom as nom," +
+                                    " component.reference, users.nom as modificateur ," +
+                                " date_modification as \"derniére modification\" , notes from modification inner join component" +
+                                    " on modification.id_composant = component.id  inner join users on" +
+                                    " users.id = modification.modificateur  inner join machine on machine.id = " +
+                                    "component.id_machine order by component.type, " + orderBy + ";";
+                            }
+                            else if (withUsers && limit == "Tout")
+                            {
+
+                                sql = "select machine.nom as machine , component.type , component.nom as nom," +
+                                    " component.reference, users.nom as modificateur ," +
+                                " date_modification as \"derniére modification\" , notes from modification inner join component" +
+                                    " on modification.id_composant = component.id  inner join users on" +
+                                    " users.id = modification.modificateur  inner join machine on machine.id = " +
+                                    "component.id_machine where users.nom = '" + user + "' order by component.type, " + orderBy + ";";
+                            }
                         }
                         else if (!Equals(id_machine, "") && Equals(ComponentType, "Tout"))
                         {
-                            sql = "select machine.nom as machine , component.type , component.nom as nom, component.reference, users.nom as modificateur ," +
-                                                       " date_modification as \"derniére modification\" , notes from modification inner join component" +
-                                                   " on modification.id_composant = component.id  inner join users on users.id = component.modificateur inner join machine on machine.id = component.id_machine " +
-                                                   "  where component.id_machine = " + id_machine + " order by component.type," + orderBy + "  ;";
+
+
+                            if (user != "Tout")
+                            {
+                                withUsers = true;
+
+
+                            }
+                            else
+                            {
+                                withUsers = false;
+
+                            }
+                            if (withUsers && limit != "Tout")
+                            {
+                                sql = "select machine.nom as machine , component.type , component.nom as nom, component.reference, users.nom as modificateur ," +
+                            " date_modification as \"derniére modification\" , notes from modification inner join component" +
+                        " on modification.id_composant = component.id  inner join users on users.id = modification.modificateur inner join machine on machine.id = component.id_machine " +
+                        "  where component.id_machine = " + id_machine + " and users.nom ='"+user+"' order by component.type," + orderBy + " limit "+limit+" ;";
+
+                            }
+                            else if (!withUsers && limit != "Tout")
+                            {
+                                sql = "select machine.nom as machine , component.type , component.nom as nom, component.reference, users.nom as modificateur ," +
+                                                     " date_modification as \"derniére modification\" , notes from modification inner join component" +
+                                                 " on modification.id_composant = component.id  inner join users on users.id = modification.modificateur inner join machine on machine.id = component.id_machine " +
+                                                 "  where component.id_machine = " + id_machine + " order by component.type," + orderBy + " limit "+limit+" ;";
+                            }
+                            else if (!withUsers && limit == "Tout")
+                            {
+
+                                sql = "select machine.nom as machine , component.type , component.nom as nom, component.reference, users.nom as modificateur ," +
+                                                    " date_modification as \"derniére modification\" , notes from modification inner join component" +
+                                                " on modification.id_composant = component.id  inner join users on users.id = modification.modificateur inner join machine on machine.id = component.id_machine " +
+                                                "  where component.id_machine = " + id_machine + " order by component.type," + orderBy + ";";
+                            }
+                            else if (withUsers && limit == "Tout")
+                            {
+
+                                sql = "select machine.nom as machine , component.type , component.nom as nom, component.reference, users.nom as modificateur ," +
+                                                     " date_modification as \"derniére modification\" , notes from modification inner join component" +
+                                                 " on modification.id_composant = component.id  inner join users on users.id = modification.modificateur inner join machine on machine.id = component.id_machine " +
+                                                 "  where component.id_machine = " + id_machine + "  and users.nom ='"+user+"' order by component.type," + orderBy + "  ;";
+                            }
+
+
                         }
 
 
+                        
 
 
                         conn.Open();

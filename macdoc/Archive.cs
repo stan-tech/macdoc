@@ -21,6 +21,10 @@ namespace macdoc
         }
         string orderBy = "";
         string machine_id="";
+        string user = "";
+        string limit = "";
+        bool mouseClicked = false;
+        int direction = 0;
         private void Archive_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
@@ -31,10 +35,15 @@ namespace macdoc
 
         private void Archive_Shown(object sender, EventArgs e)
         {
+            Limit.SelectedIndex = 0;
             Type.SelectedIndex = 0;
-            Components.SelectedIndex = 5;
-
+            Components.SelectedIndex = 0;
             DBHelper.SelectAllUsers(Modificateurs);
+            limit = Limit.SelectedItem.ToString();
+            
+            Modificateurs.SelectedIndex = 0;
+            
+
 
         }
 
@@ -67,15 +76,17 @@ namespace macdoc
 
             }
 
-            if (Components.SelectedItem!=null)
+            if (Components.SelectedItem == null || TrierPar.SelectedItem == null ||
+                Modificateurs.SelectedItem == null || Limit.SelectedItem == null)
             {
-                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, Components.SelectedItem.ToString());
+                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, "Tout", "Tout", "Tout");
 
 
             }
             else
             {
-                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, "Tout");
+                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
+
 
             }
         }
@@ -103,16 +114,16 @@ namespace macdoc
                 connection.Close();
             }
 
-
-            if (Components.SelectedItem != null)
+            if (Components.SelectedItem == null || TrierPar.SelectedItem == null ||
+                Modificateurs.SelectedItem == null || Limit.SelectedItem == null)
             {
-                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, Components.SelectedItem.ToString());
+                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, "Tout", "Tout", "Tout");
 
 
             }
             else
             {
-                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, "Tout");
+                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
 
             }
         }
@@ -147,7 +158,7 @@ namespace macdoc
                     }
                     else
                     {
-                        DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, Components.SelectedItem.ToString());
+                        DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, Components.SelectedItem.ToString(),user,limit);
 
                     }
 
@@ -165,15 +176,83 @@ namespace macdoc
 
         private void Componenets_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Components.SelectedItem != null)
+            if (Components.SelectedItem == null || TrierPar.SelectedItem == null ||
+                Modificateurs.SelectedItem == null || Limit.SelectedItem == null)
             {
-                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, Components.SelectedItem.ToString());
+
+                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, "Tout", "Tout", "Tout");
+
+            }
+            else
+            {
+                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
+
+
+            }
+        }
+
+        private void Modificateurs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (Components.SelectedItem == null || TrierPar.SelectedItem == null ||
+                Modificateurs.SelectedItem == null || Limit.SelectedItem == null)
+            {
+                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, "Tout", "Tout", "Tout");
 
 
             }
             else
             {
-                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, "Tout");
+                user = Modificateurs.SelectedItem.ToString();
+
+                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
+
+            }
+        }
+
+        private void Limit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (Components.SelectedItem == null || TrierPar.SelectedItem == null ||
+                Modificateurs.SelectedItem == null || Limit.SelectedItem == null)
+            {
+                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, "Tout", "Tout", "Tout");
+
+
+            }
+            else
+            {
+                limit = Limit.SelectedItem.ToString();
+
+                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
+
+
+            }
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+             mouseClicked = true;
+
+        }
+
+        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseClicked = false;
+        }
+
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+             direction = e.Y;
+
+            if (mouseClicked)
+            {
+              
+                
+                    this.panel1.Top = panel1.Top + e.Y;
+                    this.panel1.Height = panel1.Height + (panel2.Height - e.Y);
+                    this.panel2.Height = panel1.Height - (panel2.Bottom - panel1.Top);
+                
 
             }
         }
