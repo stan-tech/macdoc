@@ -1,14 +1,9 @@
-﻿using Org.BouncyCastle.Crypto.IO;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace macdoc
@@ -19,12 +14,19 @@ namespace macdoc
         {
             InitializeComponent();
         }
-        string orderBy = "";
-        string machine_id="";
-        string user = "";
-        string limit = "";
+        string orderBy = string.Empty;
+        string machine_id = string.Empty;
+        string user = string.Empty;
+        string limit = string.Empty;
         bool mouseClicked = false;
         int direction = 0;
+        int ModifgridHeight;
+        int MachinegridHeight;
+        const int MaxHeight = 1034;
+        const int MinHeight = 615;
+        bool keepGoing;
+        bool PanelShown = false;
+        Timer t = new Timer();
         private void Archive_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
@@ -40,9 +42,38 @@ namespace macdoc
             Components.SelectedIndex = 0;
             DBHelper.SelectAllUsers(Modificateurs);
             limit = Limit.SelectedItem.ToString();
-            
+
             Modificateurs.SelectedIndex = 0;
-            
+
+
+            //t.Interval = 10;
+            //t.Tick += delegate
+            //{
+            //    if (PanelShown)
+            //    {
+            //        if (panel2.Height != 860 && panel1.Height != 860)
+            //        {
+            //            panel2.Height += 86;
+            //            panel1.Height -= 86;
+            //            PanelShown = true;
+
+            //        }
+            //        else
+            //            t.Stop();
+            //    }
+            //    else
+            //    {
+            //        if (panel2.Height != 10 && panel1.Height != 1660)
+            //        {
+            //            panel2.Height -= 92;
+            //            panel1.Height += 166;
+            //            PanelShown = false;
+            //        }
+            //        else
+            //            t.Stop();
+            //    }
+            //};
+
 
 
         }
@@ -91,7 +122,7 @@ namespace macdoc
             }
         }
 
-      
+
 
 
         private void metroGrid1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -133,22 +164,22 @@ namespace macdoc
             using (SQLiteConnection connection = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
             {
 
-               
+
 
 
 
 
                 string command = "select machine.nom as machine, component.type , component.nom as nom, component.reference, users.nom as modificateur , date_modification as \"derniére modification\" , notes from modification inner join component" +
                            " on modification.id_composant = component.id  inner join users on users.id = component.modificateur inner join machine on  component.id_machine = machine.id where "
-                    + " (component.nom like '" + SearchModif.Text.Trim() + "%' or component .reference like '" + SearchModif.Text.Trim() + "%' or notes like  '%"+
-                    SearchModif.Text+"%') ;";
+                    + " (component.nom like '" + SearchModif.Text.Trim() + "%' or component .reference like '" + SearchModif.Text.Trim() + "%' or notes like  '%" +
+                    SearchModif.Text + "%') ;";
 
 
                 connection.Open();
 
                 try
                 {
-                    if (!Equals(SearchModif.Text, ""))
+                    if (!Equals(SearchModif.Text, string.Empty))
                     {
                         Modifs.Refresh();
                         SQLiteDataAdapter adapter = new SQLiteDataAdapter(command, connection);
@@ -158,7 +189,7 @@ namespace macdoc
                     }
                     else
                     {
-                        DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, Components.SelectedItem.ToString(),user,limit);
+                        DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
 
                     }
 
@@ -232,7 +263,12 @@ namespace macdoc
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
-             mouseClicked = true;
+            mouseClicked = true;
+            direction = e.Y;
+            ModifgridHeight = this.panel1.Height;
+            MachinegridHeight = this.panel2.Height;
+
+
 
         }
 
@@ -243,16 +279,110 @@ namespace macdoc
 
         private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
-             direction = e.Y;
+
+
+
+            if ((panel1.Height < MaxHeight && panel2.Height < MaxHeight) &&
+                     (panel1.Height > MinHeight && panel2.Height > MinHeight))
+            {
+                keepGoing = true;
+            }
+            else
+            {
+
+                keepGoing = false;
+            }
 
             if (mouseClicked)
             {
-              
-                
-                    this.panel1.Top = panel1.Top + e.Y;
-                    this.panel1.Height = panel1.Height + (panel2.Height - e.Y);
-                    this.panel2.Height = panel1.Height - (panel2.Bottom - panel1.Top);
-                
+
+                if (direction > e.Y)
+                {
+
+
+                    // this.panel1.Height = panel1.Height + (panel2.Height - e.Y);
+                    // this.Modifs.Height = Modifs.Height + (Modifs.Height - e.Y);
+
+                    // this.panel2.Height = panel1.Height - (panel2.Bottom - panel1.Top);
+
+
+
+
+                    if (keepGoing)
+                    {
+                        this.panel1.Top = panel1.Top + e.Y;
+
+                        this.panel1.Height += ModifgridHeight / 50;
+                        this.panel2.Height -= MachinegridHeight / 120;
+
+                    }
+                    /*
+                     machine panel size = (2456, 860)  location (-1, 47)
+
+                        modifs panel size (2443, 879) location (0, 898)
+
+                     */
+
+                }
+                else
+                {
+
+                    if (keepGoing)
+                    {
+                        this.panel1.Top = panel1.Top + e.Y;
+
+                        this.panel2.Height += MachinegridHeight / 50;
+                        this.panel1.Height -= ModifgridHeight / 120;
+                    }
+
+                    //this.panel1.Height = panel1.Height - (panel2.Height - e.Y);
+                    //this.Modifs.Height = ModifgridHeight - (ModifgridHeight - e.Y);
+
+                    //this.panel2.Height = panel1.Height + (panel2.Bottom - panel1.Top);
+                }
+
+            }
+        }
+
+        private void AffichierMachines_Click(object sender, EventArgs e)
+        {
+
+            if (!PanelShown)
+            {
+
+
+                //modifCollapse.Activate();
+                //machineExpand.Activate();
+
+                panel2.Height = 860;
+                panel2.Location = new Point(-1, 47);
+
+                panel1.Height = 839;
+                panel1.Location = new Point(0, 898);
+
+                AffichierMachines.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
+                AffichierMachines.Text = "Masquer les machines";
+                PanelShown = true;
+
+
+            }
+            else
+            {
+
+                //modifExpand.Activate();
+                //machineCollapse.Activate();
+
+                panel2.Height = 10;
+                panel2.Location = new Point(-1, 47);
+
+                panel1.Height = 1661;
+                panel1.Location = new Point(0, 80);
+
+                AffichierMachines.IconChar = FontAwesome.Sharp.IconChar.Eye;
+                AffichierMachines.Text = "Afficher les machines";
+                PanelShown = false;
+
+
 
             }
         }
