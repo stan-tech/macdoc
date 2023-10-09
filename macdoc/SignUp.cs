@@ -15,6 +15,7 @@ namespace macdoc
         public SignUp()
         {
             InitializeComponent();
+
         }
     }
 }

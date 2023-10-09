@@ -24,6 +24,8 @@ namespace macdoc
 
          
             InitializeComponent();
+            ShowInTaskbar = false;
+            Owner = new Home();
 
             this.compon = component;
             CapName.Text = component.Name;
@@ -79,37 +81,47 @@ namespace macdoc
                 eh(this, e);
             }
         }
-        private void Ok_Click(object sender, EventArgs e)
+        void Confirmed(object sender, EventArgs e)
         {
-
 
             string date = "";
 
-                if (checkBox1.Checked)
-                {
+            if (checkBox1.Checked)
+            {
 
-                    date = DateTime.Now.ToString();
+                date = DateTime.Now.ToString();
 
-                }
-                else
-                {
-                    date = modif.Value.ToString();
-                }
-
-            
+            }
+            else
+            {
+                date = modif.Value.ToString();
+            }
 
 
-            if (DBHelper.PerformModification(compon.ID.ToString(), compon.Type, 
+
+
+            if (DBHelper.PerformModification(compon.ID.ToString(), compon.Type,
                 CapName.Text, CapRef.Text, inst.Value.ToString(), date, notes.Text, "1"))
             {
                 OnRefreshRequested(EventArgs.Empty);
 
-                this.Close(); 
+                this.Close();
             }
+        }
+        private void Ok_Click(object sender, EventArgs e)
+        {
+
+
+
+            ConfirmAction confirm =
+            new ConfirmAction();
+            confirm.Confirmed += Confirmed;
+            confirm.ShowDialog();
 
 
         }
 
+       
         private void Annuler_Click(object sender, EventArgs e)
         {
             this.Close();

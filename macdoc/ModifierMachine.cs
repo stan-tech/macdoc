@@ -27,8 +27,10 @@ namespace macdoc
         {
             InitializeComponent();
             this.machine = machine;
+            ShowInTaskbar = false;
+            Owner = new Home();
 
-           
+
         }
 
         public void FillGrid(string component)

@@ -18,6 +18,8 @@ namespace macdoc
         {
             this.machine = machine;
             InitializeComponent();
+            ShowInTaskbar = false;
+
         }
 
         private void label3_Click(object sender, EventArgs e)

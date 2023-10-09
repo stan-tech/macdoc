@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Screenshot_2023-09-09_153207-removebg-preview %282%29.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
@@ -306,6 +309,12 @@
       <DependentUpon>Archive.cs</DependentUpon>
     </Compile>
     <Compile Include="Component.cs" />
+    <Compile Include="ConfirmAction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfirmAction.Designer.cs">
+      <DependentUpon>ConfirmAction.cs</DependentUpon>
+    </Compile>
     <Compile Include="FlatCombo.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -377,6 +386,13 @@
     <Compile Include="Suppression.Designer.cs">
       <DependentUpon>Suppression.cs</DependentUpon>
     </Compile>
+    <Compile Include="User.cs" />
+    <Compile Include="UserProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserProfile.Designer.cs">
+      <DependentUpon>UserProfile.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AjouterMachine.resx">
       <DependentUpon>AjouterMachine.cs</DependentUpon>
     </EmbeddedResource>
@@ -385,6 +401,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Archive.resx">
       <DependentUpon>Archive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfirmAction.resx">
+      <DependentUpon>ConfirmAction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
@@ -413,12 +432,16 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="SignUp.resx">
       <DependentUpon>SignUp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Suppression.resx">
       <DependentUpon>Suppression.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserProfile.resx">
+      <DependentUpon>UserProfile.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -436,6 +459,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Manuals\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Logo.ico" />
+    <Content Include="Screenshot_2023-09-09_153207-removebg-preview %282%29.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

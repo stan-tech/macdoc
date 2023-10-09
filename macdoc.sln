@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "macdoc", "macdoc\macdoc.csproj", "{113FDF8C-7397-46E1-B412-358CAFCBED03}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maintenancescheduler", "Maintenance scheduler\Maintenancescheduler.csproj", "{A651C374-4C4A-49B4-B5BB-8B3ACD81C83C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{113FDF8C-7397-46E1-B412-358CAFCBED03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{113FDF8C-7397-46E1-B412-358CAFCBED03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{113FDF8C-7397-46E1-B412-358CAFCBED03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A651C374-4C4A-49B4-B5BB-8B3ACD81C83C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A651C374-4C4A-49B4-B5BB-8B3ACD81C83C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A651C374-4C4A-49B4-B5BB-8B3ACD81C83C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A651C374-4C4A-49B4-B5BB-8B3ACD81C83C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

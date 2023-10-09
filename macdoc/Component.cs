@@ -18,6 +18,8 @@ namespace macdoc
         long num_modifications;
         int id_machine;
         string type;
+        string machineName;
+        string machineRef;
 
 
 
@@ -27,6 +29,17 @@ namespace macdoc
             set { name = value; }   
         }
 
+        public string MachineName
+        {
+            get { return machineName; }
+            set { machineName = value; }
+        }
+
+        public string MachineRef
+        {
+            get { return machineRef; }
+            set { machineRef = value; }
+        }
         public string Type
         {
             get { return type; }

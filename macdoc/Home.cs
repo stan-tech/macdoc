@@ -35,6 +35,7 @@ using DevExpress.XtraExport.Implementation;
 using Spire.Pdf.Tables;
 using static DevExpress.Utils.Svg.CommonSvgImages;
 using iTextSharp.text.pdf.draw;
+using System.Timers;
 
 namespace macdoc
 {
@@ -46,6 +47,10 @@ namespace macdoc
         Machine machine;
         bool expanded = false;
         public Form ajouter_machine;
+        public static string AppPath = AppDomain.CurrentDomain.BaseDirectory;
+        public static bool RefSearch = false;
+        public static bool GridFilled = false;
+        static List<Component> componentsToModifiy = new List<Component>();
 
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -83,10 +88,13 @@ namespace macdoc
         public Home()
         {
             this.DoubleBuffered = true;
-            
+
+           
 
             InitializeComponent();
-        
+
+            
+
 
         }
 
@@ -104,30 +112,13 @@ namespace macdoc
 
             return 1;
         }
-        public void StartFilling()
-        {
-           
-            async Task Do()
-            {
-                SelectItems();
 
-                await Task.Run(()=>
-                StartFilling());
-
-                await Task.Run(()=> Synth_Click(this, null));
-
-
-                await Task.Run(()=> DBHelper.FillHomeGrid(metroGrid1,
-                selected_component,
-                selected_machine));
-
-            }
-            
-        }
         private void Home_Load(object sender, EventArgs e)
         {
 
             SelectItems();
+            if (!RefSearch) { }
+               SelectAllComponents();
 
         }
 
@@ -300,35 +291,8 @@ namespace macdoc
 
         private void metroGrid1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            string name = metroGrid1.SelectedRows[0].Cells[1].Value.ToString(), refn = metroGrid1.SelectedRows[0].Cells[2].Value.ToString(),
-                modif = metroGrid1.SelectedRows[0].Cells[4].Value.ToString()
-                ,id =  metroGrid1.SelectedRows[0].Cells[0].Value.ToString()
-                , inst = metroGrid1.SelectedRows[0].Cells[3].Value.ToString();
+            Modifiy();
 
-            int num_modif = int.Parse(metroGrid1.SelectedRows[0].Cells[6].Value.ToString());
-
-
-            Component comp = new Component(name, refn, DateTime.Parse(inst), DateTime.Parse(modif),num_modif);
-            comp.ID = int.Parse(id);
-            comp.Type = selected_component;
-            ;
-            Modifier_composant modifier = null;
-
-            try
-            {
-                modifier = new Modifier_composant(comp);
-                modifier.cap_Changed += CapChanged;
-                modifier.ShowDialog();
-
-            }
-           
-            catch(Exception ep)
-            {
-                MessageBox.Show("Le format de date n'est pas accepté");
-
-            }
-
-            
         }
 
         public void CapChanged(object sender, EventArgs e)
@@ -336,6 +300,8 @@ namespace macdoc
             DBHelper.FillHomeGrid(metroGrid1,
                  selected_component,
                  selected_machine);
+
+            MessageBox.Show(" Modification effectuée","",MessageBoxButtons.OK ,MessageBoxIcon.Information);
 
         }
         private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -448,6 +414,10 @@ namespace macdoc
                 DBHelper.FillHomeGrid(metroGrid1,
                                 selected_component,
                                 selected_machine);
+
+                GridFilled = true;
+
+
                 try
                 {
                     CompNum.Text = DBHelper.SelectComponentNumber(selected_component, selected_machine);
@@ -472,20 +442,35 @@ namespace macdoc
                 caps.SelectedItem.ToString().Substring(0, caps.SelectedItem.ToString().Length - 1),
                 selected_machine);
 
+           
+
+
         }
 
       
+
+    
+
 
         private void MacName_TextChanged(object sender, EventArgs e)
 
         {
             string component = "";
-            int comp = caps.SelectedIndex;
+            int comp = -1;
+            string machine = "";
 
-            string machine = machineCombo.SelectedItem.ToString();
+            if (caps.SelectedItem !=null)
+            {
+               comp  = caps.SelectedIndex;
 
+            }
+            if(machineCombo.SelectedItem != null)
+            {
+                 machine = machineCombo.SelectedItem.ToString();
 
-            using(SQLiteConnection connection =new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
+            }
+
+            using (SQLiteConnection connection =new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
             {
 
                 switch (comp)
@@ -511,14 +496,19 @@ namespace macdoc
                         break;
                 }
 
-                
 
-               
-                string command = "select component.nom , component.reference ," +
-                    "component.date_insertion as \"date d'insertion\", component.date_modification as \"de modification\" ," +
-                    "component.life_duration as \"durée de vie\" from  component inner join machine on machine.id = "+
-                    "component.id_machine  where machine.nom  like '%"+machine
-                    + "%' and (component.nom like '"+Search.Text.Trim()+"%' or component .reference like '"+Search.Text.Trim() + "%') and component.type = '"+component+"';";
+
+
+                //string command = "select component.nom , component.reference ," +
+                //    "component.date_insertion as \"date d'insertion\", component.date_modification as \"de modification\" ," +
+                //    "component.life_duration as \"durée de vie\" from  component inner join machine on machine.id = "+
+                //    "component.id_machine  where machine.nom  like '%"+machine
+                //    + "%' and (component.nom like '"+Search.Text.Trim()+"%' or component .reference like '"+Search.Text.Trim() + "%') and component.type = '"+component+"';";
+
+                string command = "select component.id,component.nom , component.reference ," +
+                   "component.date_insertion as \"date d'insertion\", component.date_modification as \"de modification\" ," +
+                   "component.life_duration as \"durée de vie\" ,num_modification as \"nombre de modifications\" from  component inner join machine on machine.id = " +
+                   "component.id_machine  where (component.nom like '" + Search.Text.Trim() + "%' or component .reference like '" + Search.Text.Trim() + "%')";
 
                 if (Equals(component, "Verin"))
                 {
@@ -563,7 +553,7 @@ namespace macdoc
 
         private void ProfileButton_Click_1(object sender, EventArgs e)
         {
-            new ListDesMachine(ListDesMachine.Con).ShowDialog();
+            new UserProfile().ShowDialog();
 
         }
 
@@ -755,6 +745,386 @@ namespace macdoc
         private void History_Click(object sender, EventArgs e)
         {
             new Archive().ShowDialog();
+        }
+
+        private void pdfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string S = machineCombo.SelectedItem.ToString();
+
+           Task.Run(()=> { GeneratePdf(metroGrid1,S); }) ;
+        }
+
+        public void GeneratePdf(MetroGrid grid,string selected_machine)
+        {
+            PdfPTable table = new PdfPTable(grid.ColumnCount);
+            PdfPCell pdfPCell = null;
+            Chunk glue = new Chunk(new VerticalPositionMark());
+
+            Document document = new Document(PageSize.A4, 0f, 0f, 0f, 0f);
+            document.SetMargins(20f, 20f, 20f, 20f);
+
+            string id = Guid.NewGuid().ToString();
+
+            string path = AppDomain.CurrentDomain.BaseDirectory + "MacDoc_file_" + id + ".pdf";
+
+
+            PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(path, FileMode.Create));
+
+            document.Open();
+
+            table.WidthPercentage = 100;
+            table.HorizontalAlignment = Element.ALIGN_LEFT;
+            iTextSharp.text.Font FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
+            BaseColor.BLACK);
+
+
+
+            iTextSharp.text.Paragraph lineSeparator = new iTextSharp.text.Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator
+                (0.0F, 100.0F, BaseColor.BLACK,
+                Element.ALIGN_LEFT, 1)));
+
+            document.Add(lineSeparator);
+
+            document.Add(new iTextSharp.text.Paragraph(""));
+            iTextSharp.text.Image picture = iTextSharp.text.Image.GetInstance(AppDomain.CurrentDomain.BaseDirectory + "\\Logo.png");
+
+            picture.ScaleToFit(80f, 80f);
+            picture.Alignment = Element.ALIGN_LEFT;
+            picture.SpacingAfter = 1;
+
+            document.Add(picture);
+
+            document.Add(new Phrase("\t     MacDoc", FS));
+
+            document.Add(lineSeparator);
+
+            document.Add(new iTextSharp.text.Paragraph(""));
+
+
+
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            document.Add(new Phrase("Redigé le: " + DateTime.Now, FS));
+
+            document.Add(lineSeparator);
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            document.Add(new Phrase("Executant: " + "Aymen", FS));
+
+
+            document.Add(lineSeparator);
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+
+            Chunk machineTitle = new Chunk(selected_machine, FontFactory.GetFont("Calibri", 10,
+            BaseColor.BLACK));
+
+            Phrase machine_phrase = new Phrase();
+            Chunk machineT = new Chunk("Machine: ", FS);
+
+            machine_phrase.Add(machineT);
+
+
+            machine_phrase.Add(machineTitle);
+
+            machine_phrase.Add(glue);
+
+            FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
+            BaseColor.BLACK);
+
+            Chunk reference = new Chunk("Reference: ", FS);
+
+            machine_phrase.Add(reference);
+
+            FS = FontFactory.GetFont("Calibri", 10,
+          BaseColor.BLACK);
+
+            machine_phrase.Add(new Chunk("ORITNF000", FS));
+
+
+
+            document.Add(machine_phrase);
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            Phrase machineType = new Phrase();
+
+            FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
+           BaseColor.BLACK);
+
+            Chunk macType = new Chunk("Machine type: ", FS);
+            machineType.Add(macType);
+
+            FS = FontFactory.GetFont("Calibri", 10,
+         BaseColor.BLACK);
+
+            macType = new Chunk(SelectedMachineType, FS);
+
+            machineType.Add(macType);
+
+
+            document.Add(machineType);
+
+
+
+            Phrase CompoType = new Phrase();
+
+            FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
+           BaseColor.BLACK);
+
+            Chunk CType = new Chunk("Composants: ", FS);
+
+            CompoType.Add(CType);
+
+            FS = FontFactory.GetFont("Calibri", 10,
+         BaseColor.BLACK);
+
+            CType = new Chunk(Composants.Text, FS);
+
+            CompoType.Add(CType);
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            document.Add(CompoType);
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+
+            //table.SetWidths(new float[] { 20f, 150f, 100f});
+
+            #region Write table
+
+
+            FS = FontFactory.GetFont("Calibri", 10,
+           BaseColor.BLACK);
+
+            foreach (DataGridViewColumn header in grid.Columns)
+            {
+
+                pdfPCell = new PdfPCell(new Phrase(header.HeaderText, FS));
+                pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                table.AddCell(pdfPCell);
+
+            }
+
+            foreach (DataGridViewRow row in grid.Rows)
+            {
+                foreach (DataGridViewCell column in row.Cells)
+                {
+
+                    pdfPCell = new PdfPCell(new Phrase(column.Value.ToString(), FS));
+                    pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                    pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                    table.AddCell(pdfPCell);
+
+                }
+            }
+
+            #endregion
+
+
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+
+            Phrase phrase = new Phrase("Responsable: ", FS);
+            phrase.Add(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator
+                (0.0F, 40.0F, BaseColor.BLACK,
+                Element.ALIGN_LEFT, 1)));
+
+
+
+            document.Add(table);
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+            document.Add(new iTextSharp.text.Paragraph(""));
+
+
+            document.Add(phrase);
+
+            document.Close();
+
+
+            System.Diagnostics.Process.Start(path);
+
+
+        }
+
+
+        private void MaintenanceNotif_BalloonTipClicked(object sender, EventArgs e)
+        {
+            this.Search.Text = componentsToModifiy[0].Reference;
+
+        }
+
+        private void MaintenanceNotif_BalloonTipClicked(object sender, MouseEventArgs e)
+        {
+
+            this.Search.Text = componentsToModifiy[0].Reference;
+
+
+        }
+
+        private void metroGrid1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Modifiy();
+        }
+
+        public void Modifiy()
+        {
+            string name = metroGrid1.SelectedRows[0].Cells[1].Value.ToString(),
+               refn = metroGrid1.SelectedRows[0].Cells[2].Value.ToString(),
+               modif = metroGrid1.SelectedRows[0].Cells[4].Value.ToString()
+               , id = metroGrid1.SelectedRows[0].Cells[0].Value.ToString()
+               , inst = metroGrid1.SelectedRows[0].Cells[3].Value.ToString();
+
+            int num_modif = int.Parse(metroGrid1.SelectedRows[0].Cells[6].Value.ToString());
+
+
+            Component comp = new Component(name, refn, DateTime.Parse(inst), DateTime.Parse(modif), num_modif);
+            comp.ID = int.Parse(id);
+            comp.Type = selected_component;
+            ;
+            Modifier_composant modifier = null;
+
+            try
+            {
+                modifier = new Modifier_composant(comp);
+                modifier.cap_Changed += CapChanged;
+                modifier.ShowDialog();
+
+            }
+
+            catch (Exception ep)
+            {
+                MessageBox.Show("Le format de date n'est pas accepté");
+
+            }
+        }
+
+        private void metroGrid1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Modifiy();
+
+        }
+        void NotificationClicked(object sender, MouseEventArgs e)
+        {
+            this.Search.Text = componentsToModifiy[0].Reference;
+
+        }
+        public void SelectAllComponents()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection("data source=C:\\Users\\Stan\\source\\repos\\macdoc\\macdoc\\Files\\MacdocDB.db"))
+            {
+
+                Component component;
+
+                if (conn.State == System.Data.ConnectionState.Closed)
+                {
+                    conn.Open();
+
+                    string CurrentCinfo = System.Globalization.CultureInfo.CurrentCulture.ToString();
+                    string CulInfor = "";
+
+                    if (CurrentCinfo.Equals("fr-FR"))
+                        CulInfor = "FORMAT(date_modification, 'd', 'en-gb')";
+
+                    else if (CurrentCinfo.Equals("en-US"))
+                        CulInfor = "FORMAT(date_modification, 'd', 'en-us')";
+                    else
+                        CulInfor = "FORMAT(date_modification, 'd', 'iv')";
+
+
+                    string sqlcommand = "select component.id, component.nom , component.reference , date_insertion as \"date d'insertion\", date_modification as \"date " +
+                                      "de modification\" , life_duration as \"durée de vie\" , num_modification as \"nombre de modifications \" , machine.nom,machine.reference from" +
+                                      " component inner join machine on machine.id = component.id_machine ;";
+                    SQLiteCommand cmd = new SQLiteCommand(sqlcommand, conn);
+
+                    SQLiteDataReader reader = cmd.ExecuteReader();
+
+
+                    while (reader.Read())
+                    {
+                        string date_insertion = DateTime.Parse(reader.GetString(3)).ToString("MM/dd/yyyy");
+                        string date_modification = DateTime.Parse(reader.GetString(4)).ToString("MM/dd/yyyy");
+
+
+                        component = new Component(reader.GetString(1), reader.GetString(2),
+                            DateTime.Parse(date_insertion), DateTime.Parse(date_modification), reader.GetInt32(6));
+
+                        component.MachineName = reader.GetString(7);
+                        component.MachineRef = reader.GetString(8);
+
+                        if (reader.GetString(5).Contains("Jours"))
+                        {
+                            if (component.Date_modification.AddDays(double.Parse(reader.GetString(5).Replace("Jours", "").Trim())) <= DateTime.Now.Date)
+                                componentsToModifiy.Add(component);
+                        }
+                        else if (reader.GetString(5).Contains("Mois"))
+                        {
+                            if (component.Date_modification.AddMonths(int.Parse(reader.GetString(5).Replace("Mois", "").Trim())) <= DateTime.Now.Date)
+                                componentsToModifiy.Add(component);
+                        }
+                        else if (reader.GetString(5).Contains("Semaines"))
+                        {
+                            if (component.Date_modification.AddDays(Math.Round(double.Parse(reader.GetString(5).Replace("Semaines", "").Trim()) * 7)) <= DateTime.Now.Date)
+                                componentsToModifiy.Add(component);
+                        }
+                        else
+                        {
+                            if (component.Date_modification.AddYears(int.Parse(reader.GetString(5).Replace("Jours", "").Trim())) <= DateTime.Now.Date)
+                                componentsToModifiy.Add(component);
+                        }
+
+
+
+
+                    }
+                    reader.Close();
+
+                    if (componentsToModifiy.Count > 0)
+                    {
+
+
+
+                         MaintenanceNotif.Icon = new System.Drawing.Icon(AppDomain.CurrentDomain.BaseDirectory + "\\Logo.ico");
+                        MaintenanceNotif.Text = "Cliquez ici pour confirmer l'execution la modification";
+                        MaintenanceNotif.Visible = true;
+
+                        MaintenanceNotif.BalloonTipTitle = "Macdoc";
+                        MaintenanceNotif.BalloonTipText = "La Machine " + componentsToModifiy[0].MachineName + " avec la reference " +
+                            componentsToModifiy[0].MachineRef + ", Capteur "
+                                + componentsToModifiy[0].Name + " avec la reference " + componentsToModifiy[0].Reference + " peut necessiter une maintenane";
+                        MaintenanceNotif.ShowBalloonTip(500);
+                        MaintenanceNotif.MouseClick += NotificationClicked;
+
+
+                    }
+                    conn.Close();
+                }
+                else
+                {
+                    conn.Close();
+
+                }
+
+
+
+
+                conn.Close();
+
+            }
+
+
+        }
+
+        private void metroGrid1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

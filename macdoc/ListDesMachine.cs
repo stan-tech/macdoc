@@ -25,8 +25,9 @@ namespace macdoc
         public ListDesMachine(string operation)
         {
             InitializeComponent();
+            ShowInTaskbar = false;
 
-               this.operation = operation;
+            this.operation = operation;
             //    types.SelectedIndex = 0;
             //SelectedType = types.SelectedItem.ToString();
             

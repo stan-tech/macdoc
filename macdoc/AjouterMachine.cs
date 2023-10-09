@@ -33,8 +33,9 @@ namespace macdoc
             InitializeComponent();
             this.type = type;
             Added = added;
+            ShowInTaskbar = false;
 
-            if(refresh)
+            if (refresh)
             FillGrid(component);
 
 

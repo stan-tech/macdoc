@@ -17,6 +17,9 @@ using Guna.UI2.WinForms;
 using System.Windows.Controls;
 using System.Reflection.Emit;
 using System.Web.UI.WebControls;
+using System.Security.Cryptography.X509Certificates;
+using System.Diagnostics;
+using static DevExpress.XtraEditors.Mask.MaskSettings;
 
 namespace macdoc
 {
@@ -28,7 +31,6 @@ namespace macdoc
         public static string Staff_activity = "staff_activity";
         public static string Files = "files";
         public static string SelectedMachine;
-
         public static string SelectComponentNumber(string selected_component, string selected_machine)
         {
             string compnum = "";
@@ -52,7 +54,7 @@ namespace macdoc
 
                     compnum = cmd.ExecuteScalar().ToString();
 
-
+                    connection.Close();
 
                 }
                 else
@@ -161,6 +163,11 @@ namespace macdoc
 
 
                     }
+                    finally
+                    {
+                        conn.Close();
+
+                    }
                 }
                 else
                 {
@@ -201,39 +208,43 @@ namespace macdoc
                             string updateSql = "update  component set nom = '" + name + "'" +
                                  ",reference = '" + reference + "',date_insertion = '" + date_ins +
                                  "',date_modification = '" + date_modif + "' , num_modification = num_modification + 1 " +
-                                 "where id = " + id + " and type = '" + component + "';";
+                                 "where id = " + id + ";";
 
-                            SQLiteCommand command = new SQLiteCommand(updateSql, conn);
+                            using (SQLiteCommand command = new SQLiteCommand(updateSql, conn))
 
-
-                            if (command.ExecuteNonQuery() > 0)
                             {
-                                string id_machine = new SQLiteCommand("select id_machine from component where reference = '"+reference+"';", conn).ExecuteScalar().ToString();
-
-
-                                string insertSql = "insert into modification (date,id_composant,modificateur,notes,id_machine)" +
-                                    " values ('"+date_modif+"', "+id+","+ modificateur+",'"+notes+"',"+id_machine+");";
-                                SQLiteCommand cmd = new SQLiteCommand(insertSql, conn);
-
-
-                                if (cmd.ExecuteNonQuery() > 0)
+                                if (command.ExecuteNonQuery() > 0)
                                 {
+                                    string id_machine = new SQLiteCommand("select id_machine from component where reference = '" + reference + "';", conn).ExecuteScalar().ToString();
 
-                                    done = true;
+
+                                    string insertSql = "insert into modification (date,id_composant,modificateur,notes,id_machine)" +
+                                        " values ('" + date_modif + "', " + id + "," + modificateur + ",'" + notes + "'," + id_machine + ");";
+                                    SQLiteCommand cmd = new SQLiteCommand(insertSql, conn);
+
+
+                                    if (cmd.ExecuteNonQuery() > 0)
+                                    {
+
+                                        done = true;
+                                    }
+
+
+                                    conn.Close();
+
+
+
                                 }
+                                else
+                                {
+                                    MessageBox.Show("Echec !", "Ajout", MessageBoxButtons.OK);
 
 
-                                conn.Close();
+                                }
+                            } 
 
 
-
-                            }
-                            else
-                            {
-                                MessageBox.Show("Echec !", "Ajout", MessageBoxButtons.OK);
-
-
-                            }
+                           
 
                         }
                         else
@@ -252,10 +263,16 @@ namespace macdoc
                     {
 
 
-                        MessageBox.Show("Echec ! " + ex.Message, "Echec d'ajouter un composant", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Echec ! " + ex.Message, " Echec de modifier le composant", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 
                     }
+                    finally
+                    {
+                        conn.Close();
+
+                    }
+
                 }
                 else
                 {
@@ -383,7 +400,7 @@ namespace macdoc
             {
 
                 selection = "verin";
-                sqlcommand = "select nom , reference , dernier_vidange as \"dernier vidange\" , huil_durée as \"huile longevité\" from verin inner join component on verin.id_component = " +
+                sqlcommand = "select nom , reference , dernier_vidange as \"dernier vidange\" , huile_durée as \"huile longevité\" from verin inner join component on verin.id_component = " +
                     "component.id where component.type = 'verin';";
 
             }
@@ -402,6 +419,7 @@ namespace macdoc
                 DataTable dataTable = new DataTable();
                 adapter.Fill(dataTable);
                 metroGrid1.DataSource = dataTable;
+
                 connection.Close();
 
 
@@ -701,7 +719,10 @@ namespace macdoc
                         MessageBox.Show("Couldn't select component id !"+ex.Message, "", MessageBoxButtons.OK);
 
                     }
-                    conn.Close();
+                    finally{
+                        conn.Close();
+
+                    }
 
                 }
                 else
@@ -749,7 +770,11 @@ namespace macdoc
 
 
                     }
-                    conn.Close();
+                    finally
+                    {
+                        conn.Close();
+
+                    }
 
                 }
                 else
@@ -891,6 +916,43 @@ namespace macdoc
             }
         }
 
+
+        public static User ReturnUser(string name, string password)
+        {
+            User user = null;
+            using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
+            {
+
+                if(conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                    string user_to_return = "select nom , prenom , telephone, password from users where nom = '" + name + "' and password = '" + password + "' ;";
+
+                    SQLiteCommand sQLiteCommand = new SQLiteCommand(user_to_return, conn);
+                    SQLiteDataReader reader = sQLiteCommand.ExecuteReader();
+
+
+
+
+                    if (reader.Read())
+                    {
+                        user = new User(reader.GetString(0), reader.GetString(1), reader.GetString(2));
+                        user.PassWord = reader.GetString(3);
+
+                    }
+                    reader.Close();
+                    conn.Close() ;
+                }
+                else
+                {
+                    conn.Close();
+                }
+                
+
+            }
+
+            return user;
+        }
         public static void SelectAllUsers(Guna2ComboBox users)
         {
 
@@ -900,7 +962,9 @@ namespace macdoc
 
                 string command = "select nom from users ;";
 
+
                 SQLiteCommand sQLiteCommand = new SQLiteCommand(command, conn);
+
 
                 SQLiteDataReader reader = sQLiteCommand.ExecuteReader();
                 users.Items.Clear();
@@ -913,11 +977,49 @@ namespace macdoc
 
                 }
 
+                reader.Close();
+
                 conn.Close();
 
 
             }
         }
+        public static User SelectAdmin()
+        {
+            User user = null;
+
+            using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
+            {
+                if(conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+
+
+                    string selectAdmin = "select id,nom,prenom,telephone,role,password from users where role = 'Admin'";
+
+                    SQLiteCommand command = new SQLiteCommand(selectAdmin,conn);
+                    SQLiteDataReader reader = command.ExecuteReader();
+
+                    if(reader.Read()) {
+
+                        user = new User(reader.GetString(1),reader.GetString(2),reader.GetString(3));
+
+                    }
+                    reader.Close();
+
+                    conn.Close();
+                }
+                else
+                {
+                    conn.Close();
+                }
+            }
+
+            return user;
+        }
+
+
+
     }
 }
 

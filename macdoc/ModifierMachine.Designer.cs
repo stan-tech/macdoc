@@ -348,9 +348,10 @@
             this.Annuler.IconColor = System.Drawing.Color.Black;
             this.Annuler.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.Annuler.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Annuler.Location = new System.Drawing.Point(1417, 73);
+            this.Annuler.Location = new System.Drawing.Point(1402, 73);
             this.Annuler.Name = "Annuler";
-            this.Annuler.Size = new System.Drawing.Size(182, 76);
+            this.Annuler.Padding = new System.Windows.Forms.Padding(10);
+            this.Annuler.Size = new System.Drawing.Size(197, 76);
             this.Annuler.TabIndex = 39;
             this.Annuler.Text = "Annuler";
             this.Annuler.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -366,9 +367,10 @@
             this.Ok.IconColor = System.Drawing.Color.Black;
             this.Ok.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.Ok.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Ok.Location = new System.Drawing.Point(1656, 73);
+            this.Ok.Location = new System.Drawing.Point(1634, 73);
             this.Ok.Name = "Ok";
-            this.Ok.Size = new System.Drawing.Size(191, 76);
+            this.Ok.Padding = new System.Windows.Forms.Padding(10);
+            this.Ok.Size = new System.Drawing.Size(213, 76);
             this.Ok.TabIndex = 38;
             this.Ok.Text = "Confimer";
             this.Ok.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -378,7 +380,7 @@
             // 
             // CompNum
             // 
-            this.CompNum.BackColor = System.Drawing.Color.Gold;
+            this.CompNum.BackColor = System.Drawing.Color.DarkTurquoise;
             this.CompNum.Font = new System.Drawing.Font("Lucida Console", 15.125F, System.Drawing.FontStyle.Bold);
             this.CompNum.ForeColor = System.Drawing.Color.Black;
             this.CompNum.Location = new System.Drawing.Point(1767, 293);

@@ -19,6 +19,8 @@ namespace macdoc
             InitializeComponent();
             this.id_machine = id_machine;
             this.machineName = machineName;
+            ShowInTaskbar = false;
+
         }
 
         private void List_fichiers_Load(object sender, EventArgs e)

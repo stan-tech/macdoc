@@ -33,6 +33,7 @@ namespace macdoc
             TrierPar.SelectedIndex = 0;
 
 
+
         }
 
         private void Archive_Shown(object sender, EventArgs e)
@@ -127,6 +128,11 @@ namespace macdoc
 
         private void metroGrid1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            SelectModifications();
+        }
+
+        public void SelectModifications()
+        {
             using (SQLiteConnection connection = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
             {
                 connection.Open();
@@ -158,7 +164,6 @@ namespace macdoc
 
             }
         }
-
         private void SearchModif_TextChanged(object sender, EventArgs e)
         {
             using (SQLiteConnection connection = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
@@ -385,6 +390,18 @@ namespace macdoc
 
 
             }
+        }
+
+        private void metroGrid1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SelectModifications();
+
+        }
+
+        private void metroGrid1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            SelectModifications();
+
         }
     }
 }

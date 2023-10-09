@@ -47,18 +47,36 @@
             this.fichierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.excelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pDFToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.excelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.wordToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pdfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pdfToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.excelToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.wordToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.wordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pdfToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.excelToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.wordToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.exporterLaListeDeToutesLesModificationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pdfToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.excelToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.wordToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
             this.metroGrid1 = new MetroFramework.Controls.MetroGrid();
+            this.iconButton2 = new macdoc.RoundedButton();
+            this.SearchMac = new macdoc.RoundedTextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.Type = new Guna.UI2.WinForms.Guna2ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.AffichierMachines = new macdoc.RoundedButton();
             this.panel4 = new System.Windows.Forms.Panel();
             this.Modifs = new MetroFramework.Controls.MetroGrid();
+            this.roundedButton1 = new macdoc.RoundedButton();
+            this.SearchModif = new macdoc.RoundedTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -72,11 +90,6 @@
             this.modifCollapse = new Zeroit.Framework.Transitions.AnimatorWithEditor.ZeroitAnimatorEdit(this.components);
             this.machineExpand = new Zeroit.Framework.Transitions.AnimatorWithEditor.ZeroitAnimatorEdit(this.components);
             this.machineCollapse = new Zeroit.Framework.Transitions.AnimatorWithEditor.ZeroitAnimatorEdit(this.components);
-            this.AffichierMachines = new macdoc.RoundedButton();
-            this.roundedButton1 = new macdoc.RoundedButton();
-            this.SearchModif = new macdoc.RoundedTextBox();
-            this.iconButton2 = new macdoc.RoundedButton();
-            this.SearchMac = new macdoc.RoundedTextBox();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).BeginInit();
@@ -97,7 +110,7 @@
             this.fichierToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(2443, 48);
+            this.menuStrip1.Size = new System.Drawing.Size(2443, 44);
             this.menuStrip1.TabIndex = 49;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -116,29 +129,124 @@
             this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.excelToolStripMenuItem,
             this.pdfToolStripMenuItem,
-            this.wordToolStripMenuItem});
+            this.wordToolStripMenuItem,
+            this.exporterLaListeDeToutesLesModificationsToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             this.exportToolStripMenuItem.Size = new System.Drawing.Size(214, 44);
             this.exportToolStripMenuItem.Text = "Export";
             // 
             // excelToolStripMenuItem
             // 
+            this.excelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pDFToolStripMenuItem1,
+            this.excelToolStripMenuItem1,
+            this.wordToolStripMenuItem1});
             this.excelToolStripMenuItem.Name = "excelToolStripMenuItem";
             this.excelToolStripMenuItem.Size = new System.Drawing.Size(605, 44);
-            this.excelToolStripMenuItem.Text = "Exporter la liste des machines";
+            this.excelToolStripMenuItem.Text = "Exporter la liste actuelle des machines";
             this.excelToolStripMenuItem.Click += new System.EventHandler(this.excelToolStripMenuItem_Click);
+            // 
+            // pDFToolStripMenuItem1
+            // 
+            this.pDFToolStripMenuItem1.Name = "pDFToolStripMenuItem1";
+            this.pDFToolStripMenuItem1.Size = new System.Drawing.Size(204, 44);
+            this.pDFToolStripMenuItem1.Text = "Pdf";
+            // 
+            // excelToolStripMenuItem1
+            // 
+            this.excelToolStripMenuItem1.Name = "excelToolStripMenuItem1";
+            this.excelToolStripMenuItem1.Size = new System.Drawing.Size(204, 44);
+            this.excelToolStripMenuItem1.Text = "Excel";
+            // 
+            // wordToolStripMenuItem1
+            // 
+            this.wordToolStripMenuItem1.Name = "wordToolStripMenuItem1";
+            this.wordToolStripMenuItem1.Size = new System.Drawing.Size(204, 44);
+            this.wordToolStripMenuItem1.Text = "Word";
             // 
             // pdfToolStripMenuItem
             // 
+            this.pdfToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pdfToolStripMenuItem2,
+            this.excelToolStripMenuItem2,
+            this.wordToolStripMenuItem2});
             this.pdfToolStripMenuItem.Name = "pdfToolStripMenuItem";
             this.pdfToolStripMenuItem.Size = new System.Drawing.Size(605, 44);
-            this.pdfToolStripMenuItem.Text = "Exporter la listes actuelle des modifications";
+            this.pdfToolStripMenuItem.Text = "Exporter la liste de toutes les machines";
+            // 
+            // pdfToolStripMenuItem2
+            // 
+            this.pdfToolStripMenuItem2.Name = "pdfToolStripMenuItem2";
+            this.pdfToolStripMenuItem2.Size = new System.Drawing.Size(204, 44);
+            this.pdfToolStripMenuItem2.Text = "Pdf";
+            // 
+            // excelToolStripMenuItem2
+            // 
+            this.excelToolStripMenuItem2.Name = "excelToolStripMenuItem2";
+            this.excelToolStripMenuItem2.Size = new System.Drawing.Size(204, 44);
+            this.excelToolStripMenuItem2.Text = "Excel";
+            // 
+            // wordToolStripMenuItem2
+            // 
+            this.wordToolStripMenuItem2.Name = "wordToolStripMenuItem2";
+            this.wordToolStripMenuItem2.Size = new System.Drawing.Size(204, 44);
+            this.wordToolStripMenuItem2.Text = "Word";
             // 
             // wordToolStripMenuItem
             // 
+            this.wordToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pdfToolStripMenuItem3,
+            this.excelToolStripMenuItem3,
+            this.wordToolStripMenuItem3});
             this.wordToolStripMenuItem.Name = "wordToolStripMenuItem";
             this.wordToolStripMenuItem.Size = new System.Drawing.Size(605, 44);
-            this.wordToolStripMenuItem.Text = "Exporter la liste de toutes les modifications";
+            this.wordToolStripMenuItem.Text = "Exporter la liste actuelle des modifications";
+            // 
+            // pdfToolStripMenuItem3
+            // 
+            this.pdfToolStripMenuItem3.Name = "pdfToolStripMenuItem3";
+            this.pdfToolStripMenuItem3.Size = new System.Drawing.Size(204, 44);
+            this.pdfToolStripMenuItem3.Text = "Pdf";
+            // 
+            // excelToolStripMenuItem3
+            // 
+            this.excelToolStripMenuItem3.Name = "excelToolStripMenuItem3";
+            this.excelToolStripMenuItem3.Size = new System.Drawing.Size(204, 44);
+            this.excelToolStripMenuItem3.Text = "Excel";
+            // 
+            // wordToolStripMenuItem3
+            // 
+            this.wordToolStripMenuItem3.Name = "wordToolStripMenuItem3";
+            this.wordToolStripMenuItem3.Size = new System.Drawing.Size(204, 44);
+            this.wordToolStripMenuItem3.Text = "Word";
+            // 
+            // exporterLaListeDeToutesLesModificationsToolStripMenuItem
+            // 
+            this.exporterLaListeDeToutesLesModificationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pdfToolStripMenuItem4,
+            this.excelToolStripMenuItem4,
+            this.wordToolStripMenuItem4});
+            this.exporterLaListeDeToutesLesModificationsToolStripMenuItem.Name = "exporterLaListeDeToutesLesModificationsToolStripMenuItem";
+            this.exporterLaListeDeToutesLesModificationsToolStripMenuItem.Size = new System.Drawing.Size(605, 44);
+            this.exporterLaListeDeToutesLesModificationsToolStripMenuItem.Text = "Exporter la liste de toutes les modifications";
+            // 
+            // pdfToolStripMenuItem4
+            // 
+            this.pdfToolStripMenuItem4.Name = "pdfToolStripMenuItem4";
+            this.pdfToolStripMenuItem4.Size = new System.Drawing.Size(204, 44);
+            this.pdfToolStripMenuItem4.Text = "Pdf";
+            // 
+            // excelToolStripMenuItem4
+            // 
+            this.excelToolStripMenuItem4.Name = "excelToolStripMenuItem4";
+            this.excelToolStripMenuItem4.Size = new System.Drawing.Size(204, 44);
+            this.excelToolStripMenuItem4.Text = "Excel";
+            // 
+            // wordToolStripMenuItem4
+            // 
+            this.wordToolStripMenuItem4.Name = "wordToolStripMenuItem4";
+            this.wordToolStripMenuItem4.Size = new System.Drawing.Size(204, 44);
+            this.wordToolStripMenuItem4.Text = "Word";
             // 
             // panel2
             // 
@@ -226,6 +334,58 @@
             this.metroGrid1.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroGrid1.TabIndex = 60;
             this.metroGrid1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.metroGrid1_CellContentDoubleClick);
+            this.metroGrid1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.metroGrid1_CellDoubleClick);
+            this.metroGrid1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.metroGrid1_CellMouseDoubleClick);
+            // 
+            // iconButton2
+            // 
+            this.iconButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
+            this.machineCollapse.SetDecoration(this.iconButton2, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.modifCollapse.SetDecoration(this.iconButton2, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.modifExpand.SetDecoration(this.iconButton2, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.machineExpand.SetDecoration(this.iconButton2, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.iconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton2.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.iconButton2.ForeColor = System.Drawing.Color.Black;
+            this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
+            this.iconButton2.IconColor = System.Drawing.Color.White;
+            this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.iconButton2.IconSize = 40;
+            this.iconButton2.Location = new System.Drawing.Point(310, 97);
+            this.iconButton2.Name = "iconButton2";
+            this.iconButton2.Padding = new System.Windows.Forms.Padding(10);
+            this.iconButton2.Size = new System.Drawing.Size(80, 55);
+            this.iconButton2.TabIndex = 57;
+            this.iconButton2.Tag = "Triage";
+            this.iconButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton2.UseVisualStyleBackColor = false;
+            // 
+            // SearchMac
+            // 
+            this.SearchMac.Animated = true;
+            this.SearchMac.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.machineCollapse.SetDecoration(this.SearchMac, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.modifCollapse.SetDecoration(this.SearchMac, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.modifExpand.SetDecoration(this.SearchMac, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.machineExpand.SetDecoration(this.SearchMac, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.SearchMac.DefaultText = "";
+            this.SearchMac.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.SearchMac.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.SearchMac.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.SearchMac.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.SearchMac.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.SearchMac.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.SearchMac.ForeColor = System.Drawing.Color.Black;
+            this.SearchMac.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.SearchMac.Location = new System.Drawing.Point(28, 100);
+            this.SearchMac.Margin = new System.Windows.Forms.Padding(5);
+            this.SearchMac.Name = "SearchMac";
+            this.SearchMac.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
+            this.SearchMac.PasswordChar = '\0';
+            this.SearchMac.PlaceholderText = "";
+            this.SearchMac.SelectedText = "";
+            this.SearchMac.Size = new System.Drawing.Size(362, 50);
+            this.SearchMac.TabIndex = 59;
             // 
             // label4
             // 
@@ -345,6 +505,34 @@
             this.panel3.Size = new System.Drawing.Size(2444, 135);
             this.panel3.TabIndex = 61;
             // 
+            // AffichierMachines
+            // 
+            this.AffichierMachines.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.AffichierMachines.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(51)))), ((int)(((byte)(79)))));
+            this.machineCollapse.SetDecoration(this.AffichierMachines, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.modifCollapse.SetDecoration(this.AffichierMachines, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.modifExpand.SetDecoration(this.AffichierMachines, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.machineExpand.SetDecoration(this.AffichierMachines, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.AffichierMachines.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AffichierMachines.Font = new System.Drawing.Font("Calibri", 8.875F, System.Drawing.FontStyle.Bold);
+            this.AffichierMachines.ForeColor = System.Drawing.Color.White;
+            this.AffichierMachines.IconChar = FontAwesome.Sharp.IconChar.Eye;
+            this.AffichierMachines.IconColor = System.Drawing.Color.White;
+            this.AffichierMachines.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.AffichierMachines.IconSize = 40;
+            this.AffichierMachines.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.AffichierMachines.Location = new System.Drawing.Point(1064, 22);
+            this.AffichierMachines.Name = "AffichierMachines";
+            this.AffichierMachines.Padding = new System.Windows.Forms.Padding(15, 10, 0, 10);
+            this.AffichierMachines.Size = new System.Drawing.Size(332, 74);
+            this.AffichierMachines.TabIndex = 68;
+            this.AffichierMachines.Tag = "Triage";
+            this.AffichierMachines.Text = "Afficher les machines";
+            this.AffichierMachines.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.AffichierMachines.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.AffichierMachines.UseVisualStyleBackColor = false;
+            this.AffichierMachines.Click += new System.EventHandler(this.AffichierMachines_Click);
+            // 
             // panel4
             // 
             this.panel4.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -425,6 +613,57 @@
             this.Modifs.Size = new System.Drawing.Size(2398, 1396);
             this.Modifs.Style = MetroFramework.MetroColorStyle.Teal;
             this.Modifs.TabIndex = 60;
+            // 
+            // roundedButton1
+            // 
+            this.roundedButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
+            this.machineCollapse.SetDecoration(this.roundedButton1, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.modifCollapse.SetDecoration(this.roundedButton1, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.modifExpand.SetDecoration(this.roundedButton1, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.machineExpand.SetDecoration(this.roundedButton1, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.roundedButton1.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.roundedButton1.ForeColor = System.Drawing.Color.Black;
+            this.roundedButton1.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
+            this.roundedButton1.IconColor = System.Drawing.Color.White;
+            this.roundedButton1.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.roundedButton1.IconSize = 40;
+            this.roundedButton1.Location = new System.Drawing.Point(309, 183);
+            this.roundedButton1.Name = "roundedButton1";
+            this.roundedButton1.Padding = new System.Windows.Forms.Padding(10);
+            this.roundedButton1.Size = new System.Drawing.Size(80, 55);
+            this.roundedButton1.TabIndex = 57;
+            this.roundedButton1.Tag = "Triage";
+            this.roundedButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.roundedButton1.UseVisualStyleBackColor = false;
+            // 
+            // SearchModif
+            // 
+            this.SearchModif.Animated = true;
+            this.SearchModif.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.machineCollapse.SetDecoration(this.SearchModif, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.modifCollapse.SetDecoration(this.SearchModif, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.modifExpand.SetDecoration(this.SearchModif, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.machineExpand.SetDecoration(this.SearchModif, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.SearchModif.DefaultText = "";
+            this.SearchModif.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.SearchModif.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.SearchModif.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.SearchModif.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.SearchModif.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.SearchModif.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.SearchModif.ForeColor = System.Drawing.Color.Black;
+            this.SearchModif.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.SearchModif.Location = new System.Drawing.Point(27, 185);
+            this.SearchModif.Margin = new System.Windows.Forms.Padding(5);
+            this.SearchModif.Name = "SearchModif";
+            this.SearchModif.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
+            this.SearchModif.PasswordChar = '\0';
+            this.SearchModif.PlaceholderText = "";
+            this.SearchModif.SelectedText = "";
+            this.SearchModif.Size = new System.Drawing.Size(362, 50);
+            this.SearchModif.TabIndex = 59;
+            this.SearchModif.TextChanged += new System.EventHandler(this.SearchModif_TextChanged);
             // 
             // label5
             // 
@@ -593,8 +832,7 @@
             this.TrierPar.Items.AddRange(new object[] {
             "Nom du composant",
             "Date ascendante",
-            "Date descendante",
-            ""});
+            "Date descendante"});
             this.TrierPar.Location = new System.Drawing.Point(584, 199);
             this.TrierPar.Name = "TrierPar";
             this.TrierPar.Size = new System.Drawing.Size(376, 36);
@@ -613,7 +851,7 @@
             zeroitAnimate_Animation3.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation3.MosaicCoeff")));
             zeroitAnimate_Animation3.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation3.MosaicShift")));
             zeroitAnimate_Animation3.MosaicSize = 0;
-            zeroitAnimate_Animation3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            zeroitAnimate_Animation3.Padding = new System.Windows.Forms.Padding(0);
             zeroitAnimate_Animation3.RotateCoeff = 0F;
             zeroitAnimate_Animation3.RotateLimit = 0F;
             zeroitAnimate_Animation3.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation3.ScaleCoeff")));
@@ -642,7 +880,7 @@
             zeroitAnimate_Animation4.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation4.MosaicCoeff")));
             zeroitAnimate_Animation4.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation4.MosaicShift")));
             zeroitAnimate_Animation4.MosaicSize = 0;
-            zeroitAnimate_Animation4.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            zeroitAnimate_Animation4.Padding = new System.Windows.Forms.Padding(0);
             zeroitAnimate_Animation4.RotateCoeff = 0F;
             zeroitAnimate_Animation4.RotateLimit = 0F;
             zeroitAnimate_Animation4.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation4.ScaleCoeff")));
@@ -671,7 +909,7 @@
             zeroitAnimate_Animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation2.MosaicCoeff")));
             zeroitAnimate_Animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation2.MosaicShift")));
             zeroitAnimate_Animation2.MosaicSize = 0;
-            zeroitAnimate_Animation2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            zeroitAnimate_Animation2.Padding = new System.Windows.Forms.Padding(0);
             zeroitAnimate_Animation2.RotateCoeff = 0F;
             zeroitAnimate_Animation2.RotateLimit = 0F;
             zeroitAnimate_Animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation2.ScaleCoeff")));
@@ -700,7 +938,7 @@
             zeroitAnimate_Animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation1.MosaicCoeff")));
             zeroitAnimate_Animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation1.MosaicShift")));
             zeroitAnimate_Animation1.MosaicSize = 0;
-            zeroitAnimate_Animation1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            zeroitAnimate_Animation1.Padding = new System.Windows.Forms.Padding(0);
             zeroitAnimate_Animation1.RotateCoeff = 0F;
             zeroitAnimate_Animation1.RotateLimit = 0F;
             zeroitAnimate_Animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation1.ScaleCoeff")));
@@ -716,135 +954,6 @@
             this.machineCollapse.Target = this.panel2;
             this.machineCollapse.TargetHeight = 10;
             this.machineCollapse.TargetWidth = 2443;
-            // 
-            // AffichierMachines
-            // 
-            this.AffichierMachines.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.AffichierMachines.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(51)))), ((int)(((byte)(79)))));
-            this.machineCollapse.SetDecoration(this.AffichierMachines, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.modifCollapse.SetDecoration(this.AffichierMachines, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.modifExpand.SetDecoration(this.AffichierMachines, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.machineExpand.SetDecoration(this.AffichierMachines, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.AffichierMachines.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AffichierMachines.Font = new System.Drawing.Font("Calibri", 8.875F, System.Drawing.FontStyle.Bold);
-            this.AffichierMachines.ForeColor = System.Drawing.Color.White;
-            this.AffichierMachines.IconChar = FontAwesome.Sharp.IconChar.Eye;
-            this.AffichierMachines.IconColor = System.Drawing.Color.White;
-            this.AffichierMachines.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.AffichierMachines.IconSize = 40;
-            this.AffichierMachines.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.AffichierMachines.Location = new System.Drawing.Point(1064, 22);
-            this.AffichierMachines.Name = "AffichierMachines";
-            this.AffichierMachines.Padding = new System.Windows.Forms.Padding(15, 10, 0, 10);
-            this.AffichierMachines.Size = new System.Drawing.Size(332, 74);
-            this.AffichierMachines.TabIndex = 68;
-            this.AffichierMachines.Tag = "Triage";
-            this.AffichierMachines.Text = "Afficher les machines";
-            this.AffichierMachines.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.AffichierMachines.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.AffichierMachines.UseVisualStyleBackColor = false;
-            this.AffichierMachines.Click += new System.EventHandler(this.AffichierMachines_Click);
-            // 
-            // roundedButton1
-            // 
-            this.roundedButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
-            this.machineCollapse.SetDecoration(this.roundedButton1, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.modifCollapse.SetDecoration(this.roundedButton1, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.modifExpand.SetDecoration(this.roundedButton1, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.machineExpand.SetDecoration(this.roundedButton1, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundedButton1.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.roundedButton1.ForeColor = System.Drawing.Color.Black;
-            this.roundedButton1.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
-            this.roundedButton1.IconColor = System.Drawing.Color.White;
-            this.roundedButton1.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.roundedButton1.IconSize = 40;
-            this.roundedButton1.Location = new System.Drawing.Point(309, 183);
-            this.roundedButton1.Name = "roundedButton1";
-            this.roundedButton1.Padding = new System.Windows.Forms.Padding(10);
-            this.roundedButton1.Size = new System.Drawing.Size(80, 55);
-            this.roundedButton1.TabIndex = 57;
-            this.roundedButton1.Tag = "Triage";
-            this.roundedButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.roundedButton1.UseVisualStyleBackColor = false;
-            // 
-            // SearchModif
-            // 
-            this.SearchModif.Animated = true;
-            this.SearchModif.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.machineCollapse.SetDecoration(this.SearchModif, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.modifCollapse.SetDecoration(this.SearchModif, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.modifExpand.SetDecoration(this.SearchModif, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.machineExpand.SetDecoration(this.SearchModif, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.SearchModif.DefaultText = "";
-            this.SearchModif.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.SearchModif.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.SearchModif.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.SearchModif.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.SearchModif.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.SearchModif.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.SearchModif.ForeColor = System.Drawing.Color.Black;
-            this.SearchModif.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.SearchModif.Location = new System.Drawing.Point(27, 185);
-            this.SearchModif.Margin = new System.Windows.Forms.Padding(5);
-            this.SearchModif.Name = "SearchModif";
-            this.SearchModif.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.SearchModif.PasswordChar = '\0';
-            this.SearchModif.PlaceholderText = "";
-            this.SearchModif.SelectedText = "";
-            this.SearchModif.Size = new System.Drawing.Size(362, 50);
-            this.SearchModif.TabIndex = 59;
-            this.SearchModif.TextChanged += new System.EventHandler(this.SearchModif_TextChanged);
-            // 
-            // iconButton2
-            // 
-            this.iconButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
-            this.machineCollapse.SetDecoration(this.iconButton2, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.modifCollapse.SetDecoration(this.iconButton2, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.modifExpand.SetDecoration(this.iconButton2, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.machineExpand.SetDecoration(this.iconButton2, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.iconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton2.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.iconButton2.ForeColor = System.Drawing.Color.Black;
-            this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
-            this.iconButton2.IconColor = System.Drawing.Color.White;
-            this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.iconButton2.IconSize = 40;
-            this.iconButton2.Location = new System.Drawing.Point(310, 97);
-            this.iconButton2.Name = "iconButton2";
-            this.iconButton2.Padding = new System.Windows.Forms.Padding(10);
-            this.iconButton2.Size = new System.Drawing.Size(80, 55);
-            this.iconButton2.TabIndex = 57;
-            this.iconButton2.Tag = "Triage";
-            this.iconButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton2.UseVisualStyleBackColor = false;
-            // 
-            // SearchMac
-            // 
-            this.SearchMac.Animated = true;
-            this.SearchMac.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.machineCollapse.SetDecoration(this.SearchMac, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.modifCollapse.SetDecoration(this.SearchMac, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.modifExpand.SetDecoration(this.SearchMac, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.machineExpand.SetDecoration(this.SearchMac, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.SearchMac.DefaultText = "";
-            this.SearchMac.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.SearchMac.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.SearchMac.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.SearchMac.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.SearchMac.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.SearchMac.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.SearchMac.ForeColor = System.Drawing.Color.Black;
-            this.SearchMac.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.SearchMac.Location = new System.Drawing.Point(28, 100);
-            this.SearchMac.Margin = new System.Windows.Forms.Padding(5);
-            this.SearchMac.Name = "SearchMac";
-            this.SearchMac.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.SearchMac.PasswordChar = '\0';
-            this.SearchMac.PlaceholderText = "";
-            this.SearchMac.SelectedText = "";
-            this.SearchMac.Size = new System.Drawing.Size(362, 50);
-            this.SearchMac.TabIndex = 59;
             // 
             // Archive
             // 
@@ -916,5 +1025,18 @@
         private Zeroit.Framework.Transitions.AnimatorWithEditor.ZeroitAnimatorEdit machineCollapse;
         private Zeroit.Framework.Transitions.AnimatorWithEditor.ZeroitAnimatorEdit modifCollapse;
         private Zeroit.Framework.Transitions.AnimatorWithEditor.ZeroitAnimatorEdit machineExpand;
+        private System.Windows.Forms.ToolStripMenuItem pDFToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem wordToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem exporterLaListeDeToutesLesModificationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pdfToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem wordToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem pdfToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem wordToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem pdfToolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem wordToolStripMenuItem4;
     }
 }

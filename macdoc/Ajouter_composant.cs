@@ -26,6 +26,8 @@ namespace macdoc
             InitializeComponent();
             this.component = component;
             this.id = id;
+            ShowInTaskbar = false;
+
 
             if (component != "Courroie" ) {
 

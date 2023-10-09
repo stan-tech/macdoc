@@ -303,7 +303,7 @@
             // 
             // CompNum
             // 
-            this.CompNum.BackColor = System.Drawing.Color.Gold;
+            this.CompNum.BackColor = System.Drawing.Color.DarkTurquoise;
             this.CompNum.Font = new System.Drawing.Font("Lucida Console", 15.125F, System.Drawing.FontStyle.Bold);
             this.CompNum.ForeColor = System.Drawing.Color.Black;
             this.CompNum.Location = new System.Drawing.Point(1894, 354);
@@ -339,16 +339,17 @@
             // 
             // Ok
             // 
-            this.Ok.BackColor = System.Drawing.Color.GreenYellow;
+            this.Ok.BackColor = System.Drawing.Color.DarkTurquoise;
             this.Ok.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Ok.Font = new System.Drawing.Font("Calibri", 10.875F, System.Drawing.FontStyle.Bold);
             this.Ok.IconChar = FontAwesome.Sharp.IconChar.Check;
             this.Ok.IconColor = System.Drawing.Color.Black;
             this.Ok.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.Ok.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Ok.Location = new System.Drawing.Point(1772, 63);
+            this.Ok.Location = new System.Drawing.Point(1759, 63);
             this.Ok.Name = "Ok";
-            this.Ok.Size = new System.Drawing.Size(202, 76);
+            this.Ok.Padding = new System.Windows.Forms.Padding(10);
+            this.Ok.Size = new System.Drawing.Size(215, 76);
             this.Ok.TabIndex = 38;
             this.Ok.Text = "Confimer";
             this.Ok.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -365,9 +366,10 @@
             this.iconButton5.IconColor = System.Drawing.Color.Black;
             this.iconButton5.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.iconButton5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton5.Location = new System.Drawing.Point(1435, 64);
+            this.iconButton5.Location = new System.Drawing.Point(1455, 64);
             this.iconButton5.Name = "iconButton5";
-            this.iconButton5.Size = new System.Drawing.Size(203, 76);
+            this.iconButton5.Padding = new System.Windows.Forms.Padding(10);
+            this.iconButton5.Size = new System.Drawing.Size(216, 76);
             this.iconButton5.TabIndex = 39;
             this.iconButton5.Text = "Annuler";
             this.iconButton5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
