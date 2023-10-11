@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Guna.UI2.WinForms;
+using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace macdoc
@@ -27,6 +29,8 @@ namespace macdoc
         bool keepGoing;
         bool PanelShown = false;
         Timer t = new Timer();
+
+
         private void Archive_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
@@ -41,41 +45,18 @@ namespace macdoc
             Limit.SelectedIndex = 0;
             Type.SelectedIndex = 0;
             Components.SelectedIndex = 0;
-            DBHelper.SelectAllUsers(Modificateurs);
+            Guna2ComboBox modifcateurs = new Guna2ComboBox();
+            Task.Run( () =>
+            {
+
+                DBHelper.SelectAllUsers(Modificateurs);
+
+            });
+
+
             limit = Limit.SelectedItem.ToString();
 
-            Modificateurs.SelectedIndex = 0;
-
-
-            //t.Interval = 10;
-            //t.Tick += delegate
-            //{
-            //    if (PanelShown)
-            //    {
-            //        if (panel2.Height != 860 && panel1.Height != 860)
-            //        {
-            //            panel2.Height += 86;
-            //            panel1.Height -= 86;
-            //            PanelShown = true;
-
-            //        }
-            //        else
-            //            t.Stop();
-            //    }
-            //    else
-            //    {
-            //        if (panel2.Height != 10 && panel1.Height != 1660)
-            //        {
-            //            panel2.Height -= 92;
-            //            panel1.Height += 166;
-            //            PanelShown = false;
-            //        }
-            //        else
-            //            t.Stop();
-            //    }
-            //};
-
-
+           // Modificateurs.SelectedIndex = 0;
 
         }
 
@@ -89,7 +70,7 @@ namespace macdoc
 
         }
 
-        private void TrierPar_SelectedIndexChanged(object sender, EventArgs e)
+        private async void TrierPar_SelectedIndexChanged(object sender, EventArgs e)
         {
 
             switch (TrierPar.SelectedItem.ToString())
@@ -111,13 +92,14 @@ namespace macdoc
             if (Components.SelectedItem == null || TrierPar.SelectedItem == null ||
                 Modificateurs.SelectedItem == null || Limit.SelectedItem == null)
             {
-                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, "Tout", "Tout", "Tout");
+
+                Modifs.DataSource = await DBHelper.FillArchiveModifications( orderBy, machine_id, "Tout", "Tout", "Tout");
 
 
             }
             else
             {
-                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
+                Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
 
 
             }
@@ -131,7 +113,7 @@ namespace macdoc
             SelectModifications();
         }
 
-        public void SelectModifications()
+        public async void SelectModifications()
         {
             using (SQLiteConnection connection = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
             {
@@ -154,17 +136,17 @@ namespace macdoc
             if (Components.SelectedItem == null || TrierPar.SelectedItem == null ||
                 Modificateurs.SelectedItem == null || Limit.SelectedItem == null)
             {
-                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, "Tout", "Tout", "Tout");
+                Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy, machine_id, "Tout", "Tout", "Tout");
 
 
             }
             else
             {
-                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
+                Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy,machine_id, Components.SelectedItem.ToString(), user, limit);
 
             }
         }
-        private void SearchModif_TextChanged(object sender, EventArgs e)
+        private async void SearchModif_TextChanged(object sender, EventArgs e)
         {
             using (SQLiteConnection connection = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
             {
@@ -194,7 +176,7 @@ namespace macdoc
                     }
                     else
                     {
-                        DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
+                        Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
 
                     }
 
@@ -210,30 +192,30 @@ namespace macdoc
             }
         }
 
-        private void Componenets_SelectedIndexChanged(object sender, EventArgs e)
+        private async void Componenets_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Components.SelectedItem == null || TrierPar.SelectedItem == null ||
                 Modificateurs.SelectedItem == null || Limit.SelectedItem == null)
             {
 
-                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, "Tout", "Tout", "Tout");
+                Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy, machine_id, "Tout", "Tout", "Tout");
 
             }
             else
             {
-                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
+                Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
 
 
             }
         }
 
-        private void Modificateurs_SelectedIndexChanged(object sender, EventArgs e)
+        private async void Modificateurs_SelectedIndexChanged(object sender, EventArgs e)
         {
 
             if (Components.SelectedItem == null || TrierPar.SelectedItem == null ||
                 Modificateurs.SelectedItem == null || Limit.SelectedItem == null)
             {
-                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, "Tout", "Tout", "Tout");
+                Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy, machine_id, "Tout", "Tout", "Tout");
 
 
             }
@@ -241,18 +223,18 @@ namespace macdoc
             {
                 user = Modificateurs.SelectedItem.ToString();
 
-                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
+                Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
 
             }
         }
 
-        private void Limit_SelectedIndexChanged(object sender, EventArgs e)
+        private async void Limit_SelectedIndexChanged(object sender, EventArgs e)
         {
 
             if (Components.SelectedItem == null || TrierPar.SelectedItem == null ||
                 Modificateurs.SelectedItem == null || Limit.SelectedItem == null)
             {
-                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, "Tout", "Tout", "Tout");
+                Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy, machine_id, "Tout", "Tout", "Tout");
 
 
             }
@@ -260,7 +242,7 @@ namespace macdoc
             {
                 limit = Limit.SelectedItem.ToString();
 
-                DBHelper.FillArchiveModifications(Modifs, orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
+                Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
 
 
             }

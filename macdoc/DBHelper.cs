@@ -427,10 +427,11 @@ namespace macdoc
 
         }
 
-        public static void FillArchiveModifications(MetroGrid machineGrid,string orderBy,
+        public static async Task<DataTable > FillArchiveModifications(string orderBy,
             string id_machine,string ComponentType,string user,string limit)
         {
             bool withUsers = false ;
+            DataTable table = new DataTable();
 
             using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
             {
@@ -708,10 +709,8 @@ namespace macdoc
                         SQLiteCommand command = new SQLiteCommand(sql, conn);
                         SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
 
-                        DataTable table = new DataTable();
                         adapter.Fill(table);
 
-                        machineGrid.DataSource = table;
 
                 }
                     catch(Exception ex)
@@ -736,6 +735,7 @@ namespace macdoc
 
             }
 
+            return table;
         }
         public static void FillMachines(int machine,string type , Guna2ComboBox machineCombo)
         {
@@ -967,15 +967,20 @@ namespace macdoc
 
 
                 SQLiteDataReader reader = sQLiteCommand.ExecuteReader();
-                users.Items.Clear();
 
-                users.Items.Add("Tout");
+                users.Invoke((MethodInvoker)(() => users.Items.Clear()));
+
+                users.Invoke((MethodInvoker)(() => users.Items.Add("Tout")));
 
                 while (reader.Read())
                 {
-                    users.Items.Add(reader.GetString(0));
+                    users.Invoke((MethodInvoker)( () =>  users.Items.Add(reader.GetString(0))
+
+                        ));
 
                 }
+
+                users.Invoke((MethodInvoker)(() => users.SelectedIndex=0));
 
                 reader.Close();
 
@@ -1019,6 +1024,47 @@ namespace macdoc
         }
 
 
+      
+
+        public static async Task<DataTable> FillStoreGrid()
+        {
+            DataTable table = new DataTable();
+
+            using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
+            {
+
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+
+
+                    string selectAdmin = "select type as Composant , quantity_left as \"Reste\"  , price_ as Prix , unit as Unité  from component_store ;";
+
+                    try
+                    {
+                        SQLiteCommand command = new SQLiteCommand(selectAdmin, conn);
+                        SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
+                        adapter.Fill(table);
+
+
+
+                    }
+                    catch (Exception e)
+                    {
+                        string i = e.Message;
+                        
+                    }
+
+                }
+                else
+                {
+                    conn.Close();
+                }
+                
+            }
+            return table;
+            
+        }
 
     }
 }

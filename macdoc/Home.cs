@@ -1125,5 +1125,10 @@ namespace macdoc
         {
 
         }
+
+        private void Store_Click(object sender, EventArgs e)
+        {
+            new Store().ShowDialog();
+        }
     }
 }
