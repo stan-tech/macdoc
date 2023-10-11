@@ -1,10 +1,19 @@
-﻿using System;
+﻿using Infobip.Api.Client;
+using Infobip.Api.Client.Api;
+using Infobip.Api.Client.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data.SQLite;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Web;
 using System.Windows.Forms;
 
 namespace macdoc
@@ -46,7 +55,6 @@ namespace macdoc
 
         void OnTimer(object sender, ElapsedEventArgs e)
         {
-            SelectAllComponents();
 
         }
         void OnDoubleClick(object sender, EventArgs e)
@@ -77,8 +85,6 @@ namespace macdoc
             trayIcon.Visible = true;
             trayIcon.DoubleClick += new EventHandler(OnDoubleClick);
 
-            SelectAllComponents();
-
 
             System.Timers.Timer timer = new System.Timers.Timer();
             timer.Interval = 60000;
@@ -90,9 +96,11 @@ namespace macdoc
         public ApplicationStartUp()
                 {
                     InitializeComponent();
+                      SelectAllComponents();
+
                 }
 
-                protected override void OnLoad(EventArgs e)
+        protected override void OnLoad(EventArgs e)
                 {
             Visible = false;
             ShowInTaskbar = false;
@@ -217,9 +225,8 @@ namespace macdoc
                         trayIcon.ShowBalloonTip(500);
                         trayIcon.BalloonTipClicked += MaintenanceNotif_BalloonTipClicked;
                         trayIcon.DoubleClick += MaintenanceNotif_BalloonTipClicked;
-                        trayIcon.MouseClick += NotificationClicked;
 
-
+                        SendNotification(trayIcon.BalloonTipText);
 
 
 
@@ -258,6 +265,52 @@ namespace macdoc
             }
 
         }
+
+        public void  SendNotification(string message)
+        {
+         
+            var configuration = new Infobip.Api.Client.Configuration()
+            {
+                BasePath = "https://vvvw3m.api.infobip.com/",
+                ApiKeyPrefix = "App",
+                ApiKey = "fbced39973294bd59c9edb5f5f2dac1e-f5468981-0529-4e65-9b4c-1a30750d30b9"
+            };
+
+            var sendSmsApi = new SendSmsApi(configuration);
+
+            var smsMessage = new SmsTextualMessage()
+            {
+                From = "MacDoc",
+                Destinations = new List<SmsDestination>()
+                {
+                    new SmsDestination(to: "+213561253364")
+                },
+                Text = message
+            };
+
+            var smsRequest = new SmsAdvancedTextualRequest()
+            {
+                Messages = new List<SmsTextualMessage>() { smsMessage }
+            };
+
+
+            try
+            {
+                var smsResponse = sendSmsApi.SendSmsMessage(smsRequest);
+
+                MessageBox.Show("Message sent , result : " + $"Status: {smsResponse.Messages.First().Status}");
+
+            }
+            catch (ApiException apiException)
+            {
+                var errorCode = apiException.ErrorCode;
+                var errorHeaders = apiException.Headers;
+                var errorContent = apiException.ErrorContent;
+
+                MessageBox.Show(errorCode.ToString() + "  " + errorHeaders.ToString() +"  "+ errorContent.ToString());
+            }
+        }
+    
 
     }
 }

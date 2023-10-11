@@ -117,7 +117,7 @@ namespace macdoc
         {
 
             SelectItems();
-            if (!RefSearch) { }
+            if (!RefSearch)
                SelectAllComponents();
 
         }
@@ -1049,8 +1049,8 @@ namespace macdoc
 
                     while (reader.Read())
                     {
-                        string date_insertion = DateTime.Parse(reader.GetString(3)).ToString("MM/dd/yyyy");
-                        string date_modification = DateTime.Parse(reader.GetString(4)).ToString("MM/dd/yyyy");
+                        string date_insertion = DateTime.Parse(reader.GetString(3)).ToString("dd/MM/yyyy");
+                        string date_modification = DateTime.Parse(reader.GetString(4)).ToString("dd/MM/yyyy");
 
 
                         component = new Component(reader.GetString(1), reader.GetString(2),
@@ -1100,7 +1100,6 @@ namespace macdoc
                             componentsToModifiy[0].MachineRef + ", Capteur "
                                 + componentsToModifiy[0].Name + " avec la reference " + componentsToModifiy[0].Reference + " peut necessiter une maintenane";
                         MaintenanceNotif.ShowBalloonTip(500);
-                        MaintenanceNotif.MouseClick += NotificationClicked;
 
 
                     }

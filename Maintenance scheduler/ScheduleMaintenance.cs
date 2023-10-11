@@ -58,7 +58,7 @@ namespace Maintenance_scheduler
 
         public void LaunchMacDoc()
         {
-            if (Process.GetProcessesByName("macdoc").Length == 0)
+             if (Process.GetProcessesByName("macdoc").Length == 0)
             {
                 Process p = new System.Diagnostics.Process();
                 p.StartInfo.FileName = macdoc.Home.AppPath + "\\macdoc.exe";
