@@ -1065,6 +1065,51 @@ namespace macdoc
             return table;
             
         }
+        public static bool AddToStore(string qt, string price, string selectedComponent)
+        {
+            bool done = false;
+            using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
+            {
+
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+
+
+                    string selectAdmin = "update component_store  set quantity_left = "+qt+", price_ = "+price+" where type = '"+selectedComponent+"';";
+
+                    SQLiteCommand command = new SQLiteCommand( selectAdmin, conn);
+                    if (command.ExecuteNonQuery() > 0)
+                    {
+                        done = true;
+                        MessageBox.Show(selectedComponent+"s added","",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        done = false;
+                        MessageBox.Show(selectedComponent + "s not added ", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    }
+
+                    try
+                    { 
+                    }catch(Exception e)
+                    {
+                        MessageBox.Show(e.Message);
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+                else
+                {
+                    conn.Close();
+                }
+            }
+            return done;
+                  
+        }
 
     }
 }
