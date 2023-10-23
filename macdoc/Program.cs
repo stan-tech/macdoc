@@ -28,8 +28,8 @@ namespace macdoc
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            if(args.Length>0)
+           
+            if (args.Length > 0)
             {
                 Home.RefSearch = true;
                 Application.Run(new ApplicationStartUp());
@@ -41,12 +41,13 @@ namespace macdoc
                 Application.Run(new Home());
 
             }
+
         }
     }
-        public class ApplicationStartUp : Home
-        {
-                private NotifyIcon trayIcon;
-                private ContextMenu trayMenu;
+    public class ApplicationStartUp : Home
+    {
+        private NotifyIcon trayIcon;
+        private ContextMenu trayMenu;
         List<Component> componentsToModifiy = new List<Component>();
         NotifyIcon MaintenanceNotif = new NotifyIcon();
 
@@ -70,7 +71,7 @@ namespace macdoc
                 {
                     this.Search.Text = componentsToModifiy[0].Reference;
 
-                } 
+                }
             }
         }
         private void InitializeComponent()
@@ -94,35 +95,35 @@ namespace macdoc
 
         //Ctor
         public ApplicationStartUp()
-                {
-                    InitializeComponent();
-                      SelectAllComponents();
+        {
+            InitializeComponent();
+            SelectAllComponents();
 
-                }
+        }
 
         protected override void OnLoad(EventArgs e)
-                {
+        {
             Visible = false;
             ShowInTaskbar = false;
             base.OnLoad(e);
-                }
+        }
 
-                private void OnExit(object sender, EventArgs e)
-                {
-                    // Release the icon resource.
-                    trayIcon.Dispose();
-                    Application.Exit();
-                }
+        private void OnExit(object sender, EventArgs e)
+        {
+            // Release the icon resource.
+            trayIcon.Dispose();
+            Application.Exit();
+        }
 
-                protected override void Dispose(bool isDisposing)
-                {
-                    if (isDisposing)
-                    {
-                        // Release the icon resource.
-                        trayIcon.Dispose();
-                    }
-                    base.Dispose(isDisposing);
-                }
+        protected override void Dispose(bool isDisposing)
+        {
+            if (isDisposing)
+            {
+                // Release the icon resource.
+                trayIcon.Dispose();
+            }
+            base.Dispose(isDisposing);
+        }
         void NotificationClicked(object sender, MouseEventArgs e)
         {
             if (!AppStarted)
@@ -146,7 +147,7 @@ namespace macdoc
 
                 Component component;
 
-               if(conn.State == System.Data.ConnectionState.Closed)
+                if (conn.State == System.Data.ConnectionState.Closed)
                 {
                     conn.Open();
 
@@ -172,20 +173,24 @@ namespace macdoc
 
                     while (reader.Read())
                     {
-                        string date_insertion = DateTime.Parse(reader.GetString(3)).ToString("MM/dd/yyyy");
-                        string date_modification = DateTime.Parse(reader.GetString(4)).ToString("MM/dd/yyyy");
+                        string date_insertion = DateTime.Parse(reader.GetString(3)).ToString("dd/MM/yyyy");
+                        string date_modification = DateTime.Parse(reader.GetString(4)).ToString("dd/MM/yyyy");
 
 
                         component = new Component(reader.GetString(1), reader.GetString(2),
-                            DateTime.Parse(date_insertion), DateTime.Parse(date_modification), reader.GetInt32(6));
+                            DateTime.Parse(date_insertion), DateTime.Parse(date_modification), reader.GetInt32(6), true);
 
                         component.MachineName = reader.GetString(7);
                         component.MachineRef = reader.GetString(8);
 
                         if (reader.GetString(5).Contains("Jours"))
                         {
-                            if (component.Date_modification.AddDays(double.Parse(reader.GetString(5).Replace("Jours", "").Trim())) <= DateTime.Now.Date)
+                            //if (component.Date_modification.AddDays(double.Parse(reader.GetString(5).Replace("Jours", "").Trim())) <= DateTime.Now.Date)
+                            //    componentsToModifiy.Add(component);
+                            if (true)
+                            {
                                 componentsToModifiy.Add(component);
+                            }
                         }
                         else if (reader.GetString(5).Contains("Mois"))
                         {
@@ -216,7 +221,7 @@ namespace macdoc
 
                         //  MaintenanceNotif.Icon = new System.Drawing.Icon(AppDomain.CurrentDomain.BaseDirectory + "\\Logo.ico");
                         trayIcon.Text = "Cliquez ici pour confirmer l'execution la modification";
-                       // trayIcon.Visible = true;
+                        // trayIcon.Visible = true;
 
                         trayIcon.BalloonTipTitle = "Macdoc";
                         trayIcon.BalloonTipText = "La Machine " + componentsToModifiy[0].MachineName + " avec la reference " +
@@ -260,20 +265,20 @@ namespace macdoc
                 AppStarted = true;
                 RefSearch = true;
 
-                this.Search.Text = componentsToModifiy[0].Reference; 
+                this.Search.Text = componentsToModifiy[0].Reference;
 
             }
 
         }
 
-        public void  SendNotification(string message)
+        public void SendNotification(string message)
         {
-         
+
             var configuration = new Infobip.Api.Client.Configuration()
             {
                 BasePath = "https://vvvw3m.api.infobip.com/",
                 ApiKeyPrefix = "App",
-                ApiKey = "fbced39973294bd59c9edb5f5f2dac1e-f5468981-0529-4e65-9b4c-1a30750d30b9"
+                ApiKey = "fbced39973294bd59c9edb5f5f2dac1e-f546898  1-0529-4e65-9b4c-1a30750d30b9"
             };
 
             var sendSmsApi = new SendSmsApi(configuration);
@@ -307,10 +312,16 @@ namespace macdoc
                 var errorHeaders = apiException.Headers;
                 var errorContent = apiException.ErrorContent;
 
-                MessageBox.Show(errorCode.ToString() + "  " + errorHeaders.ToString() +"  "+ errorContent.ToString());
+                MessageBox.Show(errorCode.ToString() + "  " + errorHeaders.ToString() + "  " + errorContent.ToString());
             }
-        }
-    
+            catch (HttpRequestException heept)
+            {
 
+
+            }
+
+
+
+        }
     }
 }

@@ -48,6 +48,9 @@
     <Reference Include="Infobip.Api.Client, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Infobip.Api.Client.2.1.2\lib\netstandard2.0\Infobip.Api.Client.dll</HintPath>
     </Reference>
+    <Reference Include="InfragisticsWPF, Version=22.2.20222.19, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>..\packages\Infragistics.WPF.Trial.22.2.19\lib\net40\InfragisticsWPF.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>

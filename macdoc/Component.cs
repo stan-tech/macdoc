@@ -20,9 +20,21 @@ namespace macdoc
         string type;
         string machineName;
         string machineRef;
+        bool inserted;
+        string price;
 
 
+        public bool Inserted
+        {
+            get { return inserted; }
+            set { inserted = value; }
+        }
 
+        public string Price
+        {
+            get { return price; }
+            set { price = value; }
+        }
         public string Name
         {
             get { return name; }
@@ -83,8 +95,10 @@ namespace macdoc
         { get { return num_modifications; }
         set { num_modifications = value; }
         }
+        int quantity;
+        public int Quantity { get => quantity; set => quantity = value; }
         public Component(string name, string reference,DateTime date_insertion,DateTime date_modification,
-        int num_modifications)
+        int num_modifications,bool inserted)
         {
 
 
@@ -94,6 +108,7 @@ namespace macdoc
             this.Date_modification = date_modification;
             this.date_modification = date_modification;
             this.num_modifications = num_modifications;
+            this.inserted = inserted;   
 
         }
 

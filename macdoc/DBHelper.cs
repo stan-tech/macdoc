@@ -1038,7 +1038,7 @@ namespace macdoc
                     conn.Open();
 
 
-                    string selectAdmin = "select type as Composant , quantity_left as \"Reste\"  , price_ as Prix , unit as Unité  from component_store ;";
+                    string selectAdmin = "select type as Composant , quantity_left as \"Reste\"  , price_ as Prix , unit as Unité  , Total from component_store ;";
 
                     try
                     {
@@ -1065,34 +1065,71 @@ namespace macdoc
             return table;
             
         }
-        public static bool AddToStore(string qt, string price, string selectedComponent)
+        public static void AssignQuantity(int qtCap, int qtRed, int qtMot, int qtCourr, int qtHuile,List<Component> list)
+        {
+        
+            foreach (Component c in list)
+            {
+                switch (c.Type)
+                {
+                    case "Capteur":
+                        qtCap ++;
+                        break;
+                    case "Moteur":
+                        qtMot++;
+                        break;
+                    case "Reducteur":
+                        qtRed++;
+                        break;
+                    case "Huile":
+                        qtHuile++;
+                        break;
+                    case "Courroie":
+                        qtCourr++;
+                        break;
+                }
+            }
+
+        }
+        public static bool AddToStore(List<Component> components)
         {
             bool done = false;
+            int qtCap=0, qtRed=0, qtMot=0, qtCourr = 0, qtHuile = 0;
+
+            AssignQuantity(qtCap, qtRed, qtMot, qtCourr, qtHuile,components);
+         
             using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
             {
 
                 if (conn.State == ConnectionState.Closed)
                 {
                     conn.Open();
-
-
-                    string selectAdmin = "update component_store  set quantity_left = "+qt+", price_ = "+price+" where type = '"+selectedComponent+"';";
-
-                    SQLiteCommand command = new SQLiteCommand( selectAdmin, conn);
-                    if (command.ExecuteNonQuery() > 0)
-                    {
-                        done = true;
-                        MessageBox.Show(selectedComponent+"s added","",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        done = false;
-                        MessageBox.Show(selectedComponent + "s not added ", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    }
-
                     try
-                    { 
+                    {
+
+                        foreach (Component component in components)
+                        {
+                            string selectAdmin = "insert into component (nom,reference,prix,date_insertion,date_modification," +
+                                "life_duration,num_modification,inserted,type) values("+component.Name+","+component.Reference+ ","+component.Price
+                                +","+component.Date_insertion+ ","+component.Date_modification+","+component.Life_duration+ ","+component.Num_modifications
+                                +","+component.Inserted+","+component.Type+");";
+
+                            SQLiteCommand command = new SQLiteCommand(selectAdmin, conn);
+                            if (command.ExecuteNonQuery() > 0)
+                            {
+                                done = true;
+
+                            }
+                            else
+                            {
+                                done = false;
+
+                            }
+
+
+
+                        }
+
                     }catch(Exception e)
                     {
                         MessageBox.Show(e.Message);

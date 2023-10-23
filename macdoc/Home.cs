@@ -75,7 +75,11 @@ namespace macdoc
 
 
 
-        protected override void OnPaint(PaintEventArgs e) { }
+        protected override void OnPaint(PaintEventArgs e) {
+
+            ControlPaint.DrawBorder(e.Graphics, ClientRectangle, System.Drawing.Color.Black, ButtonBorderStyle.Solid);
+        
+    }
 
         public Form Ajout
         {
@@ -749,9 +753,7 @@ namespace macdoc
 
         private void pdfToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string S = machineCombo.SelectedItem.ToString();
-
-           Task.Run(()=> { GeneratePdf(metroGrid1,S); }) ;
+           
         }
 
         public void GeneratePdf(MetroGrid grid,string selected_machine)
@@ -985,7 +987,7 @@ namespace macdoc
             int num_modif = int.Parse(metroGrid1.SelectedRows[0].Cells[6].Value.ToString());
 
 
-            Component comp = new Component(name, refn, DateTime.Parse(inst), DateTime.Parse(modif), num_modif);
+            Component comp = new Component(name, refn,DateTime.Parse(inst), DateTime.Parse(modif), num_modif,true) ;
             comp.ID = int.Parse(id);
             comp.Type = selected_component;
             ;
@@ -1054,7 +1056,7 @@ namespace macdoc
 
 
                         component = new Component(reader.GetString(1), reader.GetString(2),
-                            DateTime.Parse(date_insertion), DateTime.Parse(date_modification), reader.GetInt32(6));
+                            DateTime.Parse(date_insertion), DateTime.Parse(date_modification), reader.GetInt32(6), true);
 
                         component.MachineName = reader.GetString(7);
                         component.MachineRef = reader.GetString(8);
@@ -1129,6 +1131,20 @@ namespace macdoc
         private void Store_Click(object sender, EventArgs e)
         {
             new Store().ShowDialog();
+        }
+
+       
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void PDF_Click_1(object sender, EventArgs e)
+        {
+            string S = machineCombo.SelectedItem.ToString();
+
+            Task.Run(() => { GeneratePdf(metroGrid1, S); });
         }
     }
 }
