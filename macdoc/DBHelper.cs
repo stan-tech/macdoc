@@ -20,6 +20,8 @@ using System.Web.UI.WebControls;
 using System.Security.Cryptography.X509Certificates;
 using System.Diagnostics;
 using static DevExpress.XtraEditors.Mask.MaskSettings;
+using System.Collections;
+using System.Web.Services.Description;
 
 namespace macdoc
 {
@@ -1048,6 +1050,7 @@ namespace macdoc
 
 
 
+
                     }
                     catch (Exception e)
                     {
@@ -1065,39 +1068,70 @@ namespace macdoc
             return table;
             
         }
-        public static void AssignQuantity(int qtCap, int qtRed, int qtMot, int qtCourr, int qtHuile,List<Component> list)
+        public static Dictionary<string, int> AssignQuantity(int qtCap, int qtRed, int qtMot, int qtCourr, int qtHuile,List<Component> list)
         {
         
+            int assigned_qt= 0;
+            Dictionary<string, int> quantities = new Dictionary<string, int>();
+            
             foreach (Component c in list)
             {
                 switch (c.Type)
                 {
                     case "Capteur":
                         qtCap ++;
+                     
+                        assigned_qt = qtCap;
+
                         break;
                     case "Moteur":
                         qtMot++;
+                        assigned_qt = qtMot;
+
+
                         break;
                     case "Reducteur":
                         qtRed++;
+                        assigned_qt = qtRed;
+
                         break;
                     case "Huile":
                         qtHuile++;
+                        assigned_qt = qtHuile;
+
                         break;
                     case "Courroie":
                         qtCourr++;
+                        assigned_qt = qtCourr;
+
                         break;
                 }
             }
 
+            quantities.Add("Capteur", qtCap);
+            quantities.Add("Moteur", qtMot);
+
+            quantities.Add("Reducteur", qtRed);
+
+            quantities.Add("Huile", qtHuile);
+            quantities.Add("Courroie", qtCourr);
+
+            return quantities;
+
+
+
         }
-        public static bool AddToStore(List<Component> components)
+        public static bool AddToStore(List<Component> components,Dictionary<string,double> prices)
         {
             bool done = false;
             int qtCap=0, qtRed=0, qtMot=0, qtCourr = 0, qtHuile = 0;
+            Dictionary<string, int> AssignedQuantity = AssignQuantity(qtCap, qtRed, qtMot, qtCourr, qtHuile, components);
+            string[] types = new string[AssignedQuantity.Keys.Count];
 
-            AssignQuantity(qtCap, qtRed, qtMot, qtCourr, qtHuile,components);
-         
+            string insertComponent = "";
+            string updatestore = "";
+
+
             using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
             {
 
@@ -1106,29 +1140,64 @@ namespace macdoc
                     conn.Open();
                     try
                     {
+                        
+                        AssignedQuantity.Keys.CopyTo(types, 0);
 
-                        foreach (Component component in components)
-                        {
-                            string selectAdmin = "insert into component (nom,reference,prix,date_insertion,date_modification," +
-                                "life_duration,num_modification,inserted,type) values("+component.Name+","+component.Reference+ ","+component.Price
-                                +","+component.Date_insertion+ ","+component.Date_modification+","+component.Life_duration+ ","+component.Num_modifications
-                                +","+component.Inserted+","+component.Type+");";
 
-                            SQLiteCommand command = new SQLiteCommand(selectAdmin, conn);
-                            if (command.ExecuteNonQuery() > 0)
+                       
+
+                            foreach (Component component in components)
+                             {
+
+                                        insertComponent = "insert into component (nom,reference,prix,date_insertion,date_modification," +
+                                                                "life_duration,num_modification,inserted,type) values('" + component.Name + "','" + component.Reference + "'," + component.Price
+                                                                + ",'" + component.Date_insertion + "','" + component.Date_modification + "','" + component.Life_duration + "'," + component.Num_modifications
+                                                                + "," + 0 + ",'" + component.Type + "');";
+
+                                    SQLiteCommand command = new SQLiteCommand(insertComponent, conn);
+
+                                    if (command.ExecuteNonQuery() > 0)
+                                    {
+                                      
+                                            done = true;
+
+                                      
+                                            done = false;
+                                       
+
+                                    }
+                                    else
+                                    {
+                                        done = false;
+
+                                    }
+                                }
+
+                            for (int a = 0; a < types.Length; a++)
                             {
-                                done = true;
+
+                                if (AssignedQuantity[types[a]] != 0)
+                                {
+                                    updatestore = "update  component_store set price_ = " + prices[types[a]]
+                                           + " , quantity_left = quantity_left + " + AssignedQuantity[types[a]]+
+                                            ", total =  quantity_left * price_ where type = '" + types[a] + "';";
+                                    SQLiteCommand updateCommand = new SQLiteCommand(updatestore, conn);
+
+                                    if (updateCommand.ExecuteNonQuery() > 0)
+                                    {
+                                        done = true;
+
+                                    }
+                                    else
+                                    {
+                                        done = false;
+                                    }
+
+                                }
 
                             }
-                            else
-                            {
-                                done = false;
 
-                            }
-
-
-
-                        }
+                            
 
                     }catch(Exception e)
                     {
@@ -1148,6 +1217,49 @@ namespace macdoc
                   
         }
 
+        public static AutoCompleteStringCollection SelectAvailableReferences(Component component)
+        {
+
+            AutoCompleteStringCollection refs = new AutoCompleteStringCollection();
+            using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
+            {
+
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                    string command = "select reference from component where inserted = 0 and replaced = 0 and type = '"+component.Type+"';";
+                    int i = 0;
+
+                    SQLiteCommand sqlcmd = new SQLiteCommand (command, conn);
+                        
+                    try
+                    {
+                        SQLiteDataReader dataReader = sqlcmd.ExecuteReader();
+                      
+                        
+                        while (dataReader.Read())
+                        {
+
+                            refs.Add(dataReader.GetString(0));
+                        }
+
+                        dataReader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show("Quelque chose n'est pas correcte! "+ex.Message);
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+
+
+                    return refs;
+        }
     }
 }
 

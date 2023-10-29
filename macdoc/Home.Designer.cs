@@ -97,6 +97,9 @@ namespace macdoc
             this.zeroitAnimatorEdit1 = new Zeroit.Framework.Transitions.AnimatorWithEditor.ZeroitAnimatorEdit(this.components);
             this.metroGrid1 = new macdoc.RoundedGrid();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.MenuButton = new FontAwesome.Sharp.IconButton();
             this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.panel3 = new System.Windows.Forms.Panel();
             this.iconButton5 = new FontAwesome.Sharp.IconButton();
@@ -110,13 +113,12 @@ namespace macdoc
             this.Synth = new FontAwesome.Sharp.IconButton();
             this.modif_button = new FontAwesome.Sharp.IconButton();
             this.Ajout_button = new FontAwesome.Sharp.IconButton();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.Account_tip = new System.Windows.Forms.ToolTip(this.components);
             this.MaintenanceNotif = new System.Windows.Forms.NotifyIcon(this.components);
             this.GridAnim = new Zeroit.Framework.Transitions.SpecAnimator.ZeroitSpecBoundsAnimator(this.components);
             this.Grid_anim_left = new Zeroit.Framework.Transitions.SpecAnimator.ZeroitSpecBoundsAnimator(this.components);
-            this.MenuButton = new FontAwesome.Sharp.IconButton();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.comboBoxes.SuspendLayout();
             this.Syn_types.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -130,10 +132,12 @@ namespace macdoc
             ((System.ComponentModel.ISupportInitialize)(this.collapse_synthTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
+            this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridAnim)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_anim_left)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Tri
@@ -161,8 +165,7 @@ namespace macdoc
             // 
             // comboBoxes
             // 
-            this.comboBoxes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxes.Controls.Add(this.label3);
             this.comboBoxes.Controls.Add(this.label2);
             this.comboBoxes.Controls.Add(this.MacNum);
@@ -171,7 +174,7 @@ namespace macdoc
             this.comboBoxes.Controls.Add(this.machineCombo);
             this.comboBoxes.Controls.Add(this.caps);
             this.zeroitAnimatorEdit1.SetDecoration(this.comboBoxes, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.comboBoxes.Location = new System.Drawing.Point(1390, 560);
+            this.comboBoxes.Location = new System.Drawing.Point(1390, 385);
             this.comboBoxes.Name = "comboBoxes";
             this.comboBoxes.Size = new System.Drawing.Size(990, 82);
             this.comboBoxes.TabIndex = 12;
@@ -306,7 +309,7 @@ namespace macdoc
             this.iconButton2.IconColor = System.Drawing.Color.White;
             this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.iconButton2.IconSize = 40;
-            this.iconButton2.Location = new System.Drawing.Point(1202, 587);
+            this.iconButton2.Location = new System.Drawing.Point(525, 25);
             this.iconButton2.Name = "iconButton2";
             this.iconButton2.Padding = new System.Windows.Forms.Padding(10);
             this.iconButton2.Size = new System.Drawing.Size(80, 55);
@@ -330,7 +333,7 @@ namespace macdoc
             this.Search.Font = new System.Drawing.Font("Segoe UI", 14.125F, System.Drawing.FontStyle.Italic);
             this.Search.ForeColor = System.Drawing.Color.DarkGray;
             this.Search.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.Search.Location = new System.Drawing.Point(722, 590);
+            this.Search.Location = new System.Drawing.Point(45, 28);
             this.Search.Margin = new System.Windows.Forms.Padding(5);
             this.Search.Name = "Search";
             this.Search.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
@@ -348,7 +351,7 @@ namespace macdoc
             this.zeroitAnimatorEdit1.SetDecoration(this.Composants, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
             this.Composants.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Composants.ForeColor = System.Drawing.Color.White;
-            this.Composants.Location = new System.Drawing.Point(21, 595);
+            this.Composants.Location = new System.Drawing.Point(22, 528);
             this.Composants.Name = "Composants";
             this.Composants.Size = new System.Drawing.Size(152, 45);
             this.Composants.TabIndex = 23;
@@ -356,7 +359,6 @@ namespace macdoc
             // 
             // Syn_types
             // 
-            this.Syn_types.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.Syn_types.BackColor = System.Drawing.Color.Transparent;
             this.Syn_types.Controls.Add(this.NC);
             this.Syn_types.Controls.Add(this.Tri);
@@ -397,11 +399,10 @@ namespace macdoc
             this.panel4.Controls.Add(this.Store);
             this.panel4.Controls.Add(this.History);
             this.panel4.Controls.Add(this.Machines);
-            this.panel4.Controls.Add(this.Profile);
             this.zeroitAnimatorEdit1.SetDecoration(this.panel4, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.panel4.Location = new System.Drawing.Point(1880, 238);
+            this.panel4.Location = new System.Drawing.Point(1826, 251);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(523, 123);
+            this.panel4.Size = new System.Drawing.Size(457, 104);
             this.panel4.TabIndex = 12;
             // 
             // roundedButton1
@@ -428,7 +429,7 @@ namespace macdoc
             // Store
             // 
             this.Store.AccessibleDescription = "Account";
-            this.Store.BackColor = System.Drawing.Color.DarkGray;
+            this.Store.BackColor = System.Drawing.Color.Transparent;
             this.zeroitAnimatorEdit1.SetDecoration(this.Store, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
             this.Store.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Store.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
@@ -437,10 +438,10 @@ namespace macdoc
             this.Store.IconColor = System.Drawing.Color.White;
             this.Store.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.Store.IconSize = 80;
-            this.Store.Location = new System.Drawing.Point(110, 35);
+            this.Store.Location = new System.Drawing.Point(35, 17);
             this.Store.Name = "Store";
             this.Store.Padding = new System.Windows.Forms.Padding(15, 10, 10, 10);
-            this.Store.Size = new System.Drawing.Size(80, 80);
+            this.Store.Size = new System.Drawing.Size(105, 80);
             this.Store.TabIndex = 10;
             this.Store.Tag = "Synthesis";
             this.Store.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -451,7 +452,7 @@ namespace macdoc
             // History
             // 
             this.History.AccessibleDescription = "Account";
-            this.History.BackColor = System.Drawing.Color.DarkGray;
+            this.History.BackColor = System.Drawing.Color.Transparent;
             this.zeroitAnimatorEdit1.SetDecoration(this.History, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
             this.History.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.History.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
@@ -460,10 +461,10 @@ namespace macdoc
             this.History.IconColor = System.Drawing.Color.White;
             this.History.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.History.IconSize = 80;
-            this.History.Location = new System.Drawing.Point(216, 34);
+            this.History.Location = new System.Drawing.Point(192, 18);
             this.History.Name = "History";
             this.History.Padding = new System.Windows.Forms.Padding(10);
-            this.History.Size = new System.Drawing.Size(80, 80);
+            this.History.Size = new System.Drawing.Size(105, 80);
             this.History.TabIndex = 10;
             this.History.Tag = "Synthesis";
             this.History.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -474,7 +475,7 @@ namespace macdoc
             // Machines
             // 
             this.Machines.AccessibleDescription = "Account";
-            this.Machines.BackColor = System.Drawing.Color.DarkGray;
+            this.Machines.BackColor = System.Drawing.Color.Transparent;
             this.zeroitAnimatorEdit1.SetDecoration(this.Machines, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
             this.Machines.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Machines.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
@@ -483,10 +484,10 @@ namespace macdoc
             this.Machines.IconColor = System.Drawing.Color.White;
             this.Machines.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.Machines.IconSize = 80;
-            this.Machines.Location = new System.Drawing.Point(320, 35);
+            this.Machines.Location = new System.Drawing.Point(339, 17);
             this.Machines.Name = "Machines";
             this.Machines.Padding = new System.Windows.Forms.Padding(10);
-            this.Machines.Size = new System.Drawing.Size(80, 80);
+            this.Machines.Size = new System.Drawing.Size(105, 80);
             this.Machines.TabIndex = 10;
             this.Machines.Tag = "Synthesis";
             this.Machines.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -506,11 +507,11 @@ namespace macdoc
             this.Profile.IconChar = FontAwesome.Sharp.IconChar.AddressCard;
             this.Profile.IconColor = System.Drawing.Color.White;
             this.Profile.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.Profile.IconSize = 80;
-            this.Profile.Location = new System.Drawing.Point(430, 35);
+            this.Profile.IconSize = 60;
+            this.Profile.Location = new System.Drawing.Point(14, 136);
             this.Profile.Name = "Profile";
             this.Profile.Padding = new System.Windows.Forms.Padding(10);
-            this.Profile.Size = new System.Drawing.Size(80, 80);
+            this.Profile.Size = new System.Drawing.Size(69, 72);
             this.Profile.TabIndex = 10;
             this.Profile.Tag = "Synthesis";
             this.Profile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -543,9 +544,9 @@ namespace macdoc
             // 
             this.Caplabel_anim.AnimateY = false;
             this.Caplabel_anim.Control = this.Composants;
-            this.Caplabel_anim.EndBounds = new System.Drawing.Rectangle(455, 595, 158, 45);
+            this.Caplabel_anim.EndBounds = new System.Drawing.Rectangle(455, 528, 158, 45);
             this.Caplabel_anim.Intervall = 5;
-            this.Caplabel_anim.StartBounds = new System.Drawing.Rectangle(323, 595, 158, 45);
+            this.Caplabel_anim.StartBounds = new System.Drawing.Rectangle(323, 528, 158, 45);
             this.Caplabel_anim.StepSize = 30D;
             this.Caplabel_anim.ZeroitSpecSynchronizationMode = Zeroit.Framework.Transitions.SpecAnimator.ZeroitSpecSynchronizationMode.None;
             // 
@@ -553,9 +554,9 @@ namespace macdoc
             // 
             this.combos_anim.AnimateY = false;
             this.combos_anim.Control = this.comboBoxes;
-            this.combos_anim.EndBounds = new System.Drawing.Rectangle(723, 560, 1687, 152);
+            this.combos_anim.EndBounds = new System.Drawing.Rectangle(723, 385, 1687, 152);
             this.combos_anim.Intervall = 5;
-            this.combos_anim.StartBounds = new System.Drawing.Rectangle(591, 560, 1687, 152);
+            this.combos_anim.StartBounds = new System.Drawing.Rectangle(591, 385, 1687, 152);
             this.combos_anim.StepSize = 30D;
             this.combos_anim.ZeroitSpecSynchronizationMode = Zeroit.Framework.Transitions.SpecAnimator.ZeroitSpecSynchronizationMode.None;
             // 
@@ -563,9 +564,9 @@ namespace macdoc
             // 
             this.CapLabel_anim_left.AnimateY = false;
             this.CapLabel_anim_left.Control = this.Composants;
-            this.CapLabel_anim_left.EndBounds = new System.Drawing.Rectangle(323, 595, 158, 45);
+            this.CapLabel_anim_left.EndBounds = new System.Drawing.Rectangle(323, 528, 158, 45);
             this.CapLabel_anim_left.Intervall = 5;
-            this.CapLabel_anim_left.StartBounds = new System.Drawing.Rectangle(455, 595, 158, 45);
+            this.CapLabel_anim_left.StartBounds = new System.Drawing.Rectangle(455, 528, 158, 45);
             this.CapLabel_anim_left.StepSize = 30D;
             this.CapLabel_anim_left.ZeroitSpecSynchronizationMode = Zeroit.Framework.Transitions.SpecAnimator.ZeroitSpecSynchronizationMode.None;
             // 
@@ -573,9 +574,9 @@ namespace macdoc
             // 
             this.combos_anim_left.AnimateY = false;
             this.combos_anim_left.Control = this.comboBoxes;
-            this.combos_anim_left.EndBounds = new System.Drawing.Rectangle(591, 560, 1687, 152);
+            this.combos_anim_left.EndBounds = new System.Drawing.Rectangle(591, 385, 1687, 152);
             this.combos_anim_left.Intervall = 5;
-            this.combos_anim_left.StartBounds = new System.Drawing.Rectangle(723, 560, 1687, 152);
+            this.combos_anim_left.StartBounds = new System.Drawing.Rectangle(723, 385, 1687, 152);
             this.combos_anim_left.StepSize = 30D;
             this.combos_anim_left.ZeroitSpecSynchronizationMode = Zeroit.Framework.Transitions.SpecAnimator.ZeroitSpecSynchronizationMode.None;
             // 
@@ -661,7 +662,7 @@ namespace macdoc
             this.metroGrid1.EnableHeadersVisualStyles = false;
             this.metroGrid1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.metroGrid1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.metroGrid1.Location = new System.Drawing.Point(20, 678);
+            this.metroGrid1.Location = new System.Drawing.Point(20, 605);
             this.metroGrid1.Name = "metroGrid1";
             this.metroGrid1.ReadOnly = true;
             this.metroGrid1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -677,7 +678,7 @@ namespace macdoc
             this.metroGrid1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.metroGrid1.RowTemplate.Height = 33;
             this.metroGrid1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.metroGrid1.Size = new System.Drawing.Size(2360, 929);
+            this.metroGrid1.Size = new System.Drawing.Size(2360, 1002);
             this.metroGrid1.Style = MetroFramework.MetroColorStyle.Silver;
             this.metroGrid1.TabIndex = 11;
             this.metroGrid1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.metroGrid1_CellContentClick);
@@ -690,8 +691,7 @@ namespace macdoc
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            this.panel1.Controls.Add(this.MenuButton);
-            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.iconButton1);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel4);
@@ -704,12 +704,59 @@ namespace macdoc
             this.panel1.Controls.Add(this.modif_button);
             this.panel1.Controls.Add(this.Ajout_button);
             this.zeroitAnimatorEdit1.SetDecoration(this.panel1, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.panel1.Location = new System.Drawing.Point(0, 3);
+            this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.panel1.Size = new System.Drawing.Size(2403, 376);
+            this.panel1.Size = new System.Drawing.Size(2404, 376);
             this.panel1.TabIndex = 24;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Controls.Add(this.MenuButton);
+            this.panel2.Controls.Add(this.Profile);
+            this.zeroitAnimatorEdit1.SetDecoration(this.panel2, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.panel2.Location = new System.Drawing.Point(2294, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(102, 355);
+            this.panel2.TabIndex = 17;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.zeroitAnimatorEdit1.SetDecoration(this.pictureBox1, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(14, 21);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(66, 66);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 15;
+            this.pictureBox1.TabStop = false;
+            // 
+            // MenuButton
+            // 
+            this.MenuButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.MenuButton.BackColor = System.Drawing.Color.Transparent;
+            this.zeroitAnimatorEdit1.SetDecoration(this.MenuButton, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.MenuButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.MenuButton.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.MenuButton.ForeColor = System.Drawing.Color.Transparent;
+            this.MenuButton.IconChar = FontAwesome.Sharp.IconChar.SignOutAlt;
+            this.MenuButton.IconColor = System.Drawing.Color.White;
+            this.MenuButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.MenuButton.IconSize = 60;
+            this.MenuButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.MenuButton.Location = new System.Drawing.Point(14, 273);
+            this.MenuButton.Name = "MenuButton";
+            this.MenuButton.Size = new System.Drawing.Size(69, 72);
+            this.MenuButton.TabIndex = 16;
+            this.MenuButton.Tag = "Synthesis";
+            this.MenuButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.MenuButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.MenuButton.UseVisualStyleBackColor = false;
             // 
             // iconButton1
             // 
@@ -725,9 +772,9 @@ namespace macdoc
             this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.iconButton1.IconSize = 58;
             this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton1.Location = new System.Drawing.Point(1396, 255);
+            this.iconButton1.Location = new System.Drawing.Point(1274, 251);
             this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(570, 97);
+            this.iconButton1.Size = new System.Drawing.Size(530, 97);
             this.iconButton1.TabIndex = 11;
             this.iconButton1.Tag = "Supprimer une machine";
             this.iconButton1.Text = "Supprimer une machine";
@@ -743,9 +790,9 @@ namespace macdoc
             this.panel3.Controls.Add(this.iconButton4);
             this.panel3.Controls.Add(this.PDF);
             this.zeroitAnimatorEdit1.SetDecoration(this.panel3, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.panel3.Location = new System.Drawing.Point(1990, 9);
+            this.panel3.Location = new System.Drawing.Point(1834, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(413, 244);
+            this.panel3.Size = new System.Drawing.Size(443, 244);
             this.panel3.TabIndex = 9;
             // 
             // iconButton5
@@ -762,7 +809,7 @@ namespace macdoc
             this.iconButton5.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton5.IconSize = 140;
             this.iconButton5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton5.Location = new System.Drawing.Point(275, 21);
+            this.iconButton5.Location = new System.Drawing.Point(315, 21);
             this.iconButton5.Name = "iconButton5";
             this.iconButton5.Size = new System.Drawing.Size(121, 207);
             this.iconButton5.TabIndex = 1;
@@ -785,7 +832,7 @@ namespace macdoc
             this.iconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton4.IconSize = 140;
             this.iconButton4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton4.Location = new System.Drawing.Point(138, 21);
+            this.iconButton4.Location = new System.Drawing.Point(158, 21);
             this.iconButton4.Name = "iconButton4";
             this.iconButton4.Size = new System.Drawing.Size(131, 207);
             this.iconButton4.TabIndex = 1;
@@ -829,7 +876,7 @@ namespace macdoc
             this.Palettiseur.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.Palettiseur.IconSize = 140;
             this.Palettiseur.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Palettiseur.Location = new System.Drawing.Point(949, 203);
+            this.Palettiseur.Location = new System.Drawing.Point(827, 199);
             this.Palettiseur.Name = "Palettiseur";
             this.Palettiseur.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.Palettiseur.Size = new System.Drawing.Size(400, 155);
@@ -852,7 +899,7 @@ namespace macdoc
             this.accoppiatore.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.accoppiatore.IconSize = 140;
             this.accoppiatore.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.accoppiatore.Location = new System.Drawing.Point(140, 203);
+            this.accoppiatore.Location = new System.Drawing.Point(18, 199);
             this.accoppiatore.Name = "accoppiatore";
             this.accoppiatore.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.accoppiatore.Size = new System.Drawing.Size(397, 155);
@@ -875,7 +922,7 @@ namespace macdoc
             this.CPK.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.CPK.IconSize = 140;
             this.CPK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.CPK.Location = new System.Drawing.Point(949, 30);
+            this.CPK.Location = new System.Drawing.Point(827, 26);
             this.CPK.Name = "CPK";
             this.CPK.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.CPK.Size = new System.Drawing.Size(400, 167);
@@ -899,7 +946,7 @@ namespace macdoc
             this.Tecnoferrari.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.Tecnoferrari.IconSize = 140;
             this.Tecnoferrari.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Tecnoferrari.Location = new System.Drawing.Point(140, 30);
+            this.Tecnoferrari.Location = new System.Drawing.Point(18, 26);
             this.Tecnoferrari.Name = "Tecnoferrari";
             this.Tecnoferrari.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.Tecnoferrari.Size = new System.Drawing.Size(397, 167);
@@ -922,7 +969,7 @@ namespace macdoc
             this.Banc.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.Banc.IconSize = 140;
             this.Banc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Banc.Location = new System.Drawing.Point(543, 30);
+            this.Banc.Location = new System.Drawing.Point(421, 26);
             this.Banc.Name = "Banc";
             this.Banc.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.Banc.Size = new System.Drawing.Size(400, 167);
@@ -945,7 +992,7 @@ namespace macdoc
             this.Synth.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.Synth.IconSize = 120;
             this.Synth.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Synth.Location = new System.Drawing.Point(543, 203);
+            this.Synth.Location = new System.Drawing.Point(421, 199);
             this.Synth.Name = "Synth";
             this.Synth.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.Synth.Size = new System.Drawing.Size(400, 155);
@@ -969,9 +1016,9 @@ namespace macdoc
             this.modif_button.IconColor = System.Drawing.Color.WhiteSmoke;
             this.modif_button.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.modif_button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.modif_button.Location = new System.Drawing.Point(1396, 30);
+            this.modif_button.Location = new System.Drawing.Point(1274, 26);
             this.modif_button.Name = "modif_button";
-            this.modif_button.Size = new System.Drawing.Size(570, 84);
+            this.modif_button.Size = new System.Drawing.Size(530, 84);
             this.modif_button.TabIndex = 5;
             this.modif_button.Tag = "Modifier une machine";
             this.modif_button.Text = "Modifier une machine";
@@ -993,9 +1040,9 @@ namespace macdoc
             this.Ajout_button.IconColor = System.Drawing.Color.WhiteSmoke;
             this.Ajout_button.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.Ajout_button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Ajout_button.Location = new System.Drawing.Point(1396, 140);
+            this.Ajout_button.Location = new System.Drawing.Point(1274, 136);
             this.Ajout_button.Name = "Ajout_button";
-            this.Ajout_button.Size = new System.Drawing.Size(570, 97);
+            this.Ajout_button.Size = new System.Drawing.Size(530, 97);
             this.Ajout_button.TabIndex = 3;
             this.Ajout_button.Tag = "Ajouter une machine";
             this.Ajout_button.Text = "Ajouter une machine";
@@ -1003,6 +1050,17 @@ namespace macdoc
             this.Ajout_button.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.Ajout_button.UseVisualStyleBackColor = false;
             this.Ajout_button.Click += new System.EventHandler(this.Ajout_button_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.panel5.Controls.Add(this.iconButton2);
+            this.panel5.Controls.Add(this.Search);
+            this.zeroitAnimatorEdit1.SetDecoration(this.panel5, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.panel5.Location = new System.Drawing.Point(830, 495);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(644, 104);
+            this.panel5.TabIndex = 42;
             // 
             // openFileDialog1
             // 
@@ -1021,9 +1079,9 @@ namespace macdoc
             // 
             this.GridAnim.AnimateY = false;
             this.GridAnim.Control = this.metroGrid1;
-            this.GridAnim.EndBounds = new System.Drawing.Rectangle(463, 678, 1928, 1295);
+            this.GridAnim.EndBounds = new System.Drawing.Rectangle(463, 605, 1928, 1295);
             this.GridAnim.Intervall = 5;
-            this.GridAnim.StartBounds = new System.Drawing.Rectangle(331, 678, 1928, 1295);
+            this.GridAnim.StartBounds = new System.Drawing.Rectangle(331, 605, 1928, 1295);
             this.GridAnim.StepSize = 30D;
             this.GridAnim.ZeroitSpecSynchronizationMode = Zeroit.Framework.Transitions.SpecAnimator.ZeroitSpecSynchronizationMode.None;
             // 
@@ -1031,44 +1089,11 @@ namespace macdoc
             // 
             this.Grid_anim_left.AnimateY = false;
             this.Grid_anim_left.Control = this.metroGrid1;
-            this.Grid_anim_left.EndBounds = new System.Drawing.Rectangle(331, 678, 1928, 1295);
+            this.Grid_anim_left.EndBounds = new System.Drawing.Rectangle(331, 605, 1928, 1295);
             this.Grid_anim_left.Intervall = 5;
-            this.Grid_anim_left.StartBounds = new System.Drawing.Rectangle(463, 678, 1928, 1295);
+            this.Grid_anim_left.StartBounds = new System.Drawing.Rectangle(463, 605, 1928, 1295);
             this.Grid_anim_left.StepSize = 30D;
             this.Grid_anim_left.ZeroitSpecSynchronizationMode = Zeroit.Framework.Transitions.SpecAnimator.ZeroitSpecSynchronizationMode.None;
-            // 
-            // MenuButton
-            // 
-            this.MenuButton.BackColor = System.Drawing.Color.Transparent;
-            this.zeroitAnimatorEdit1.SetDecoration(this.MenuButton, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.MenuButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.MenuButton.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.MenuButton.ForeColor = System.Drawing.Color.Transparent;
-            this.MenuButton.IconChar = FontAwesome.Sharp.IconChar.AlignJustify;
-            this.MenuButton.IconColor = System.Drawing.Color.White;
-            this.MenuButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.MenuButton.IconSize = 60;
-            this.MenuButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.MenuButton.Location = new System.Drawing.Point(29, 292);
-            this.MenuButton.Name = "MenuButton";
-            this.MenuButton.Size = new System.Drawing.Size(66, 60);
-            this.MenuButton.TabIndex = 14;
-            this.MenuButton.Tag = "Synthesis";
-            this.MenuButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.MenuButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.MenuButton.UseVisualStyleBackColor = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.zeroitAnimatorEdit1.SetDecoration(this.pictureBox1, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(29, 30);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(66, 66);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
             // 
             // Home
             // 
@@ -1076,10 +1101,9 @@ namespace macdoc
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
             this.ClientSize = new System.Drawing.Size(2403, 1627);
-            this.Controls.Add(this.iconButton2);
+            this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.comboBoxes);
-            this.Controls.Add(this.Search);
             this.Controls.Add(this.Syn_types);
             this.Controls.Add(this.Composants);
             this.Controls.Add(this.metroGrid1);
@@ -1105,10 +1129,12 @@ namespace macdoc
             ((System.ComponentModel.ISupportInitialize)(this.collapse_synthTypes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel3.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GridAnim)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_anim_left)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1166,6 +1192,8 @@ namespace macdoc
         private FontAwesome.Sharp.IconButton iconButton4;
         private FontAwesome.Sharp.IconButton MenuButton;
         private PictureBox pictureBox1;
+        private Panel panel2;
+        private Panel panel5;
     }
 }
 

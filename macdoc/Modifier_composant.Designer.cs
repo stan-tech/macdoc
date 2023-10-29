@@ -37,11 +37,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.notes = new macdoc.RoundedTextBox();
             this.CapRef = new macdoc.RoundedTextBox();
             this.CapName = new macdoc.RoundedTextBox();
             this.Ok = new macdoc.RoundedButton();
             this.Annuler = new macdoc.RoundedButton();
-            this.notes = new macdoc.RoundedTextBox();
             this.SuspendLayout();
             // 
             // inst
@@ -147,9 +147,36 @@
             this.label5.TabIndex = 20;
             this.label5.Text = "Notes";
             // 
+            // notes
+            // 
+            this.notes.Animated = true;
+            this.notes.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.notes.DefaultText = "";
+            this.notes.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.notes.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.notes.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.notes.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.notes.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.notes.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.notes.ForeColor = System.Drawing.Color.Black;
+            this.notes.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.notes.Location = new System.Drawing.Point(154, 615);
+            this.notes.Margin = new System.Windows.Forms.Padding(5);
+            this.notes.Multiline = true;
+            this.notes.Name = "notes";
+            this.notes.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
+            this.notes.PasswordChar = '\0';
+            this.notes.PlaceholderText = "";
+            this.notes.SelectedText = "";
+            this.notes.Size = new System.Drawing.Size(431, 240);
+            this.notes.TabIndex = 42;
+            // 
             // CapRef
             // 
+            this.CapRef.AllowDrop = true;
             this.CapRef.Animated = true;
+            this.CapRef.AutoRoundedCorners = true;
+            this.CapRef.BorderRadius = 29;
             this.CapRef.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.CapRef.DefaultText = "";
             this.CapRef.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -168,6 +195,7 @@
             this.CapRef.PlaceholderText = "";
             this.CapRef.SelectedText = "";
             this.CapRef.Size = new System.Drawing.Size(362, 60);
+            this.CapRef.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             this.CapRef.TabIndex = 42;
             // 
             // CapName
@@ -230,30 +258,6 @@
             this.Annuler.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.Annuler.UseVisualStyleBackColor = false;
             this.Annuler.Click += new System.EventHandler(this.Annuler_Click);
-            // 
-            // notes
-            // 
-            this.notes.Animated = true;
-            this.notes.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.notes.DefaultText = "";
-            this.notes.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.notes.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.notes.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.notes.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.notes.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.notes.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.notes.ForeColor = System.Drawing.Color.Black;
-            this.notes.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.notes.Location = new System.Drawing.Point(154, 615);
-            this.notes.Margin = new System.Windows.Forms.Padding(5);
-            this.notes.Multiline = true;
-            this.notes.Name = "notes";
-            this.notes.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.notes.PasswordChar = '\0';
-            this.notes.PlaceholderText = "";
-            this.notes.SelectedText = "";
-            this.notes.Size = new System.Drawing.Size(431, 240);
-            this.notes.TabIndex = 42;
             // 
             // Modifier_composant
             // 

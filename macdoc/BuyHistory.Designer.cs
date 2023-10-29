@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Syn_types = new macdoc.RoundedPanel();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.Nouveaux = new FontAwesome.Sharp.IconButton();
             this.NC = new FontAwesome.Sharp.IconButton();
-            this.Tri = new FontAwesome.Sharp.IconButton();
+            this.Remp = new FontAwesome.Sharp.IconButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.Compos = new macdoc.RoundedGrid();
             this.iconButton2 = new macdoc.RoundedButton();
@@ -53,35 +53,36 @@
             // 
             this.Syn_types.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.Syn_types.BackColor = System.Drawing.Color.Transparent;
-            this.Syn_types.Controls.Add(this.iconButton1);
+            this.Syn_types.Controls.Add(this.Nouveaux);
             this.Syn_types.Controls.Add(this.NC);
-            this.Syn_types.Controls.Add(this.Tri);
+            this.Syn_types.Controls.Add(this.Remp);
             this.Syn_types.Location = new System.Drawing.Point(18, 22);
             this.Syn_types.Name = "Syn_types";
             this.Syn_types.Size = new System.Drawing.Size(1752, 123);
             this.Syn_types.TabIndex = 12;
             // 
-            // iconButton1
+            // Nouveaux
             // 
-            this.iconButton1.BackColor = System.Drawing.Color.Indigo;
-            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton1.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.iconButton1.ForeColor = System.Drawing.Color.White;
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Pager;
-            this.iconButton1.IconColor = System.Drawing.Color.White;
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.IconSize = 100;
-            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.iconButton1.Location = new System.Drawing.Point(604, -2);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Padding = new System.Windows.Forms.Padding(10);
-            this.iconButton1.Size = new System.Drawing.Size(519, 126);
-            this.iconButton1.TabIndex = 8;
-            this.iconButton1.Tag = "Triage";
-            this.iconButton1.Text = "Nouveaux       210";
-            this.iconButton1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton1.UseVisualStyleBackColor = false;
+            this.Nouveaux.BackColor = System.Drawing.Color.Indigo;
+            this.Nouveaux.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Nouveaux.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.Nouveaux.ForeColor = System.Drawing.Color.White;
+            this.Nouveaux.IconChar = FontAwesome.Sharp.IconChar.Pager;
+            this.Nouveaux.IconColor = System.Drawing.Color.White;
+            this.Nouveaux.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.Nouveaux.IconSize = 100;
+            this.Nouveaux.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.Nouveaux.Location = new System.Drawing.Point(604, -2);
+            this.Nouveaux.Name = "Nouveaux";
+            this.Nouveaux.Padding = new System.Windows.Forms.Padding(10);
+            this.Nouveaux.Size = new System.Drawing.Size(519, 126);
+            this.Nouveaux.TabIndex = 8;
+            this.Nouveaux.Tag = "Triage";
+            this.Nouveaux.Text = "Nouveaux       210";
+            this.Nouveaux.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Nouveaux.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.Nouveaux.UseVisualStyleBackColor = false;
+            this.Nouveaux.Click += new System.EventHandler(this.Nouveaux_Click);
             // 
             // NC
             // 
@@ -104,28 +105,30 @@
             this.NC.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.NC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.NC.UseVisualStyleBackColor = false;
+            this.NC.Click += new System.EventHandler(this.NC_Click);
             // 
-            // Tri
+            // Remp
             // 
-            this.Tri.BackColor = System.Drawing.Color.Indigo;
-            this.Tri.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Tri.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.Tri.ForeColor = System.Drawing.Color.White;
-            this.Tri.IconChar = FontAwesome.Sharp.IconChar.TrashRestore;
-            this.Tri.IconColor = System.Drawing.Color.White;
-            this.Tri.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.Tri.IconSize = 100;
-            this.Tri.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.Tri.Location = new System.Drawing.Point(1120, -2);
-            this.Tri.Name = "Tri";
-            this.Tri.Padding = new System.Windows.Forms.Padding(10);
-            this.Tri.Size = new System.Drawing.Size(648, 126);
-            this.Tri.TabIndex = 8;
-            this.Tri.Tag = "Triage";
-            this.Tri.Text = "Remplacés        300";
-            this.Tri.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Tri.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.Tri.UseVisualStyleBackColor = false;
+            this.Remp.BackColor = System.Drawing.Color.Indigo;
+            this.Remp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Remp.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.Remp.ForeColor = System.Drawing.Color.White;
+            this.Remp.IconChar = FontAwesome.Sharp.IconChar.TrashRestore;
+            this.Remp.IconColor = System.Drawing.Color.White;
+            this.Remp.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.Remp.IconSize = 100;
+            this.Remp.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.Remp.Location = new System.Drawing.Point(1120, -2);
+            this.Remp.Name = "Remp";
+            this.Remp.Padding = new System.Windows.Forms.Padding(10);
+            this.Remp.Size = new System.Drawing.Size(648, 126);
+            this.Remp.TabIndex = 8;
+            this.Remp.Tag = "Triage";
+            this.Remp.Text = "Remplacés        300";
+            this.Remp.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Remp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.Remp.UseVisualStyleBackColor = false;
+            this.Remp.Click += new System.EventHandler(this.Remp_Click);
             // 
             // panel1
             // 
@@ -144,9 +147,9 @@
             this.Compos.AllowUserToOrderColumns = true;
             this.Compos.AllowUserToResizeColumns = false;
             this.Compos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
-            this.Compos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
+            this.Compos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
             this.Compos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -156,24 +159,24 @@
             this.Compos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Compos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.Compos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Compos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Compos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.Compos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Compos.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Compos.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Compos.DefaultCellStyle = dataGridViewCellStyle13;
             this.Compos.EnableHeadersVisualStyles = false;
             this.Compos.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.Compos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -181,19 +184,19 @@
             this.Compos.Name = "Compos";
             this.Compos.ReadOnly = true;
             this.Compos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Compos.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Compos.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.Compos.RowHeadersWidth = 82;
             this.Compos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle25.Padding = new System.Windows.Forms.Padding(16, 29, 16, 29);
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Compos.RowsDefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.Padding = new System.Windows.Forms.Padding(16, 29, 16, 29);
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Compos.RowsDefaultCellStyle = dataGridViewCellStyle15;
             this.Compos.RowTemplate.DividerHeight = 2;
             this.Compos.RowTemplate.Height = 203;
             this.Compos.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -307,6 +310,7 @@
             this.Name = "BuyHistory";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BuyHistory";
+            this.Load += new System.EventHandler(this.BuyHistory_Load);
             this.Syn_types.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Compos)).EndInit();
@@ -319,14 +323,14 @@
 
         private RoundedPanel Syn_types;
         private FontAwesome.Sharp.IconButton NC;
-        private FontAwesome.Sharp.IconButton Tri;
+        private FontAwesome.Sharp.IconButton Remp;
         private System.Windows.Forms.Panel panel1;
         public RoundedGrid Compos;
         private RoundedButton iconButton2;
         public RoundedTextBox Search;
         private System.Windows.Forms.Label label3;
         private RoundedButton roundedButton1;
-        private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton Nouveaux;
         private RoundedButton roundedButton2;
     }
 }

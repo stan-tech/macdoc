@@ -14,7 +14,7 @@ namespace macdoc
         string reference;
         DateTime date_insertion;
         DateTime date_modification;
-        double  life_duration ;
+        string  life_duration ;
         long num_modifications;
         int id_machine;
         string type;
@@ -22,6 +22,7 @@ namespace macdoc
         string machineRef;
         bool inserted;
         string price;
+        string unit;
 
 
         public bool Inserted
@@ -30,6 +31,11 @@ namespace macdoc
             set { inserted = value; }
         }
 
+        public string Unit
+        {
+            get { return unit; }
+            set { unit = value; }
+        }
         public string Price
         {
             get { return price; }
@@ -85,7 +91,7 @@ namespace macdoc
             set { date_modification = value; }
         }
 
-        public double Life_duration
+        public string Life_duration
         {
             get { return life_duration; }
             set { life_duration = value; }

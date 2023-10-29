@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FontAwesome.Sharp;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -42,6 +43,33 @@ namespace macdoc
             Store store = new Store();
             store.ShowDialog();
             this.Close();
+        }
+
+        private void NC_Click(object sender, EventArgs e)
+        {
+            NC.BackColor = System.Drawing.Color.BlueViolet;
+            Nouveaux.BackColor = System.Drawing.Color.Indigo;
+            Remp.BackColor = System.Drawing.Color.Indigo;
+        }
+
+        private void Nouveaux_Click(object sender, EventArgs e)
+        {
+            NC.BackColor = System.Drawing.Color.Indigo;
+            Nouveaux.BackColor = System.Drawing.Color.BlueViolet;
+            Remp.BackColor = System.Drawing.Color.Indigo;
+        }
+
+        private void Remp_Click(object sender, EventArgs e)
+        {
+            NC.BackColor = System.Drawing.Color.Indigo;
+            Nouveaux.BackColor = System.Drawing.Color.Indigo;
+            Remp.BackColor = System.Drawing.Color.BlueViolet;
+        }
+
+        private async void BuyHistory_Load(object sender, EventArgs e)
+        {
+            NC.PerformClick();
+            Compos.DataSource = await DBHelper.FillStoreGrid();
         }
     }
 }

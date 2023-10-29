@@ -19,6 +19,8 @@ namespace macdoc
         string id;
         public Component compon;
         public event EventHandler cap_Changed;
+        public string[] refs;
+        AutoCompleteStringCollection references;
         public Modifier_composant(Component component)
         {
 
@@ -31,6 +33,8 @@ namespace macdoc
             CapName.Text = component.Name;
             CapRef.Text = component.Reference;
 
+            CapName.SelectionStart  = component.Name.Length;
+            CapRef.SelectionStart = component.Reference.Length;
 
             inst.Format = DateTimePickerFormat.Short;
 
@@ -55,6 +59,15 @@ namespace macdoc
 
         private void Modifier_Load(object sender, EventArgs e)
         {
+             
+
+             references = DBHelper.SelectAvailableReferences(compon);
+
+
+            CapRef.AutoCompleteCustomSource = references;
+            CapRef.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            CapRef.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
 
             if (checkBox1.Checked)
             {
@@ -110,13 +123,28 @@ namespace macdoc
         }
         private void Ok_Click(object sender, EventArgs e)
         {
+            if (!references.Contains(CapRef.Text))
+            {
+                DialogResult result = MessageBox.Show("Cette reference n'existe pas. Vous pouvez l'ajouter via le store", "",MessageBoxButtons.OKCancel);
+                if(result == DialogResult.OK)
+                {
+                    Arrivage arrivage = new Arrivage(compon.Type, true);
+                    arrivage.ShowDialog();
+                    this.Close();
 
+                    return;
+                }
 
+            }
+            else
+            {
 
-            ConfirmAction confirm =
-            new ConfirmAction();
-            confirm.Confirmed += Confirmed;
-            confirm.ShowDialog();
+                ConfirmAction confirm =
+                new ConfirmAction();
+                confirm.Confirmed += Confirmed;
+                confirm.ShowDialog();
+
+            }
 
 
         }

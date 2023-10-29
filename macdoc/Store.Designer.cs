@@ -49,6 +49,7 @@ namespace macdoc
             this.roundedButton2 = new macdoc.RoundedButton();
             this.Print = new macdoc.RoundedButton();
             this.Compos = new macdoc.RoundedGrid();
+            this.roundedButton4 = new macdoc.RoundedButton();
             this.contextMenuStrip1.SuspendLayout();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Compos)).BeginInit();
@@ -157,7 +158,7 @@ namespace macdoc
             this.roundedButton3.IconColor = System.Drawing.Color.Black;
             this.roundedButton3.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.roundedButton3.IconSize = 58;
-            this.roundedButton3.Location = new System.Drawing.Point(766, 67);
+            this.roundedButton3.Location = new System.Drawing.Point(685, 67);
             this.roundedButton3.Name = "roundedButton3";
             this.roundedButton3.Padding = new System.Windows.Forms.Padding(15, 20, 15, 15);
             this.roundedButton3.Size = new System.Drawing.Size(93, 58);
@@ -174,7 +175,7 @@ namespace macdoc
             this.roundedButton2.IconColor = System.Drawing.Color.Black;
             this.roundedButton2.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.roundedButton2.IconSize = 58;
-            this.roundedButton2.Location = new System.Drawing.Point(905, 67);
+            this.roundedButton2.Location = new System.Drawing.Point(820, 67);
             this.roundedButton2.Name = "roundedButton2";
             this.roundedButton2.Padding = new System.Windows.Forms.Padding(15, 20, 15, 15);
             this.roundedButton2.Size = new System.Drawing.Size(93, 58);
@@ -190,7 +191,7 @@ namespace macdoc
             this.Print.IconColor = System.Drawing.Color.Black;
             this.Print.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.Print.IconSize = 58;
-            this.Print.Location = new System.Drawing.Point(1036, 67);
+            this.Print.Location = new System.Drawing.Point(955, 67);
             this.Print.Name = "Print";
             this.Print.Padding = new System.Windows.Forms.Padding(15);
             this.Print.Size = new System.Drawing.Size(93, 58);
@@ -265,6 +266,21 @@ namespace macdoc
             this.Compos.TabIndex = 60;
             this.Compos.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.Compos_CellMouseClick);
             // 
+            // roundedButton4
+            // 
+            this.roundedButton4.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.roundedButton4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.roundedButton4.IconChar = FontAwesome.Sharp.IconChar.ClockRotateLeft;
+            this.roundedButton4.IconColor = System.Drawing.Color.Black;
+            this.roundedButton4.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.roundedButton4.IconSize = 58;
+            this.roundedButton4.Location = new System.Drawing.Point(1084, 67);
+            this.roundedButton4.Name = "roundedButton4";
+            this.roundedButton4.Padding = new System.Windows.Forms.Padding(15);
+            this.roundedButton4.Size = new System.Drawing.Size(93, 58);
+            this.roundedButton4.TabIndex = 74;
+            this.roundedButton4.UseVisualStyleBackColor = false;
+            // 
             // Store
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -276,6 +292,7 @@ namespace macdoc
             this.Controls.Add(this.roundedButton1);
             this.Controls.Add(this.roundedButton3);
             this.Controls.Add(this.roundedButton2);
+            this.Controls.Add(this.roundedButton4);
             this.Controls.Add(this.Print);
             this.Controls.Add(this.MainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -306,5 +323,6 @@ namespace macdoc
         private RoundedButton roundedButton3;
         private Guna.UI2.WinForms.Guna2ComboBox caps;
         private Label Composants;
+        private RoundedButton roundedButton4;
     }
 }
