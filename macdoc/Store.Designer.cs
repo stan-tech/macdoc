@@ -32,27 +32,29 @@ namespace macdoc
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Store));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Search = new System.Windows.Forms.ToolStripMenuItem();
             this.Annuler = new System.Windows.Forms.ToolStripMenuItem();
             this.Retirer = new System.Windows.Forms.ToolStripMenuItem();
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.caps = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.Composants = new System.Windows.Forms.Label();
+            this.Compos = new macdoc.RoundedGrid();
             this.roundedButton1 = new macdoc.RoundedButton();
             this.roundedButton3 = new macdoc.RoundedButton();
             this.roundedButton2 = new macdoc.RoundedButton();
             this.Print = new macdoc.RoundedButton();
-            this.Compos = new macdoc.RoundedGrid();
-            this.roundedButton4 = new macdoc.RoundedButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.caps = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.History = new macdoc.RoundedButton();
+            this.label6 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Compos)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -96,42 +98,78 @@ namespace macdoc
             // MainPanel
             // 
             this.MainPanel.Controls.Add(this.Compos);
-            this.MainPanel.Location = new System.Drawing.Point(12, 129);
+            this.MainPanel.Location = new System.Drawing.Point(12, 116);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(1789, 1024);
             this.MainPanel.TabIndex = 58;
             // 
-            // caps
+            // Compos
             // 
-            this.caps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.caps.BackColor = System.Drawing.Color.Transparent;
-            this.caps.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.caps.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.caps.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.caps.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.caps.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.caps.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.caps.ItemHeight = 30;
-            this.caps.Items.AddRange(new object[] {
-            "Nom ",
-            "Quantité",
-            "Prix"});
-            this.caps.Location = new System.Drawing.Point(45, 89);
-            this.caps.Name = "caps";
-            this.caps.Size = new System.Drawing.Size(317, 36);
-            this.caps.TabIndex = 75;
-            // 
-            // Composants
-            // 
-            this.Composants.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.Composants.AutoSize = true;
-            this.Composants.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.Composants.ForeColor = System.Drawing.Color.White;
-            this.Composants.Location = new System.Drawing.Point(37, 30);
-            this.Composants.Name = "Composants";
-            this.Composants.Size = new System.Drawing.Size(149, 45);
-            this.Composants.TabIndex = 76;
-            this.Composants.Text = "Trier par";
+            this.Compos.AllowDrop = true;
+            this.Compos.AllowUserToAddRows = false;
+            this.Compos.AllowUserToDeleteRows = false;
+            this.Compos.AllowUserToOrderColumns = true;
+            this.Compos.AllowUserToResizeColumns = false;
+            this.Compos.AllowUserToResizeRows = false;
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Calibri", 16.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
+            this.Compos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle26;
+            this.Compos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Compos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.Compos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.Compos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.Compos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Compos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.Compos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
+            dataGridViewCellStyle27.Font = new System.Drawing.Font("Calibri", 19.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle27.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle27.Padding = new System.Windows.Forms.Padding(0, 35, 0, 35);
+            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Compos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle27;
+            this.Compos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.Compos.Cursor = System.Windows.Forms.Cursors.Hand;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle28.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle28.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Compos.DefaultCellStyle = dataGridViewCellStyle28;
+            this.Compos.EnableHeadersVisualStyles = false;
+            this.Compos.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.Compos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.Compos.Location = new System.Drawing.Point(16, 34);
+            this.Compos.Name = "Compos";
+            this.Compos.ReadOnly = true;
+            this.Compos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
+            dataGridViewCellStyle29.Font = new System.Drawing.Font("Calibri", 16.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Compos.RowHeadersDefaultCellStyle = dataGridViewCellStyle29;
+            this.Compos.RowHeadersWidth = 82;
+            this.Compos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle30.Font = new System.Drawing.Font("Calibri", 16.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle30.Padding = new System.Windows.Forms.Padding(16, 55, 16, 55);
+            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Compos.RowsDefaultCellStyle = dataGridViewCellStyle30;
+            this.Compos.RowTemplate.DividerHeight = 2;
+            this.Compos.RowTemplate.Height = 203;
+            this.Compos.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Compos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.Compos.Size = new System.Drawing.Size(1755, 971);
+            this.Compos.Style = MetroFramework.MetroColorStyle.Teal;
+            this.Compos.TabIndex = 60;
+            this.Compos.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.Compos_CellMouseClick);
             // 
             // roundedButton1
             // 
@@ -158,7 +196,7 @@ namespace macdoc
             this.roundedButton3.IconColor = System.Drawing.Color.Black;
             this.roundedButton3.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.roundedButton3.IconSize = 58;
-            this.roundedButton3.Location = new System.Drawing.Point(685, 67);
+            this.roundedButton3.Location = new System.Drawing.Point(29, 29);
             this.roundedButton3.Name = "roundedButton3";
             this.roundedButton3.Padding = new System.Windows.Forms.Padding(15, 20, 15, 15);
             this.roundedButton3.Size = new System.Drawing.Size(93, 58);
@@ -175,7 +213,7 @@ namespace macdoc
             this.roundedButton2.IconColor = System.Drawing.Color.Black;
             this.roundedButton2.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.roundedButton2.IconSize = 58;
-            this.roundedButton2.Location = new System.Drawing.Point(820, 67);
+            this.roundedButton2.Location = new System.Drawing.Point(164, 29);
             this.roundedButton2.Name = "roundedButton2";
             this.roundedButton2.Padding = new System.Windows.Forms.Padding(15, 20, 15, 15);
             this.roundedButton2.Size = new System.Drawing.Size(93, 58);
@@ -191,95 +229,79 @@ namespace macdoc
             this.Print.IconColor = System.Drawing.Color.Black;
             this.Print.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.Print.IconSize = 58;
-            this.Print.Location = new System.Drawing.Point(955, 67);
+            this.Print.Location = new System.Drawing.Point(302, 29);
             this.Print.Name = "Print";
             this.Print.Padding = new System.Windows.Forms.Padding(15);
             this.Print.Size = new System.Drawing.Size(93, 58);
             this.Print.TabIndex = 74;
             this.Print.UseVisualStyleBackColor = false;
+            this.Print.Click += new System.EventHandler(this.Print_Click);
             // 
-            // Compos
+            // panel1
             // 
-            this.Compos.AllowDrop = true;
-            this.Compos.AllowUserToAddRows = false;
-            this.Compos.AllowUserToDeleteRows = false;
-            this.Compos.AllowUserToOrderColumns = true;
-            this.Compos.AllowUserToResizeColumns = false;
-            this.Compos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Calibri", 16.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
-            this.Compos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
-            this.Compos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Compos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.Compos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.Compos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.Compos.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Compos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.Compos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Calibri", 19.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(0, 35, 0, 35);
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Compos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            this.Compos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Compos.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Compos.DefaultCellStyle = dataGridViewCellStyle8;
-            this.Compos.EnableHeadersVisualStyles = false;
-            this.Compos.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.Compos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.Compos.Location = new System.Drawing.Point(16, 24);
-            this.Compos.Name = "Compos";
-            this.Compos.ReadOnly = true;
-            this.Compos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Calibri", 16.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Compos.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            this.Compos.RowHeadersWidth = 82;
-            this.Compos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Calibri", 16.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(16, 55, 16, 55);
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Compos.RowsDefaultCellStyle = dataGridViewCellStyle10;
-            this.Compos.RowTemplate.DividerHeight = 2;
-            this.Compos.RowTemplate.Height = 203;
-            this.Compos.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Compos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.Compos.Size = new System.Drawing.Size(1755, 971);
-            this.Compos.Style = MetroFramework.MetroColorStyle.Teal;
-            this.Compos.TabIndex = 60;
-            this.Compos.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.Compos_CellMouseClick);
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.panel1.Controls.Add(this.roundedButton2);
+            this.panel1.Controls.Add(this.History);
+            this.panel1.Controls.Add(this.Print);
+            this.panel1.Controls.Add(this.roundedButton3);
+            this.panel1.Location = new System.Drawing.Point(715, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(558, 100);
+            this.panel1.TabIndex = 75;
             // 
-            // roundedButton4
+            // caps
             // 
-            this.roundedButton4.BackColor = System.Drawing.Color.DarkTurquoise;
-            this.roundedButton4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.roundedButton4.IconChar = FontAwesome.Sharp.IconChar.ClockRotateLeft;
-            this.roundedButton4.IconColor = System.Drawing.Color.Black;
-            this.roundedButton4.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.roundedButton4.IconSize = 58;
-            this.roundedButton4.Location = new System.Drawing.Point(1084, 67);
-            this.roundedButton4.Name = "roundedButton4";
-            this.roundedButton4.Padding = new System.Windows.Forms.Padding(15);
-            this.roundedButton4.Size = new System.Drawing.Size(93, 58);
-            this.roundedButton4.TabIndex = 74;
-            this.roundedButton4.UseVisualStyleBackColor = false;
+            this.caps.AllowDrop = true;
+            this.caps.BackColor = System.Drawing.Color.Transparent;
+            this.caps.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.caps.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.caps.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.caps.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.caps.FocusedState.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.caps.Font = new System.Drawing.Font("Segoe UI", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.caps.ForeColor = System.Drawing.Color.Black;
+            this.caps.HoverState.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.caps.ItemHeight = 48;
+            this.caps.Items.AddRange(new object[] {
+            "Nouveaux",
+            "En Usage",
+            "Remplacés"});
+            this.caps.ItemsAppearance.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.caps.ItemsAppearance.SelectedFont = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.caps.Location = new System.Drawing.Point(391, 45);
+            this.caps.MaxDropDownItems = 28;
+            this.caps.Name = "caps";
+            this.caps.ShadowDecoration.BorderRadius = 8;
+            this.caps.Size = new System.Drawing.Size(302, 54);
+            this.caps.TabIndex = 76;
+            this.caps.SelectedIndexChanged += new System.EventHandler(this.caps_SelectedIndexChanged);
+            // 
+            // History
+            // 
+            this.History.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.History.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.History.IconChar = FontAwesome.Sharp.IconChar.ClockRotateLeft;
+            this.History.IconColor = System.Drawing.Color.Black;
+            this.History.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.History.IconSize = 58;
+            this.History.Location = new System.Drawing.Point(440, 29);
+            this.History.Name = "History";
+            this.History.Padding = new System.Windows.Forms.Padding(15);
+            this.History.Size = new System.Drawing.Size(93, 58);
+            this.History.TabIndex = 74;
+            this.History.UseVisualStyleBackColor = false;
+            this.History.Click += new System.EventHandler(this.Print_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(297, 49);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(86, 50);
+            this.label6.TabIndex = 77;
+            this.label6.Text = "État";
             // 
             // Store
             // 
@@ -287,13 +309,10 @@ namespace macdoc
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1813, 1156);
-            this.Controls.Add(this.Composants);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.caps);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.roundedButton1);
-            this.Controls.Add(this.roundedButton3);
-            this.Controls.Add(this.roundedButton2);
-            this.Controls.Add(this.roundedButton4);
-            this.Controls.Add(this.Print);
             this.Controls.Add(this.MainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -305,6 +324,7 @@ namespace macdoc
             this.contextMenuStrip1.ResumeLayout(false);
             this.MainPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Compos)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -321,8 +341,9 @@ namespace macdoc
         private RoundedButton roundedButton2;
         private RoundedButton Print;
         private RoundedButton roundedButton3;
+        private Panel panel1;
+        private RoundedButton History;
         private Guna.UI2.WinForms.Guna2ComboBox caps;
-        private Label Composants;
-        private RoundedButton roundedButton4;
+        private Label label6;
     }
 }

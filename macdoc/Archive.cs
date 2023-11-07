@@ -1,12 +1,19 @@
-﻿using Guna.UI2.WinForms;
+﻿using ClosedXML.Excel;
+using Guna.UI2.WinForms;
+using iTextSharp.text.pdf.draw;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using MetroFramework.Controls;
 using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraReports.Web.ReportDesigner.DataContracts;
 
 namespace macdoc
 {
@@ -29,7 +36,11 @@ namespace macdoc
         bool keepGoing;
         bool PanelShown = false;
         Timer t = new Timer();
-
+        MetroGrid AllModificationsTable = new MetroGrid();
+        MetroGrid VarTable = new MetroGrid();
+        string Selectedcomponents, modifier, lines;
+        string machineName = "Tout";
+        string machineRef = "Tout", machineType = "Tout";
 
         private void Archive_Load(object sender, EventArgs e)
         {
@@ -93,14 +104,23 @@ namespace macdoc
                 Modificateurs.SelectedItem == null || Limit.SelectedItem == null)
             {
 
-                Modifs.DataSource = await DBHelper.FillArchiveModifications( orderBy, machine_id, "Tout", "Tout", "Tout");
+                Modifs.DataSource 
+                    = await DBHelper.FillArchiveModifications( orderBy, machine_id, "Tout", "Tout", "Tout");
+                AllModificationsTable = Modifs;
+
+                Selectedcomponents = "Tout";
+                modifier = "Tout"; 
+                lines = "Tout";
 
 
             }
             else
             {
                 Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
-
+                VarTable = Modifs;
+                Selectedcomponents = Components.SelectedItem.ToString();
+                modifier = user;
+                lines = limit;
 
             }
         }
@@ -122,28 +142,50 @@ namespace macdoc
                 {
                     machine_id = new SQLiteCommand("select id from machine where reference = '" + metroGrid1.SelectedRows[0].Cells[2].Value.ToString()
                            + "';", connection).ExecuteScalar().ToString();
+
+                    SQLiteDataReader reader  = new SQLiteCommand("select nom,reference,type from machine where id = '" + machine_id
+                           + "';", connection).ExecuteReader();
+                    if(reader.Read())
+                    {
+                        machineName = reader.GetString(0);
+                        machineRef = reader.GetString(1);
+                        machineType = reader.GetString(2);
+                    }
+
+                    reader.Close();
+
                 }
                 catch (Exception)
                 {
 
                     throw;
                 }
+                finally
+                {
+                    connection.Close();
+
+                }
 
 
-                connection.Close();
             }
 
             if (Components.SelectedItem == null || TrierPar.SelectedItem == null ||
                 Modificateurs.SelectedItem == null || Limit.SelectedItem == null)
             {
-                Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy, machine_id, "Tout", "Tout", "Tout");
+                Modifs.DataSource =AllModificationsTable.DataSource
+                    = await DBHelper.FillArchiveModifications(orderBy, machine_id, "Tout", "Tout", "Tout");
 
-
+                Selectedcomponents = "Tout";
+                modifier = "Tout";
+                lines = "Tout";
             }
             else
             {
-                Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy,machine_id, Components.SelectedItem.ToString(), user, limit);
-
+                Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
+                VarTable = Modifs;
+                Selectedcomponents = Components.SelectedItem.ToString();
+                modifier = user;
+                lines = limit;
             }
         }
         private async void SearchModif_TextChanged(object sender, EventArgs e)
@@ -199,12 +241,18 @@ namespace macdoc
             {
 
                 Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy, machine_id, "Tout", "Tout", "Tout");
-
+                Selectedcomponents = "Tout";
+                modifier = "Tout";
+                lines = "Tout";
             }
             else
             {
                 Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
-
+                VarTable = Modifs;
+                Selectedcomponents = Components.SelectedItem.ToString();
+                modifier = user;
+                lines = limit;
+           
 
             }
         }
@@ -217,14 +265,19 @@ namespace macdoc
             {
                 Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy, machine_id, "Tout", "Tout", "Tout");
 
-
+                Selectedcomponents = "Tout";
+                modifier = "Tout";
+                lines = "Tout";
             }
             else
             {
                 user = Modificateurs.SelectedItem.ToString();
 
                 Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
-
+                VarTable = Modifs;
+                Selectedcomponents = Components.SelectedItem.ToString();
+                modifier = user;
+                lines = limit;
             }
         }
 
@@ -235,15 +288,20 @@ namespace macdoc
                 Modificateurs.SelectedItem == null || Limit.SelectedItem == null)
             {
                 Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy, machine_id, "Tout", "Tout", "Tout");
-
+                Selectedcomponents = "Tout";
+                modifier = "Tout";
+                lines = "Tout";
 
             }
             else
             {
                 limit = Limit.SelectedItem.ToString();
 
-                Modifs.DataSource = await DBHelper.FillArchiveModifications(orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
-
+                Modifs.DataSource =  await DBHelper.FillArchiveModifications(orderBy, machine_id, Components.SelectedItem.ToString(), user, limit);
+                VarTable = Modifs;
+                Selectedcomponents = Components.SelectedItem.ToString();
+                modifier = user;
+                lines = limit;
 
             }
         }
@@ -380,10 +438,691 @@ namespace macdoc
 
         }
 
+        private void excelToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            GenerateMachinesDocument(metroGrid1, "xlsx", Type.SelectedItem.ToString(),false);
+        }
+
+        private void wordToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            GenerateMachinesDocument(metroGrid1, "docx", Type.SelectedItem.ToString(),false);
+
+        }
+
+        private void pdfToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            GenerateMachinesDocument(metroGrid1, "pdf", "Tout" , true);
+
+        }
+
+        private void pdfToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            GeneratePdf(VarTable, machineName, machineRef, machineType, modifier, "pdf", Selectedcomponents, lines);
+
+        }
+
+        private void excelToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            GeneratePdf(VarTable, machineName, machineRef, machineType, modifier, "xlsx", Selectedcomponents, lines);
+
+        }
+
+        private void wordToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            GeneratePdf(VarTable, machineName, machineRef, machineType, modifier, "docx", Selectedcomponents, lines);
+
+        }
+
+        private void pdfToolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            GeneratePdf(AllModificationsTable, machineName, machineRef, machineType, modifier, "pdf", Selectedcomponents, lines);
+
+        }
+
+        private void excelToolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            GeneratePdf(AllModificationsTable, machineName, machineRef, machineType, modifier, "xlsx", Selectedcomponents, lines);
+
+        }
+
+        private void wordToolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            GeneratePdf(AllModificationsTable, machineName, machineRef, machineType, modifier, "docx", Selectedcomponents, lines);
+
+        }
+
+        private  void SearchMac_TextChanged(object sender, EventArgs e)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
+            {
+
+
+
+
+
+
+                string command = "select nom ,type , reference, date_installation as \"date d'installation\"  from machine" +
+                    "  where (nom like '" + SearchMac.Text.Trim() + "%' or reference like '" + SearchMac.Text.Trim() + "%') ;";
+
+
+                connection.Open();
+
+                try
+                {
+                    if (!Equals(SearchMac.Text, string.Empty))
+                    {
+                        Modifs.Refresh();
+                        SQLiteDataAdapter adapter = new SQLiteDataAdapter(command, connection);
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        metroGrid1.DataSource = dataTable;
+                    }
+                    else
+                    {
+                       DBHelper.SelectMachineByType(metroGrid1, Type.SelectedItem.ToString());
+
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Echec !" + ex.Message, "Ajout", MessageBoxButtons.OK);
+
+                }
+                connection.Close();
+            }
+
+        }
+
+        private void pDFToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            GenerateMachinesDocument(metroGrid1, "pdf", Type.SelectedItem.ToString(),false);
+        }
+
+        private void pdfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GenerateMachinesDocument(metroGrid1, "pdf", Type.SelectedItem.ToString(),false);
+
+        }
+
+        private void wordToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            GenerateMachinesDocument(metroGrid1, "docx", "Tout", true);
+
+        }
+
         private void metroGrid1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             SelectModifications();
 
         }
+        public void GeneratePdf(MetroGrid grid, string selected_machine,string MachineReference,
+            string selected_machineType,string modifier, string file,string Composants,string lines)
+        {
+            PdfPTable table = new PdfPTable(grid.ColumnCount);
+
+
+            PdfPCell pdfPCell = null;
+            Chunk glue = new Chunk(new VerticalPositionMark());
+
+            Document document = new Document(PageSize.A4, 0f, 0f, 0f, 0f);
+            document.SetMargins(20f, 20f, 20f, 20f);
+
+            string id = Guid.NewGuid().ToString();
+            string path = AppDomain.CurrentDomain.BaseDirectory + "MacDoc_file_" + id + ".pdf";
+
+
+            PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(path, FileMode.Create));
+
+            document.Open();
+
+            table.WidthPercentage = 100;
+            table.HorizontalAlignment = Element.ALIGN_LEFT;
+            iTextSharp.text.Font FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
+            BaseColor.BLACK);
+
+
+            #region Header
+
+            iTextSharp.text.Paragraph lineSeparator = new iTextSharp.text.Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator
+                (0.0F, 100.0F, BaseColor.BLACK,
+                Element.ALIGN_LEFT, 1)));
+
+            document.Add(lineSeparator);
+
+            document.Add(new iTextSharp.text.Paragraph(""));
+            iTextSharp.text.Image picture = iTextSharp.text.Image.GetInstance(AppDomain.CurrentDomain.BaseDirectory + "\\Logo.png");
+
+            picture.ScaleToFit(80f, 80f);
+            picture.Alignment = Element.ALIGN_LEFT;
+            picture.SpacingAfter = 1;
+
+            document.Add(picture);
+
+            document.Add(new Phrase("\t     MacDoc", FS));
+
+            document.Add(lineSeparator);
+
+            document.Add(new iTextSharp.text.Paragraph(""));
+
+
+
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            document.Add(new Phrase("Redigé le: " + DateTime.Now, FS));
+
+            document.Add(lineSeparator);
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            document.Add(new Phrase("Executant: " + "Steve", FS));
+
+
+            document.Add(lineSeparator); 
+            #endregion
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            #region Title
+
+            PdfPTable titleTable = new PdfPTable(1);
+            
+            Phrase title = new Phrase();
+            
+            FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
+            BaseColor.BLACK);
+            Chunk titleChunk = new Chunk("Liste des modifications", FS);
+
+            title.Add(titleChunk);
+            PdfPCell cell = new PdfPCell();
+            cell.HorizontalAlignment = Element.ALIGN_CENTER;
+            cell.Phrase = title;
+            titleTable.AddCell(cell);
+            document.Add(titleTable);
+            #endregion
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            #region Machine name and reference
+
+            Chunk machineTitle = new Chunk(selected_machine, FontFactory.GetFont("Calibri", 10,
+            BaseColor.BLACK));
+
+            Phrase machine_phrase = new Phrase();
+            Chunk machineT = new Chunk("Machine: ", FS);
+
+            machine_phrase.Add(machineT);
+
+
+            machine_phrase.Add(machineTitle);
+
+            machine_phrase.Add(glue);
+
+            FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
+            BaseColor.BLACK);
+
+            Chunk reference = new Chunk("Reference: ", FS);
+
+            machine_phrase.Add(reference);
+
+            FS = FontFactory.GetFont("Calibri", 10,
+          BaseColor.BLACK);
+
+            machine_phrase.Add(new Chunk(MachineReference, FS));
+
+
+
+            document.Add(machine_phrase); 
+            #endregion
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            #region MachineType
+            Phrase machineType = new Phrase();
+
+            FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
+           BaseColor.BLACK);
+
+            Chunk macType = new Chunk("Machine type: ", FS);
+            machineType.Add(macType);
+
+            FS = FontFactory.GetFont("Calibri", 10,
+         BaseColor.BLACK);
+
+            macType = new Chunk(selected_machineType, FS);
+
+            machineType.Add(macType);
+
+
+            document.Add(machineType);
+
+            #endregion
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+
+            #region Components
+            Phrase CompoType = new Phrase();
+
+            FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
+           BaseColor.BLACK);
+
+            Chunk CType = new Chunk("Composants: ", FS);
+
+            CompoType.Add(CType);
+
+            FS = FontFactory.GetFont("Calibri", 10,
+         BaseColor.BLACK);
+
+            CType = new Chunk(Composants, FS);
+
+            CompoType.Add(CType);
+            document.Add(CompoType); 
+            #endregion
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            #region Modifiers
+
+            Phrase Modificateur = new Phrase();
+
+            FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
+           BaseColor.BLACK);
+
+            Chunk ModifChunk = new Chunk("Modificateurs: ", FS);
+
+            Modificateur.Add(ModifChunk);
+
+            FS = FontFactory.GetFont("Calibri", 10,
+         BaseColor.BLACK);
+
+            ModifChunk = new Chunk(modifier, FS);
+
+            Modificateur.Add(ModifChunk);
+
+            document.Add(Modificateur);
+
+            #endregion
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            #region Lines
+
+            Phrase Lines = new Phrase();
+
+            FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
+           BaseColor.BLACK);
+
+            Chunk LineChunk = new Chunk("Lignes: ", FS);
+
+            Lines.Add(LineChunk);
+
+            FS = FontFactory.GetFont("Calibri", 10,
+         BaseColor.BLACK);
+
+            LineChunk = new Chunk(lines, FS);
+
+            Lines.Add(LineChunk);
+
+            document.Add(Lines);
+
+            #endregion
+
+            //table.SetWidths(new float[] { 20f, 150f, 100f});
+
+
+            #region Write table
+
+
+            FS = FontFactory.GetFont("Calibri", 10,
+           BaseColor.BLACK);
+
+            foreach (DataGridViewColumn header in grid.Columns)
+            {
+
+                pdfPCell = new PdfPCell(new Phrase(header.HeaderText, FS));
+                pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                table.AddCell(pdfPCell);
+
+            }
+
+
+            foreach (DataGridViewRow row in grid.Rows)
+            {
+                foreach (DataGridViewCell column in row.Cells)
+                {
+
+                    pdfPCell = new PdfPCell(new Phrase(column.Value.ToString(), FS));
+                    pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                    pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                    table.AddCell(pdfPCell);
+
+                }
+            }
+
+            #endregion
+
+
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+
+            Phrase phrase = new Phrase("Responsable: ", FS);
+            phrase.Add(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator
+                (0.0F, 40.0F, BaseColor.BLACK,
+                Element.ALIGN_LEFT, 1)));
+
+
+
+            document.Add(table);
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+            document.Add(new iTextSharp.text.Paragraph(""));
+
+
+            document.Add(phrase);
+
+            document.Close();
+            var doc = new Aspose.Words.Document(path);
+
+            switch (file.ToLower())
+            {
+
+                case "pdf":
+
+                    System.Diagnostics.Process.Start(path);
+
+                    break;
+                case "docx":
+
+                    doc.Save(AppDomain.CurrentDomain.BaseDirectory + "MacDoc_file_" + id + ".docx");
+                    File.Delete(path);
+                    System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "MacDoc_file_" + id + ".docx");
+
+
+                    break;
+                case "xlsx":
+                    using (XLWorkbook workbook = new XLWorkbook())
+                    {
+                        workbook.Worksheets.Add((DataTable)grid.DataSource, "Composants");
+                        workbook.SaveAs(AppDomain.CurrentDomain.BaseDirectory + "MacDoc_file_" + id + ".xlsx");
+                        System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "MacDoc_file_" + id + ".xlsx");
+                    }
+
+                    break;
+            }
+
+
+        }
+        public void GenerateMachinesDocument(MetroGrid grid, string file,string machineType,bool all)
+        {
+            PdfPTable table = new PdfPTable(grid.ColumnCount);
+
+
+            PdfPCell pdfPCell = null;
+            Chunk glue = new Chunk(new VerticalPositionMark());
+
+            Document document = new Document(PageSize.A4, 0f, 0f, 0f, 0f);
+            document.SetMargins(20f, 20f, 20f, 20f);
+
+            string id = Guid.NewGuid().ToString();
+            string path = AppDomain.CurrentDomain.BaseDirectory + "MacDoc_file_" + id + ".pdf";
+
+
+            PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(path, FileMode.Create));
+
+            document.Open();
+
+            table.WidthPercentage = 100;
+            table.HorizontalAlignment = Element.ALIGN_LEFT;
+            iTextSharp.text.Font FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
+            BaseColor.BLACK);
+
+
+            #region Header
+
+            iTextSharp.text.Paragraph lineSeparator = new iTextSharp.text.Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator
+                (0.0F, 100.0F, BaseColor.BLACK,
+                Element.ALIGN_LEFT, 1)));
+
+            document.Add(lineSeparator);
+
+            document.Add(new iTextSharp.text.Paragraph(""));
+            iTextSharp.text.Image picture = iTextSharp.text.Image.GetInstance(AppDomain.CurrentDomain.BaseDirectory + "\\Logo.png");
+
+            picture.ScaleToFit(80f, 80f);
+            picture.Alignment = Element.ALIGN_LEFT;
+            picture.SpacingAfter = 1;
+
+            document.Add(picture);
+
+            document.Add(new Phrase("\t     MacDoc", FS));
+
+            document.Add(lineSeparator);
+
+            document.Add(new iTextSharp.text.Paragraph(""));
+
+
+
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            document.Add(new Phrase("Redigé le: " + DateTime.Now, FS));
+
+            document.Add(lineSeparator);
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            document.Add(new Phrase("Executant: " + "Steve", FS));
+
+
+            document.Add(lineSeparator);
+            #endregion
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            #region Title
+
+            PdfPTable titleTable = new PdfPTable(1);
+
+            Phrase title = new Phrase();
+
+            FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
+            BaseColor.BLACK);
+            Chunk titleChunk = new Chunk("Liste des machines", FS);
+
+            title.Add(titleChunk);
+            PdfPCell cell = new PdfPCell();
+            cell.HorizontalAlignment = Element.ALIGN_CENTER;
+            cell.Phrase = title;
+            titleTable.AddCell(cell);
+            document.Add(titleTable);
+            #endregion
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            #region MachineType
+            Phrase machineTypePhrase = new Phrase();
+
+            FS = FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
+           BaseColor.BLACK);
+
+            Chunk macType = new Chunk("Machine type: ", FS);
+            machineTypePhrase.Add(macType);
+
+            FS = FontFactory.GetFont("Calibri", 10,
+         BaseColor.BLACK);
+
+            macType = new Chunk(machineType, FS);
+
+            machineTypePhrase.Add(macType);
+
+
+            document.Add(machineTypePhrase);
+
+            #endregion
+
+            //table.SetWidths(new float[] { 20f, 150f, 100f});
+
+            #region Write table
+
+
+            FS = FontFactory.GetFont("Calibri", 10,
+           BaseColor.BLACK);
+
+            if (all)
+            {
+                
+
+                Phrase TypePhrase;
+                iTextSharp.text.Font F;
+                Chunk machineTypeChunk = new Chunk("Machine type: ", FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
+                   BaseColor.BLACK));
+                MetroGrid grid1;
+
+                foreach (object item in Type.Items)
+                {
+                    PdfPTable table1 = new PdfPTable(grid.ColumnCount);
+                    table1.WidthPercentage = 100;
+                    table1.HorizontalAlignment = Element.ALIGN_LEFT;
+
+                    document.Add(new iTextSharp.text.Paragraph("\n"));
+
+                    TypePhrase = new Phrase();
+
+                    machineTypeChunk = new Chunk("Machine type: ", FontFactory.GetFont("Calibri", 12, iTextSharp.text.Font.BOLD,
+                   BaseColor.BLACK));
+
+                    TypePhrase.Add(machineTypeChunk);
+
+                      
+                    F = FontFactory.GetFont("Calibri", 10,
+                 BaseColor.BLACK);
+
+                    machineTypeChunk = new Chunk(item.ToString(), FS);
+
+                    TypePhrase.Add(machineTypeChunk);
+
+
+                    document.Add(TypePhrase);
+
+                    grid1 = grid;
+
+                    DBHelper.SelectMachineByType(grid1, item.ToString());
+
+                    foreach (DataGridViewColumn header in grid1.Columns)
+                    {
+
+                        pdfPCell = new PdfPCell(new Phrase(header.HeaderText, F));
+                        pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                        pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                        table1.AddCell(pdfPCell);
+
+                    }
+
+
+                    foreach (DataGridViewRow row in grid1.Rows)
+                    {
+                        foreach (DataGridViewCell column in row.Cells)
+                        {
+
+                            pdfPCell = new PdfPCell(new Phrase(column.Value.ToString(), F));
+                            pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                            pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                            table1.AddCell(pdfPCell);
+
+                        }
+                    }
+
+                    document.Add(table1);
+
+                }
+            }
+            else
+            {
+                foreach (DataGridViewColumn header in grid.Columns)
+                {
+
+                    pdfPCell = new PdfPCell(new Phrase(header.HeaderText, FS));
+                    pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                    pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                    table.AddCell(pdfPCell);
+
+                }
+
+
+                foreach (DataGridViewRow row in grid.Rows)
+                {
+                    foreach (DataGridViewCell column in row.Cells)
+                    {
+
+                        pdfPCell = new PdfPCell(new Phrase(column.Value.ToString(), FS));
+                        pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                        pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                        table.AddCell(pdfPCell);
+
+                    }
+                }
+                document.Add(table);
+
+            }
+            #endregion
+
+
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+
+            Phrase phrase = new Phrase("Responsable: ", FS);
+            phrase.Add(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator
+                (0.0F, 40.0F, BaseColor.BLACK,
+                Element.ALIGN_LEFT, 1)));
+
+
+
+            document.Add(table);
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+            document.Add(new iTextSharp.text.Paragraph(""));
+
+
+            document.Add(phrase);
+
+            document.Close();
+            var doc = new Aspose.Words.Document(path);
+
+            switch (file.ToLower())
+            {
+
+                case "pdf":
+
+                    System.Diagnostics.Process.Start(path);
+
+                    break;
+                case "docx":
+
+                    doc.Save(AppDomain.CurrentDomain.BaseDirectory + "MacDoc_file_" + id + ".docx");
+                    File.Delete(path);
+                    System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "MacDoc_file_" + id + ".docx");
+
+
+                    break;
+                case "xlsx":
+                    using (XLWorkbook workbook = new XLWorkbook())
+                    {
+                        workbook.Worksheets.Add((DataTable)grid.DataSource, "Machine");
+                        workbook.SaveAs(AppDomain.CurrentDomain.BaseDirectory + "MacDoc_file_" + id + ".xlsx");
+                        System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "MacDoc_file_" + id + ".xlsx");
+                    }
+
+                    break;
+            }
+
+        }
+
     }
 }

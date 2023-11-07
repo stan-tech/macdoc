@@ -76,14 +76,22 @@ namespace macdoc
             machine = MacName.Text;
 
 
-            last_id = DBHelper.InsertMachine(machine, SelectedType, Ref.Text, datepicker.Value.ToString()
-               , component);
-            
-            if(last_id!="0")
+            if (!(MacName.Text =="" || Ref.Text == "" || TypeCom.SelectedItem ==null) )
             {
+                last_id = DBHelper.InsertMachine(machine, SelectedType, Ref.Text, datepicker.Value.ToString()
+                      , component);
 
-                empty = false;
-                Added = true;
+                if (last_id != "0")
+                {
+
+                    empty = false;
+                    Added = true;
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Echec ! , Veuillez remplisser tout les champs", "Ajout", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
         }
@@ -325,11 +333,13 @@ namespace macdoc
 
         public void AjouterMachine_Load(object sender, EventArgs e)
         {
+            datepicker.Value = DateTime.Now;
             CompNum.Text = Compos.RowCount.ToString(); 
         }
 
         public void caps_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Composants.Text = caps.SelectedItem.ToString();
             component = caps.SelectedItem.ToString().Substring(0, caps.SelectedItem.ToString().Length - 1);
             FillGrid(component);
             CompNum.Text  = Compos.RowCount.ToString(); 

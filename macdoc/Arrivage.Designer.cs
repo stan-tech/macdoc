@@ -61,6 +61,7 @@
             this.cap_vie = new Guna.UI2.WinForms.Guna2ComboBox();
             this.dureeDeVie = new macdoc.RoundedTextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Compos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -120,7 +121,7 @@
             this.caps.Font = new System.Drawing.Font("Segoe UI", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.caps.ForeColor = System.Drawing.Color.Black;
             this.caps.HoverState.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.caps.ItemHeight = 30;
+            this.caps.ItemHeight = 48;
             this.caps.Items.AddRange(new object[] {
             "Capteur",
             "Moteur",
@@ -129,11 +130,11 @@
             "Courroie"});
             this.caps.ItemsAppearance.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
             this.caps.ItemsAppearance.SelectedFont = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.caps.Location = new System.Drawing.Point(266, 139);
+            this.caps.Location = new System.Drawing.Point(317, 139);
             this.caps.MaxDropDownItems = 28;
             this.caps.Name = "caps";
             this.caps.ShadowDecoration.BorderRadius = 8;
-            this.caps.Size = new System.Drawing.Size(319, 36);
+            this.caps.Size = new System.Drawing.Size(319, 54);
             this.caps.TabIndex = 71;
             this.caps.SelectedIndexChanged += new System.EventHandler(this.caps_SelectedIndexChanged);
             // 
@@ -182,17 +183,17 @@
             this.unit.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
             this.unit.ForeColor = System.Drawing.Color.Black;
             this.unit.HoverState.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.unit.ItemHeight = 30;
+            this.unit.ItemHeight = 48;
             this.unit.Items.AddRange(new object[] {
             "Litre",
             "Unité"});
             this.unit.ItemsAppearance.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
             this.unit.ItemsAppearance.SelectedFont = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.unit.Location = new System.Drawing.Point(301, 467);
+            this.unit.Location = new System.Drawing.Point(352, 457);
             this.unit.MaxDropDownItems = 28;
             this.unit.Name = "unit";
             this.unit.ShadowDecoration.BorderRadius = 8;
-            this.unit.Size = new System.Drawing.Size(284, 36);
+            this.unit.Size = new System.Drawing.Size(284, 54);
             this.unit.TabIndex = 71;
             // 
             // label1
@@ -200,7 +201,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(43, 467);
+            this.label1.Location = new System.Drawing.Point(43, 461);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(109, 50);
             this.label1.TabIndex = 65;
@@ -369,7 +370,7 @@
             this.CapRef.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.CapRef.ForeColor = System.Drawing.Color.Black;
             this.CapRef.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CapRef.Location = new System.Drawing.Point(232, 348);
+            this.CapRef.Location = new System.Drawing.Point(283, 348);
             this.CapRef.Margin = new System.Windows.Forms.Padding(5);
             this.CapRef.Name = "CapRef";
             this.CapRef.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
@@ -378,6 +379,7 @@
             this.CapRef.SelectedText = "";
             this.CapRef.Size = new System.Drawing.Size(356, 60);
             this.CapRef.TabIndex = 67;
+            this.CapRef.TextOffset = new System.Drawing.Point(10, -2);
             // 
             // CapName
             // 
@@ -392,7 +394,7 @@
             this.CapName.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.CapName.ForeColor = System.Drawing.Color.Black;
             this.CapName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CapName.Location = new System.Drawing.Point(232, 233);
+            this.CapName.Location = new System.Drawing.Point(283, 233);
             this.CapName.Margin = new System.Windows.Forms.Padding(5);
             this.CapName.Name = "CapName";
             this.CapName.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
@@ -401,6 +403,7 @@
             this.CapName.SelectedText = "";
             this.CapName.Size = new System.Drawing.Size(356, 60);
             this.CapName.TabIndex = 68;
+            this.CapName.TextOffset = new System.Drawing.Point(10, -2);
             // 
             // price_unit
             // 
@@ -424,6 +427,7 @@
             this.price_unit.SelectedText = "";
             this.price_unit.Size = new System.Drawing.Size(316, 50);
             this.price_unit.TabIndex = 58;
+            this.price_unit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.price_unit.TextOffset = new System.Drawing.Point(10, -2);
             this.price_unit.TextChanged += new System.EventHandler(this.price_unit_TextChanged);
             this.price_unit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.price_unit_KeyPress);
@@ -552,7 +556,7 @@
             // 
             this.dureeDeVie.Animated = true;
             this.dureeDeVie.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.dureeDeVie.DefaultText = "";
+            this.dureeDeVie.DefaultText = "1";
             this.dureeDeVie.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
             this.dureeDeVie.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.dureeDeVie.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
@@ -561,15 +565,16 @@
             this.dureeDeVie.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.dureeDeVie.ForeColor = System.Drawing.Color.Black;
             this.dureeDeVie.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.dureeDeVie.Location = new System.Drawing.Point(260, 769);
+            this.dureeDeVie.Location = new System.Drawing.Point(266, 769);
             this.dureeDeVie.Margin = new System.Windows.Forms.Padding(5);
             this.dureeDeVie.Name = "dureeDeVie";
             this.dureeDeVie.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
             this.dureeDeVie.PasswordChar = '\0';
             this.dureeDeVie.PlaceholderText = "";
             this.dureeDeVie.SelectedText = "";
-            this.dureeDeVie.Size = new System.Drawing.Size(165, 57);
+            this.dureeDeVie.Size = new System.Drawing.Size(159, 57);
             this.dureeDeVie.TabIndex = 84;
+            this.dureeDeVie.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label10
             // 
@@ -581,6 +586,18 @@
             this.label10.Size = new System.Drawing.Size(227, 50);
             this.label10.TabIndex = 83;
             this.label10.Text = "Durée de vie";
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.White;
+            this.label11.Location = new System.Drawing.Point(743, 25);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(300, 50);
+            this.label11.TabIndex = 66;
+            this.label11.Text = "Nouvel arrivage";
             // 
             // Arrivage
             // 
@@ -607,6 +624,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label4);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label3);
@@ -655,5 +673,6 @@
         private Guna.UI2.WinForms.Guna2ComboBox cap_vie;
         private RoundedTextBox dureeDeVie;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
     }
 }

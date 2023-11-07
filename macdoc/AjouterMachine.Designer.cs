@@ -62,11 +62,11 @@
             // Composants
             // 
             this.Composants.AutoSize = true;
-            this.Composants.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.Composants.Font = new System.Drawing.Font("Segoe UI", 15F);
             this.Composants.ForeColor = System.Drawing.Color.White;
-            this.Composants.Location = new System.Drawing.Point(416, 389);
+            this.Composants.Location = new System.Drawing.Point(403, 278);
             this.Composants.Name = "Composants";
-            this.Composants.Size = new System.Drawing.Size(158, 45);
+            this.Composants.Size = new System.Drawing.Size(181, 54);
             this.Composants.TabIndex = 30;
             this.Composants.Text = "Capteurs";
             // 
@@ -111,7 +111,7 @@
             this.Compos.EnableHeadersVisualStyles = false;
             this.Compos.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.Compos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.Compos.Location = new System.Drawing.Point(412, 450);
+            this.Compos.Location = new System.Drawing.Point(412, 349);
             this.Compos.Name = "Compos";
             this.Compos.ReadOnly = true;
             this.Compos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -127,7 +127,7 @@
             this.Compos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.Compos.RowTemplate.Height = 33;
             this.Compos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.Compos.Size = new System.Drawing.Size(1562, 856);
+            this.Compos.Size = new System.Drawing.Size(1562, 957);
             this.Compos.Style = MetroFramework.MetroColorStyle.Silver;
             this.Compos.TabIndex = 29;
             // 
@@ -136,7 +136,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(1447, 339);
+            this.label1.Location = new System.Drawing.Point(1447, 237);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(211, 45);
             this.label1.TabIndex = 32;
@@ -159,7 +159,7 @@
             "Reducteurs",
             "Vérins",
             "Courroies"});
-            this.caps.Location = new System.Drawing.Point(1455, 398);
+            this.caps.Location = new System.Drawing.Point(1455, 296);
             this.caps.Name = "caps";
             this.caps.Size = new System.Drawing.Size(317, 36);
             this.caps.TabIndex = 31;
@@ -170,7 +170,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(956, 44);
+            this.label2.Location = new System.Drawing.Point(988, 44);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(94, 45);
             this.label2.TabIndex = 36;
@@ -181,7 +181,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(25, 45);
+            this.label3.Location = new System.Drawing.Point(37, 45);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(94, 45);
             this.label3.TabIndex = 37;
@@ -192,7 +192,7 @@
             this.date.AutoSize = true;
             this.date.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
             this.date.ForeColor = System.Drawing.Color.White;
-            this.date.Location = new System.Drawing.Point(12, 222);
+            this.date.Location = new System.Drawing.Point(673, 248);
             this.date.Name = "date";
             this.date.Size = new System.Drawing.Size(303, 45);
             this.date.TabIndex = 42;
@@ -207,7 +207,7 @@
             this.datepicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.datepicker.HoverState.BorderColor = System.Drawing.Color.Transparent;
             this.datepicker.HoverState.FillColor = System.Drawing.Color.GreenYellow;
-            this.datepicker.Location = new System.Drawing.Point(20, 275);
+            this.datepicker.Location = new System.Drawing.Point(668, 296);
             this.datepicker.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.datepicker.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.datepicker.Name = "datepicker";
@@ -242,7 +242,7 @@
             this.Voir.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.Voir.IconSize = 40;
             this.Voir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Voir.Location = new System.Drawing.Point(964, 360);
+            this.Voir.Location = new System.Drawing.Point(1118, 258);
             this.Voir.Name = "Voir";
             this.Voir.Padding = new System.Windows.Forms.Padding(15, 10, 0, 10);
             this.Voir.Size = new System.Drawing.Size(264, 74);
@@ -266,10 +266,10 @@
             this.Addfile.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.Addfile.IconSize = 40;
             this.Addfile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Addfile.Location = new System.Drawing.Point(12, 450);
+            this.Addfile.Location = new System.Drawing.Point(24, 349);
             this.Addfile.Name = "Addfile";
             this.Addfile.Padding = new System.Windows.Forms.Padding(15, 10, 0, 10);
-            this.Addfile.Size = new System.Drawing.Size(325, 74);
+            this.Addfile.Size = new System.Drawing.Size(354, 84);
             this.Addfile.TabIndex = 47;
             this.Addfile.Tag = "Triage";
             this.Addfile.Text = "Ajouter un manuel";
@@ -306,7 +306,7 @@
             this.CompNum.BackColor = System.Drawing.Color.DarkTurquoise;
             this.CompNum.Font = new System.Drawing.Font("Lucida Console", 15.125F, System.Drawing.FontStyle.Bold);
             this.CompNum.ForeColor = System.Drawing.Color.Black;
-            this.CompNum.Location = new System.Drawing.Point(1894, 354);
+            this.CompNum.Location = new System.Drawing.Point(1894, 237);
             this.CompNum.Name = "CompNum";
             this.CompNum.Size = new System.Drawing.Size(80, 80);
             this.CompNum.TabIndex = 41;
@@ -327,7 +327,7 @@
             this.MacName.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.MacName.ForeColor = System.Drawing.Color.Black;
             this.MacName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.MacName.Location = new System.Drawing.Point(17, 94);
+            this.MacName.Location = new System.Drawing.Point(32, 95);
             this.MacName.Margin = new System.Windows.Forms.Padding(5);
             this.MacName.Name = "MacName";
             this.MacName.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
@@ -400,7 +400,7 @@
             "Accoppiatore",
             "Extra-pack",
             "Maxi-pack"});
-            this.TypeCom.Location = new System.Drawing.Point(964, 103);
+            this.TypeCom.Location = new System.Drawing.Point(996, 103);
             this.TypeCom.Name = "TypeCom";
             this.TypeCom.Size = new System.Drawing.Size(317, 36);
             this.TypeCom.TabIndex = 35;
@@ -417,9 +417,9 @@
             this.AjouCour.IconColor = System.Drawing.Color.WhiteSmoke;
             this.AjouCour.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.AjouCour.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.AjouCour.Location = new System.Drawing.Point(12, 1213);
+            this.AjouCour.Location = new System.Drawing.Point(24, 1222);
             this.AjouCour.Name = "AjouCour";
-            this.AjouCour.Size = new System.Drawing.Size(346, 84);
+            this.AjouCour.Size = new System.Drawing.Size(354, 84);
             this.AjouCour.TabIndex = 34;
             this.AjouCour.Tag = "Ajouter une machine";
             this.AjouCour.Text = "Ajouter une courroie";
@@ -438,9 +438,9 @@
             this.ajouver.IconColor = System.Drawing.Color.WhiteSmoke;
             this.ajouver.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ajouver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ajouver.Location = new System.Drawing.Point(12, 1069);
+            this.ajouver.Location = new System.Drawing.Point(24, 1042);
             this.ajouver.Name = "ajouver";
-            this.ajouver.Size = new System.Drawing.Size(346, 84);
+            this.ajouver.Size = new System.Drawing.Size(354, 84);
             this.ajouver.TabIndex = 34;
             this.ajouver.Tag = "Ajouter une machine";
             this.ajouver.Text = "Ajouter un vérin";
@@ -459,9 +459,9 @@
             this.Ajoured.IconColor = System.Drawing.Color.WhiteSmoke;
             this.Ajoured.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.Ajoured.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Ajoured.Location = new System.Drawing.Point(12, 916);
+            this.Ajoured.Location = new System.Drawing.Point(24, 862);
             this.Ajoured.Name = "Ajoured";
-            this.Ajoured.Size = new System.Drawing.Size(346, 84);
+            this.Ajoured.Size = new System.Drawing.Size(354, 84);
             this.Ajoured.TabIndex = 34;
             this.Ajoured.Tag = "Ajouter une machine";
             this.Ajoured.Text = "Ajouter un Reducteur";
@@ -480,9 +480,9 @@
             this.Ajoumot.IconColor = System.Drawing.Color.WhiteSmoke;
             this.Ajoumot.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.Ajoumot.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Ajoumot.Location = new System.Drawing.Point(12, 754);
+            this.Ajoumot.Location = new System.Drawing.Point(21, 682);
             this.Ajoumot.Name = "Ajoumot";
-            this.Ajoumot.Size = new System.Drawing.Size(346, 84);
+            this.Ajoumot.Size = new System.Drawing.Size(354, 84);
             this.Ajoumot.TabIndex = 34;
             this.Ajoumot.Tag = "Ajouter un moteur";
             this.Ajoumot.Text = "Ajouter un moteur";
@@ -501,9 +501,9 @@
             this.Ajout_button.IconColor = System.Drawing.Color.WhiteSmoke;
             this.Ajout_button.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.Ajout_button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Ajout_button.Location = new System.Drawing.Point(12, 602);
+            this.Ajout_button.Location = new System.Drawing.Point(24, 502);
             this.Ajout_button.Name = "Ajout_button";
-            this.Ajout_button.Size = new System.Drawing.Size(346, 84);
+            this.Ajout_button.Size = new System.Drawing.Size(354, 84);
             this.Ajout_button.TabIndex = 34;
             this.Ajout_button.Tag = "Ajouter une machine";
             this.Ajout_button.Text = "Ajouter un capteur";

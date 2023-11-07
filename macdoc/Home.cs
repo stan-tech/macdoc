@@ -36,6 +36,8 @@ using Spire.Pdf.Tables;
 using static DevExpress.Utils.Svg.CommonSvgImages;
 using iTextSharp.text.pdf.draw;
 using System.Timers;
+using static Infragistics.Shared.DynamicResourceString;
+using ClosedXML.Excel;
 
 namespace macdoc
 {
@@ -756,9 +758,11 @@ namespace macdoc
            
         }
 
-        public void GeneratePdf(MetroGrid grid,string selected_machine)
+        public void GeneratePdf(MetroGrid grid,string selected_machine,string file)
         {
             PdfPTable table = new PdfPTable(grid.ColumnCount);
+                        
+
             PdfPCell pdfPCell = null;
             Chunk glue = new Chunk(new VerticalPositionMark());
 
@@ -766,10 +770,9 @@ namespace macdoc
             document.SetMargins(20f, 20f, 20f, 20f);
 
             string id = Guid.NewGuid().ToString();
-
             string path = AppDomain.CurrentDomain.BaseDirectory + "MacDoc_file_" + id + ".pdf";
 
-
+      
             PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(path, FileMode.Create));
 
             document.Open();
@@ -813,7 +816,7 @@ namespace macdoc
 
             document.Add(new iTextSharp.text.Paragraph("\n"));
 
-            document.Add(new Phrase("Executant: " + "Aymen", FS));
+            document.Add(new Phrase("Executant: " + "Steve", FS));
 
 
             document.Add(lineSeparator);
@@ -913,11 +916,12 @@ namespace macdoc
 
             }
 
+
             foreach (DataGridViewRow row in grid.Rows)
             {
                 foreach (DataGridViewCell column in row.Cells)
                 {
-
+                    
                     pdfPCell = new PdfPCell(new Phrase(column.Value.ToString(), FS));
                     pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
                     pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
@@ -949,13 +953,44 @@ namespace macdoc
             document.Add(phrase);
 
             document.Close();
+            var doc = new Aspose.Words.Document(path);
+
+            switch (file.ToLower())
+            {
+
+                case "pdf":
+
+                    System.Diagnostics.Process.Start(path);
+
+                    break;
+                case "docx":
+
+                    doc.Save(AppDomain.CurrentDomain.BaseDirectory + "MacDoc_file_" + id + ".docx");
+                    File.Delete(path);
+                    System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "MacDoc_file_" + id + ".docx");
 
 
-            System.Diagnostics.Process.Start(path);
+                    break;
+                case "xlsx":
+                    using (XLWorkbook workbook = new XLWorkbook())
+                    {
+                        workbook.Worksheets.Add((DataTable)grid.DataSource,"Composants");
+                       workbook.SaveAs( AppDomain.CurrentDomain.BaseDirectory + "MacDoc_file_" + id + ".xlsx");
+                        System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "MacDoc_file_" + id + ".xlsx");
+                    }
+                      
+                    break;
+            }
 
 
         }
+        public void GenerateExcel(RoundedGrid grid, string selected_machine)
+        {
+            
 
+            
+
+        }
 
         private void MaintenanceNotif_BalloonTipClicked(object sender, EventArgs e)
         {
@@ -990,12 +1025,10 @@ namespace macdoc
             Component comp = new Component(name, refn,DateTime.Parse(inst), DateTime.Parse(modif), num_modif,true) ;
             comp.ID = int.Parse(id);
             comp.Type = selected_component;
-            ;
-            Modifier_composant modifier = null;
-
+            
             try
             {
-                modifier = new Modifier_composant(comp);
+                Modifier_composant  modifier = new Modifier_composant(comp);
                 modifier.cap_Changed += CapChanged;
                 modifier.ShowDialog();
 
@@ -1043,7 +1076,7 @@ namespace macdoc
 
                     string sqlcommand = "select component.id, component.nom , component.reference , date_insertion as \"date d'insertion\", date_modification as \"date " +
                                       "de modification\" , life_duration as \"durée de vie\" , num_modification as \"nombre de modifications \" , machine.nom,machine.reference from" +
-                                      " component inner join machine on machine.id = component.id_machine ;";
+                                      " component inner join machine on machine.id = component.id_machine where inserted = 1 ;";
                     SQLiteCommand cmd = new SQLiteCommand(sqlcommand, conn);
 
                     SQLiteDataReader reader = cmd.ExecuteReader();
@@ -1061,12 +1094,12 @@ namespace macdoc
                         component.MachineName = reader.GetString(7);
                         component.MachineRef = reader.GetString(8);
 
-                        if (reader.GetString(5).Contains("Jours"))
+                       /* if (reader.GetString(5).Contains("Jours"))
                         {
                             if (component.Date_modification.AddDays(double.Parse(reader.GetString(5).Replace("Jours", "").Trim())) <= DateTime.Now.Date)
                                 componentsToModifiy.Add(component);
                         }
-                        else if (reader.GetString(5).Contains("Mois"))
+                        else*/ if (reader.GetString(5).Contains("Mois"))
                         {
                             if (component.Date_modification.AddMonths(int.Parse(reader.GetString(5).Replace("Mois", "").Trim())) <= DateTime.Now.Date)
                                 componentsToModifiy.Add(component);
@@ -1076,11 +1109,11 @@ namespace macdoc
                             if (component.Date_modification.AddDays(Math.Round(double.Parse(reader.GetString(5).Replace("Semaines", "").Trim()) * 7)) <= DateTime.Now.Date)
                                 componentsToModifiy.Add(component);
                         }
-                        else
+                      /*  else
                         {
                             if (component.Date_modification.AddYears(int.Parse(reader.GetString(5).Replace("Jours", "").Trim())) <= DateTime.Now.Date)
                                 componentsToModifiy.Add(component);
-                        }
+                        }*/
 
 
 
@@ -1144,7 +1177,21 @@ namespace macdoc
         {
             string S = machineCombo.SelectedItem.ToString();
 
-            Task.Run(() => { GeneratePdf(metroGrid1, S); });
+            Task.Run(() => { GeneratePdf(metroGrid1, S,"pdf"); });
+        }
+
+        private void Word_Click(object sender, EventArgs e)
+        {
+            string S = machineCombo.SelectedItem.ToString();
+
+            Task.Run(() => { GeneratePdf(metroGrid1, S, "docx"); });
+        }
+
+        private void Excel_Click(object sender, EventArgs e)
+        {
+            string S = machineCombo.SelectedItem.ToString();
+
+            Task.Run(() => { GeneratePdf(metroGrid1, S, "xlsx"); });
         }
     }
 }

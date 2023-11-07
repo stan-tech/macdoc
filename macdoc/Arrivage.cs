@@ -22,6 +22,7 @@ namespace macdoc
         public EventHandler added;
         bool allowChangeType ;
         Dictionary<string, double> prices= new Dictionary<string, double>();
+        string name, reference;
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
@@ -42,9 +43,26 @@ namespace macdoc
             this.allowChangeType = allowChangeType;
 
         }
+        public string Name
+        {
+            get { return this.name; }
+           set {this.name = value; }
+
+        }
+        public string Reference
+        {
+            get { return this.reference; }
+            set { this.reference = value; }
+
+        }
 
         private void Arrivage_Load(object sender, EventArgs e)
         {
+            if(name!= null && reference != null){
+                CapName.Text = name;
+                CapRef.Text = reference;
+                
+            }
             cap_vie.SelectedIndex = 0;
             switch(selected_component)
             {
@@ -92,7 +110,7 @@ namespace macdoc
                 DateTime.MinValue, DateTime.MinValue, 0, false);
                 component.Price = price_unit.Text;
                 component.Type = selected_component;
-                 component.Quantity = int.Parse(Qt.Text);
+                component.Quantity = int.Parse(Qt.Text);
                 component.Life_duration = dureeDeVie.Text + " " + cap_vie.SelectedItem.ToString();
 
             string unit_ = unit.SelectedItem.ToString();
@@ -171,15 +189,13 @@ namespace macdoc
                     try
                     {
 
-                        string com = "select unit , price_ from component_store where type = '"
+                        string com = "select unit , MAX(price_) from component_store where type = '"
                             + selected_component + "'; ";
                         SQLiteCommand cmd = new SQLiteCommand(com, conn);
                         SQLiteDataReader reader = cmd.ExecuteReader();
                         if (reader.Read())
                         {
-                           
-                          
-                                    unit.SelectedIndex =( reader.GetString(0) == "Unit") ? 1 :  0;
+                           unit.SelectedIndex =( reader.GetString(0) == "Unit") ? 1 :  0;
 
 
                             price_unit.Text = reader.GetDouble(1).ToString();

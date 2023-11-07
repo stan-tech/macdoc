@@ -1,6 +1,6 @@
 ﻿namespace macdoc
 {
-    partial class Test
+    partial class SplashScreen
     {
         /// <summary>
         /// Required designer variable.
@@ -28,18 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // Test
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "Test";
-            this.Text = "Test";
-            this.Load += new System.EventHandler(this.Test_Load);
-            this.ResumeLayout(false);
-
+            this.Text = "SplashScreen";
         }
 
         #endregion

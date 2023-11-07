@@ -60,12 +60,12 @@ namespace macdoc
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Zeroit.Framework.Transitions.AnimatorWithEditor.ZeroitAnimate_Animation zeroitAnimate_Animation1 = new Zeroit.Framework.Transitions.AnimatorWithEditor.ZeroitAnimate_Animation();
+            Zeroit.Framework.Transitions.AnimatorWithEditor.ZeroitAnimate_Animation zeroitAnimate_Animation2 = new Zeroit.Framework.Transitions.AnimatorWithEditor.ZeroitAnimate_Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Tri = new FontAwesome.Sharp.IconButton();
             this.comboBoxes = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
@@ -99,11 +99,11 @@ namespace macdoc
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.MenuButton = new FontAwesome.Sharp.IconButton();
+            this.MenuButton = new macdoc.RoundedButton();
             this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.iconButton5 = new FontAwesome.Sharp.IconButton();
-            this.iconButton4 = new FontAwesome.Sharp.IconButton();
+            this.Excel = new FontAwesome.Sharp.IconButton();
+            this.Word = new FontAwesome.Sharp.IconButton();
             this.PDF = new FontAwesome.Sharp.IconButton();
             this.Palettiseur = new FontAwesome.Sharp.IconButton();
             this.accoppiatore = new FontAwesome.Sharp.IconButton();
@@ -511,7 +511,7 @@ namespace macdoc
             this.Profile.Location = new System.Drawing.Point(14, 136);
             this.Profile.Name = "Profile";
             this.Profile.Padding = new System.Windows.Forms.Padding(10);
-            this.Profile.Size = new System.Drawing.Size(69, 72);
+            this.Profile.Size = new System.Drawing.Size(83, 77);
             this.Profile.TabIndex = 10;
             this.Profile.Tag = "Synthesis";
             this.Profile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -592,23 +592,23 @@ namespace macdoc
             // 
             this.zeroitAnimatorEdit1.AnimationType = Zeroit.Framework.Transitions.AnimatorWithEditor.AnimationType.Transparent;
             this.zeroitAnimatorEdit1.Cursor = null;
-            zeroitAnimate_Animation1.AnimateOnlyDifferences = true;
-            zeroitAnimate_Animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation1.BlindCoeff")));
-            zeroitAnimate_Animation1.LeafCoeff = 0F;
-            zeroitAnimate_Animation1.MaxTime = 1F;
-            zeroitAnimate_Animation1.MinTime = 0F;
-            zeroitAnimate_Animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation1.MosaicCoeff")));
-            zeroitAnimate_Animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation1.MosaicShift")));
-            zeroitAnimate_Animation1.MosaicSize = 0;
-            zeroitAnimate_Animation1.Padding = new System.Windows.Forms.Padding(0);
-            zeroitAnimate_Animation1.RotateCoeff = 0F;
-            zeroitAnimate_Animation1.RotateLimit = 0F;
-            zeroitAnimate_Animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation1.ScaleCoeff")));
-            zeroitAnimate_Animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation1.SlideCoeff")));
-            zeroitAnimate_Animation1.TimeCoeff = 0F;
-            zeroitAnimate_Animation1.TransparencyCoeff = 1F;
-            this.zeroitAnimatorEdit1.DefaultAnimation = zeroitAnimate_Animation1;
-            this.zeroitAnimatorEdit1.Editor = new Zeroit.Framework.Transitions.AnimationEditors.AnimateInput(Zeroit.Framework.Transitions.AnimatorWithEditor.AnimationType.Transparent, 30, 1689, 150, 300, zeroitAnimate_Animation1, this.Syn_types, 0, new decimal(new int[] {
+            zeroitAnimate_Animation2.AnimateOnlyDifferences = true;
+            zeroitAnimate_Animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation2.BlindCoeff")));
+            zeroitAnimate_Animation2.LeafCoeff = 0F;
+            zeroitAnimate_Animation2.MaxTime = 1F;
+            zeroitAnimate_Animation2.MinTime = 0F;
+            zeroitAnimate_Animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation2.MosaicCoeff")));
+            zeroitAnimate_Animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation2.MosaicShift")));
+            zeroitAnimate_Animation2.MosaicSize = 0;
+            zeroitAnimate_Animation2.Padding = new System.Windows.Forms.Padding(0);
+            zeroitAnimate_Animation2.RotateCoeff = 0F;
+            zeroitAnimate_Animation2.RotateLimit = 0F;
+            zeroitAnimate_Animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation2.ScaleCoeff")));
+            zeroitAnimate_Animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("zeroitAnimate_Animation2.SlideCoeff")));
+            zeroitAnimate_Animation2.TimeCoeff = 0F;
+            zeroitAnimate_Animation2.TransparencyCoeff = 1F;
+            this.zeroitAnimatorEdit1.DefaultAnimation = zeroitAnimate_Animation2;
+            this.zeroitAnimatorEdit1.Editor = new Zeroit.Framework.Transitions.AnimationEditors.AnimateInput(Zeroit.Framework.Transitions.AnimatorWithEditor.AnimationType.Transparent, 30, 1689, 150, 300, zeroitAnimate_Animation2, this.Syn_types, 0, new decimal(new int[] {
                 0,
                 0,
                 0,
@@ -628,9 +628,9 @@ namespace macdoc
             this.metroGrid1.AllowUserToOrderColumns = true;
             this.metroGrid1.AllowUserToResizeColumns = false;
             this.metroGrid1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Gray;
-            this.metroGrid1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Gray;
+            this.metroGrid1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.metroGrid1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -640,25 +640,25 @@ namespace macdoc
             this.metroGrid1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.metroGrid1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.metroGrid1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metroGrid1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGrid1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.metroGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.metroGrid1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.zeroitAnimatorEdit1.SetDecoration(this.metroGrid1, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metroGrid1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGrid1.DefaultCellStyle = dataGridViewCellStyle7;
             this.metroGrid1.EnableHeadersVisualStyles = false;
             this.metroGrid1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.metroGrid1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -666,14 +666,14 @@ namespace macdoc
             this.metroGrid1.Name = "metroGrid1";
             this.metroGrid1.ReadOnly = true;
             this.metroGrid1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metroGrid1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGrid1.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.metroGrid1.RowHeadersWidth = 82;
             this.metroGrid1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.metroGrid1.RowTemplate.Height = 33;
@@ -729,7 +729,7 @@ namespace macdoc
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.zeroitAnimatorEdit1.SetDecoration(this.pictureBox1, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(14, 21);
+            this.pictureBox1.Location = new System.Drawing.Point(24, 21);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(66, 66);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -748,10 +748,10 @@ namespace macdoc
             this.MenuButton.IconColor = System.Drawing.Color.White;
             this.MenuButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.MenuButton.IconSize = 60;
-            this.MenuButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.MenuButton.Location = new System.Drawing.Point(14, 273);
+            this.MenuButton.Location = new System.Drawing.Point(14, 268);
             this.MenuButton.Name = "MenuButton";
-            this.MenuButton.Size = new System.Drawing.Size(69, 72);
+            this.MenuButton.Padding = new System.Windows.Forms.Padding(5);
+            this.MenuButton.Size = new System.Drawing.Size(83, 77);
             this.MenuButton.TabIndex = 16;
             this.MenuButton.Tag = "Synthesis";
             this.MenuButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -786,8 +786,8 @@ namespace macdoc
             // panel3
             // 
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.Controls.Add(this.iconButton5);
-            this.panel3.Controls.Add(this.iconButton4);
+            this.panel3.Controls.Add(this.Excel);
+            this.panel3.Controls.Add(this.Word);
             this.panel3.Controls.Add(this.PDF);
             this.zeroitAnimatorEdit1.SetDecoration(this.panel3, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
             this.panel3.Location = new System.Drawing.Point(1834, 0);
@@ -795,51 +795,51 @@ namespace macdoc
             this.panel3.Size = new System.Drawing.Size(443, 244);
             this.panel3.TabIndex = 9;
             // 
-            // iconButton5
+            // Excel
             // 
-            this.iconButton5.BackColor = System.Drawing.Color.Transparent;
-            this.iconButton5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("iconButton5.BackgroundImage")));
-            this.iconButton5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.zeroitAnimatorEdit1.SetDecoration(this.iconButton5, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.iconButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton5.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.iconButton5.ForeColor = System.Drawing.Color.Black;
-            this.iconButton5.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.iconButton5.IconColor = System.Drawing.Color.Black;
-            this.iconButton5.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton5.IconSize = 140;
-            this.iconButton5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton5.Location = new System.Drawing.Point(315, 21);
-            this.iconButton5.Name = "iconButton5";
-            this.iconButton5.Size = new System.Drawing.Size(121, 207);
-            this.iconButton5.TabIndex = 1;
-            this.iconButton5.Tag = "CPK";
-            this.iconButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton5.UseVisualStyleBackColor = false;
-            this.iconButton5.Click += new System.EventHandler(this.CPK_Click);
+            this.Excel.BackColor = System.Drawing.Color.Transparent;
+            this.Excel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Excel.BackgroundImage")));
+            this.Excel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.zeroitAnimatorEdit1.SetDecoration(this.Excel, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.Excel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Excel.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.Excel.ForeColor = System.Drawing.Color.Black;
+            this.Excel.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.Excel.IconColor = System.Drawing.Color.Black;
+            this.Excel.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.Excel.IconSize = 140;
+            this.Excel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Excel.Location = new System.Drawing.Point(315, 21);
+            this.Excel.Name = "Excel";
+            this.Excel.Size = new System.Drawing.Size(121, 207);
+            this.Excel.TabIndex = 1;
+            this.Excel.Tag = "CPK";
+            this.Excel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.Excel.UseVisualStyleBackColor = false;
+            this.Excel.Click += new System.EventHandler(this.Excel_Click);
             // 
-            // iconButton4
+            // Word
             // 
-            this.iconButton4.BackColor = System.Drawing.Color.Transparent;
-            this.iconButton4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("iconButton4.BackgroundImage")));
-            this.iconButton4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.zeroitAnimatorEdit1.SetDecoration(this.iconButton4, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
-            this.iconButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton4.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
-            this.iconButton4.ForeColor = System.Drawing.Color.Black;
-            this.iconButton4.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.iconButton4.IconColor = System.Drawing.Color.Black;
-            this.iconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton4.IconSize = 140;
-            this.iconButton4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton4.Location = new System.Drawing.Point(158, 21);
-            this.iconButton4.Name = "iconButton4";
-            this.iconButton4.Size = new System.Drawing.Size(131, 207);
-            this.iconButton4.TabIndex = 1;
-            this.iconButton4.Tag = "CPK";
-            this.iconButton4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton4.UseVisualStyleBackColor = false;
-            this.iconButton4.Click += new System.EventHandler(this.CPK_Click);
+            this.Word.BackColor = System.Drawing.Color.Transparent;
+            this.Word.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Word.BackgroundImage")));
+            this.Word.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.zeroitAnimatorEdit1.SetDecoration(this.Word, Zeroit.Framework.Transitions.AnimatorWithEditor.DecorationType.None);
+            this.Word.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Word.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.Word.ForeColor = System.Drawing.Color.Black;
+            this.Word.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.Word.IconColor = System.Drawing.Color.Black;
+            this.Word.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.Word.IconSize = 140;
+            this.Word.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Word.Location = new System.Drawing.Point(158, 21);
+            this.Word.Name = "Word";
+            this.Word.Size = new System.Drawing.Size(131, 207);
+            this.Word.TabIndex = 1;
+            this.Word.Tag = "CPK";
+            this.Word.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.Word.UseVisualStyleBackColor = false;
+            this.Word.Click += new System.EventHandler(this.Word_Click);
             // 
             // PDF
             // 
@@ -1188,9 +1188,9 @@ namespace macdoc
         private FontAwesome.Sharp.IconButton modif_button;
         private FontAwesome.Sharp.IconButton Ajout_button;
         private FontAwesome.Sharp.IconButton PDF;
-        private FontAwesome.Sharp.IconButton iconButton5;
-        private FontAwesome.Sharp.IconButton iconButton4;
-        private FontAwesome.Sharp.IconButton MenuButton;
+        private FontAwesome.Sharp.IconButton Excel;
+        private FontAwesome.Sharp.IconButton Word;
+        private RoundedButton MenuButton;
         private PictureBox pictureBox1;
         private Panel panel2;
         private Panel panel5;

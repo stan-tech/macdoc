@@ -22,6 +22,7 @@ using System.Diagnostics;
 using static DevExpress.XtraEditors.Mask.MaskSettings;
 using System.Collections;
 using System.Web.Services.Description;
+using FontAwesome.Sharp;
 
 namespace macdoc
 {
@@ -50,7 +51,7 @@ namespace macdoc
 
                     string composants_num = "select" +
                                " count(id_machine) as counts from component inner join machine on id_machine =" +
-                                "machine.id  where machine.nom = '" + selected_machine + "' and component.type = '"+selected_component+"'; ";
+                                "machine.id  where machine.nom = '" + selected_machine + "' and component.type = '"+selected_component+"' and inserted =1; ";
 
                     SQLiteCommand cmd = new SQLiteCommand(composants_num, connection);
 
@@ -113,23 +114,30 @@ namespace macdoc
                             
                             
 
-                        string sql = "insert into component  (nom,reference,date_insertion,date_modification,id_machine,life_duration,type,modificateur) values('"
+                        string sql = "insert into component  (nom,reference,date_insertion,date_modification,id_machine,life_duration,type,modificateur,inserted,replaced) values('"
                                                         + name + "','" + reference + "','"
                                                         + date_ins + "','"
-                                                        + date_modif + "','" + id + "','"
+                                                        + date_modif + "'," + id + ",'"
                                                         + duration + "','"
                                                         + component + "'," +
-                                                        "1);";
+                                                        "1,1,0);";
+                            string updateStore = "update  component_store set "
+                                         + " quantity_left = quantity_left + 1" +
+                                          " where type = '" + component + "' and state = \"InUse\";";
 
-                                    SQLiteCommand command = new SQLiteCommand(sql, conn);
+                            SQLiteCommand storeCommand = new SQLiteCommand(updateStore, conn)
+                                , command = new SQLiteCommand(sql, conn);
 
 
                                     if (command.ExecuteNonQuery() > 0)
                                     {
 
-                                        conn.Close();
+                                        if (storeCommand.ExecuteNonQuery()>0)
+                                        {
 
-                                        done = true;
+                                            done = true;
+        
+                                         }                                     
 
 
 
@@ -188,10 +196,11 @@ namespace macdoc
             return done;
         }
 
-        public static bool PerformModification(string id, string component, string name, string reference, string date_ins,
-            string date_modif, string notes,string modificateur)
+        public static bool PerformModification(string id, string Oldcomponent,string NewComponent, string name, string reference, string date_ins,
+            string date_modif, string notes,string modificateur,bool replaced,string type)
         {
             bool done = false;
+            bool keepGoing = true;
 
             using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
             {
@@ -211,40 +220,110 @@ namespace macdoc
                                  ",reference = '" + reference + "',date_insertion = '" + date_ins +
                                  "',date_modification = '" + date_modif + "' , num_modification = num_modification + 1 " +
                                  "where id = " + id + ";";
+                            string updateNewSql,updateStore,updateStoreMinus = "";
 
-                            using (SQLiteCommand command = new SQLiteCommand(updateSql, conn))
-
+                            if (replaced)
                             {
-                                if (command.ExecuteNonQuery() > 0)
+                                updateSql = "update  component set nom = '" + name + "'" +
+                                 ",inserted = 0 , replaced = 1, date_insertion = '" + date_ins +
+                                 "',date_modification = '" + date_modif + "' , num_modification = num_modification + 1 " +
+                                 "where reference = '" + Oldcomponent + "';";
+
+                                updateStore = "update  component_store set "  
+                                          + " quantity_left = quantity_left + 1" +
+                                           " where type = '" + type + "' and state = \"Replaced\";";
+
+                                updateStoreMinus = "update  component_store set "
+                                          + " quantity_left = quantity_left - 1" +
+                                           ", total =  quantity_left * price_ where type = '" + type + "' and state = \"Nouveau\";";
+
+                                SQLiteCommand updateCommand = new SQLiteCommand(updateStore, conn);
+                                SQLiteCommand updateCommandMinus = new SQLiteCommand(updateStoreMinus, conn);
+
+
+                                try
                                 {
-                                    string id_machine = new SQLiteCommand("select id_machine from component where reference = '" + reference + "';", conn).ExecuteScalar().ToString();
-
-
-                                    string insertSql = "insert into modification (date,id_composant,modificateur,notes,id_machine)" +
-                                        " values ('" + date_modif + "', " + id + "," + modificateur + ",'" + notes + "'," + id_machine + ");";
-                                    SQLiteCommand cmd = new SQLiteCommand(insertSql, conn);
-
-
-                                    if (cmd.ExecuteNonQuery() > 0)
+                                    if(updateCommand.ExecuteNonQuery() <=0 ||
+                                        updateCommandMinus.ExecuteNonQuery() <= 0)
                                     {
-
-                                        done = true;
+                                        keepGoing = false;
+                                        MessageBox.Show("Quelque chose n'est pas correcte!");
                                     }
-
-
-                                    conn.Close();
-
-
-
                                 }
-                                else
+                                catch(Exception ex)
+                                { 
+                                
+                                
+                                
+                                }
+
+
+
+                            }
+
+                            if (keepGoing)
+                            {
+                                using (SQLiteCommand command = new SQLiteCommand(updateSql, conn))
                                 {
-                                    MessageBox.Show("Echec !", "Ajout", MessageBoxButtons.OK);
+
+                                    if (command.ExecuteNonQuery() > 0)
+                                    {
+                                        string id_machine = new SQLiteCommand("select id_machine from component where reference = '" + Oldcomponent + "';", conn)
+                                            .ExecuteScalar().ToString();
+
+                                        if (id_machine.Equals(""))
+                                        {
+                                            id_machine = "null";
+                                        }
+
+                                        if (replaced)
+                                        {
+                                            updateNewSql = "update  component set nom = '" + name + "'" +
+                                           ",inserted = 1 ,replaced = 0, id_machine = " + id_machine + ",date_insertion = '" + date_ins +
+                                           "',date_modification = '" + date_modif + "' " +
+                                           "where reference = '" + NewComponent + "';";
+
+                                            SQLiteCommand Newcommand = new SQLiteCommand(updateNewSql, conn);
+                                            try
+                                            {
+                                                Newcommand.ExecuteNonQuery();
+
+                                            }
+                                            catch (Exception)
+                                            {
+
+                                                throw;
+                                            }
+
+                                        }
 
 
+                                        string insertSql = "insert into modification (date,id_composant,modificateur,notes,id_machine)" +
+                                            " values ('" + date_modif + "', " + id + "," + modificateur + ",\"" + notes + "\"," + id_machine + ");";
+                                        SQLiteCommand cmd = new SQLiteCommand(insertSql, conn);
+
+
+                                        if (cmd.ExecuteNonQuery() > 0)
+                                        {
+
+                                            done = true;
+                                        }
+
+
+                                        conn.Close();
+
+
+
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Echec !", "Ajout", MessageBoxButtons.OK);
+
+
+                                    }
                                 }
-                            } 
 
+                            }
 
                            
 
@@ -396,7 +475,7 @@ namespace macdoc
             string sqlcommand = "select component.id, component.nom , component.reference , date_insertion as \"date d'insertion\", date_modification as \"date " +
                     "de modification\" , life_duration as \"durée de vie\" , num_modification as \"nombre de modifications \"  from" +
                     " component inner join machine on machine.id = component.id_machine where machine.nom = '" 
-                    + selected_machine + "' and component.type ='"+selection+"';";
+                    + selected_machine + "' and component.type ='"+selection+"' and inserted = 1;";
 
             if (Equals(selection, "Vérin"))
             {
@@ -1028,7 +1107,7 @@ namespace macdoc
 
       
 
-        public static async Task<DataTable> FillStoreGrid()
+        public static async Task<DataTable> FillStoreGrid(string state)
         {
             DataTable table = new DataTable();
 
@@ -1040,7 +1119,7 @@ namespace macdoc
                     conn.Open();
 
 
-                    string selectAdmin = "select type as Composant , quantity_left as \"Reste\"  , price_ as Prix , unit as Unité  , Total from component_store ;";
+                    string selectAdmin = "select type as Composant , quantity_left as \"Reste\"  , price_ as Prix , unit as Unité  , Price_*quantity_left as Total from component_store where state = '" + state + "';";
 
                     try
                     {
@@ -1068,10 +1147,12 @@ namespace macdoc
             return table;
             
         }
-        public static Dictionary<string, int> AssignQuantity(int qtCap, int qtRed, int qtMot, int qtCourr, int qtHuile,List<Component> list)
+        public static Dictionary<string, int> AssignQuantity(List<Component> list)
         {
         
             int assigned_qt= 0;
+            int qtCap = 0, qtRed = 0, qtMot = 0, qtCourr = 0, qtHuile = 0;
+
             Dictionary<string, int> quantities = new Dictionary<string, int>();
             
             foreach (Component c in list)
@@ -1079,29 +1160,29 @@ namespace macdoc
                 switch (c.Type)
                 {
                     case "Capteur":
-                        qtCap ++;
+                        qtCap += c.Quantity;
                      
                         assigned_qt = qtCap;
 
                         break;
                     case "Moteur":
-                        qtMot++;
+                        qtMot += c.Quantity;
                         assigned_qt = qtMot;
 
 
                         break;
                     case "Reducteur":
-                        qtRed++;
+                        qtRed += c.Quantity;
                         assigned_qt = qtRed;
 
                         break;
                     case "Huile":
-                        qtHuile++;
+                        qtHuile += c.Quantity;
                         assigned_qt = qtHuile;
 
                         break;
                     case "Courroie":
-                        qtCourr++;
+                        qtCourr += c.Quantity;
                         assigned_qt = qtCourr;
 
                         break;
@@ -1124,12 +1205,12 @@ namespace macdoc
         public static bool AddToStore(List<Component> components,Dictionary<string,double> prices)
         {
             bool done = false;
-            int qtCap=0, qtRed=0, qtMot=0, qtCourr = 0, qtHuile = 0;
-            Dictionary<string, int> AssignedQuantity = AssignQuantity(qtCap, qtRed, qtMot, qtCourr, qtHuile, components);
+           
+            Dictionary<string, int> AssignedQuantity = AssignQuantity(components);
             string[] types = new string[AssignedQuantity.Keys.Count];
 
             string insertComponent = "";
-            string updatestore = "";
+            string updatestorePrice = "", updatestore = "";
 
 
             using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
@@ -1161,9 +1242,7 @@ namespace macdoc
                                       
                                             done = true;
 
-                                      
-                                            done = false;
-                                       
+                                                                             
 
                                     }
                                     else
@@ -1180,10 +1259,18 @@ namespace macdoc
                                 {
                                     updatestore = "update  component_store set price_ = " + prices[types[a]]
                                            + " , quantity_left = quantity_left + " + AssignedQuantity[types[a]]+
-                                            ", total =  quantity_left * price_ where type = '" + types[a] + "';";
-                                    SQLiteCommand updateCommand = new SQLiteCommand(updatestore, conn);
+                                            " where type = '" + types[a] + "' and state = \"Nouveau\";";
 
-                                    if (updateCommand.ExecuteNonQuery() > 0)
+
+                                updatestorePrice = "update  component_store set price_ = " + prices[types[a]]
+                                          + " where type = '" + types[a] + "';";
+
+                                SQLiteCommand updateCommand = new SQLiteCommand(updatestore, conn);
+                                SQLiteCommand updatePriceCommand = new SQLiteCommand(updatestorePrice, conn);
+
+
+                                if (updateCommand.ExecuteNonQuery() > 0 &&
+                                    updatePriceCommand.ExecuteNonQuery()>0)
                                     {
                                         done = true;
 
@@ -1260,6 +1347,189 @@ namespace macdoc
 
                     return refs;
         }
+        public static async Task<DataTable> SelectStoreComponents(MetroGrid grid , string selectionType, bool search, string searchText)
+        {
+            string condition = "";
+
+            switch (selectionType)
+            {
+                case "n":
+                    condition = "inserted = 0 and replaced = 0";
+
+                    break;
+                case "u":
+                    condition = "inserted = 1";
+
+                    break;
+                case "r":
+                    condition = "inserted = 0 and replaced = 1";
+
+                    break;
+            }
+
+            DataTable table = new DataTable();
+
+            using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
+            {
+                string select;
+
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+
+                    if (search && !searchText.Equals(""))
+                    {
+
+                       select  = "select component.id,component.Type as Type, component.nom , component.reference , date_insertion as \"date d'insertion\", date_modification as \"date " +
+                                          "de modification\" , life_duration as \"durée de vie\", machine.nom as Machine from" +
+                                          " component full join machine on machine.id = component.id_machine where " +
+                                          "( LOWER(component.reference) like '%" + searchText.ToLower().Trim()+ "%' or LOWER(component.nom) " +
+                                          "like '%" + searchText.ToLower().Trim()+ "%' ) and " + condition + "  order by component.id, component.Type ; ";
+                    }
+                    else
+                    {
+
+                         select = "select component.id,component.Type as Type, component.nom , component.reference , date_insertion as \"date d'insertion\", date_modification as \"date " +
+                                          "de modification\" , life_duration as \"durée de vie\", machine.nom as Machine from" +
+                                          " component full join machine on machine.id = component.id_machine where " + condition + " order by component.id, component.Type;";
+
+                    }
+                    SQLiteCommand sqlcmd = new SQLiteCommand(select, conn);
+                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlcmd);
+                    try
+                    {
+                        adapter.Fill(table);
+                        grid.Invoke((MethodInvoker)(() => {
+                            grid.DataSource = table;
+                        }));
+
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+            return table;
+        }
+        public static void SelectNumber(IconButton newComponent, IconButton UsedComponent, IconButton ReplacedComponent)
+        {
+
+            using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
+            {
+                string selectUsed = "select count(id) from  component where inserted =1;";
+                string selectNew= "select count(id) from  component where inserted = 0 and replaced = 0;";
+
+                string selectReplaced = "select count(id) from  component where inserted =0 and replaced =1;";
+
+
+
+
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+
+                    try
+                    {
+                        SQLiteDataReader reader = new SQLiteCommand(selectNew, conn).ExecuteReader();
+                        SQLiteDataReader Usedreader = new SQLiteCommand(selectUsed, conn).ExecuteReader();
+
+                        SQLiteDataReader Replacedreader = new SQLiteCommand(selectReplaced, conn).ExecuteReader();
+
+                      UsedComponent.Invoke((MethodInvoker) (()=> {
+
+
+                          if (Usedreader.Read())
+                          {
+                              UsedComponent.Text = "En usage" + "       " + Usedreader.GetInt32(0);
+
+                          }
+                      }));
+                        ReplacedComponent.Invoke((MethodInvoker)(() =>
+                        {
+                            if (Replacedreader.Read())
+                            {
+                                ReplacedComponent.Text = "Remplacés" + "        " + Replacedreader.GetInt32(0);
+
+                            }                        }));
+
+                        newComponent.Invoke((MethodInvoker)(() =>
+                        {
+                            if (reader.Read())
+                            {
+                                newComponent.Text = "Nouveaux" + "       " + reader.GetInt32(0);
+
+                            }                        }));
+
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+
+
+
+
+                }
+            }
+        }
+        public static void SelectFromComponentStore(RoundedGrid roundedGrid, string state)
+        {
+            DataTable table = new DataTable();
+
+            using (SQLiteConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString))
+            {
+
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+
+
+                    string selectAdmin = "select type as Composant , quantity_left as \"Reste\"  , price_ as Prix , unit as Unité  , Total from component_store where state = '"+state+"';";
+
+                    try
+                    {
+                        SQLiteCommand command = new SQLiteCommand(selectAdmin, conn);
+                        SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
+                        adapter.Fill(table);
+
+
+                        roundedGrid.Invoke((MethodInvoker)(() =>
+                        {
+                            
+                                roundedGrid.DataSource = table;
+
+                            
+                        }));
+
+
+
+                    }
+                    catch (Exception e)
+                    {
+                        string i = e.Message;
+
+                    }
+
+                }
+                else
+                {
+                    conn.Close();
+                }
+
+            }
+        }
+
     }
 }
 

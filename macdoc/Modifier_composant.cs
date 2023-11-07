@@ -110,11 +110,15 @@ namespace macdoc
                 date = modif.Value.ToString();
             }
 
+            bool replaced = false;
+            if(CapRef.Text != compon.Reference)
+            {
+                replaced = true;
+            }
+           
 
-
-
-            if (DBHelper.PerformModification(compon.ID.ToString(), compon.Type,
-                CapName.Text, CapRef.Text, inst.Value.ToString(), date, notes.Text, "1"))
+            if (DBHelper.PerformModification(compon.ID.ToString(), compon.Reference,CapRef.Text,
+                CapName.Text, CapRef.Text, inst.Value.ToString(), date, notes.Text, "1",replaced,compon.Type))
             {
                 OnRefreshRequested(EventArgs.Empty);
 
@@ -123,28 +127,45 @@ namespace macdoc
         }
         private void Ok_Click(object sender, EventArgs e)
         {
-            if (!references.Contains(CapRef.Text))
-            {
-                DialogResult result = MessageBox.Show("Cette reference n'existe pas. Vous pouvez l'ajouter via le store", "",MessageBoxButtons.OKCancel);
-                if(result == DialogResult.OK)
-                {
-                    Arrivage arrivage = new Arrivage(compon.Type, true);
-                    arrivage.ShowDialog();
-                    this.Close();
 
-                    return;
+            if (!CapRef.Text.Equals(compon.Reference))
+            {
+                if (!references.Contains(CapRef.Text))
+                {
+                    DialogResult result = MessageBox.Show("Cette reference n'existe pas. Vous pouvez l'ajouter via le store", "", MessageBoxButtons.OKCancel);
+                    if (result == DialogResult.OK)
+                    {
+                        Arrivage arrivage = new Arrivage(compon.Type, true);
+                        arrivage.Name = CapName.Text;
+                        arrivage.Reference = CapRef.Text;
+                        arrivage.ShowDialog();
+                        this.Close();
+
+                        return;
+                    }
+
+                }
+                else
+                {
+
+                    ConfirmAction confirm =
+                    new ConfirmAction();
+                    confirm.Confirmed += Confirmed;
+                    confirm.ShowDialog();
+
                 }
 
             }
             else
             {
-
                 ConfirmAction confirm =
-                new ConfirmAction();
+                    new ConfirmAction();
                 confirm.Confirmed += Confirmed;
                 confirm.ShowDialog();
-
             }
+            
+            
+         
 
 
         }

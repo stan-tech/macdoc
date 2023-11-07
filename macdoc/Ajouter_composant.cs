@@ -29,7 +29,7 @@ namespace macdoc
             ShowInTaskbar = false;
 
 
-            if (component != "Courroie" ) {
+            if (component != "Courroie") {
 
                 this.Text = "Ajouter un " + component;
 

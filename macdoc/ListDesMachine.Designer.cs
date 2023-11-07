@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Tecno-ferrari");
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("New-check");
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Triage");
@@ -55,7 +56,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.CompNum = new macdoc.RoundedLabel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.Excel = new FontAwesome.Sharp.IconButton();
+            this.Word = new FontAwesome.Sharp.IconButton();
+            this.PDF = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).BeginInit();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroGrid1
@@ -107,15 +113,18 @@
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 20, 0, 20);
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.metroGrid1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.metroGrid1.RowHeadersWidth = 82;
             this.metroGrid1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(16, 25, 16, 25);
+            this.metroGrid1.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.metroGrid1.RowTemplate.Height = 33;
             this.metroGrid1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.metroGrid1.Size = new System.Drawing.Size(1054, 884);
+            this.metroGrid1.Size = new System.Drawing.Size(1701, 884);
             this.metroGrid1.Style = MetroFramework.MetroColorStyle.Silver;
             this.metroGrid1.TabIndex = 12;
             this.metroGrid1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.metroGrid1_CellContentClick);
@@ -229,7 +238,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(1164, 109);
+            this.label2.Location = new System.Drawing.Point(1712, 109);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(162, 45);
             this.label2.TabIndex = 49;
@@ -240,7 +249,7 @@
             this.CompNum.BackColor = System.Drawing.Color.Gold;
             this.CompNum.Font = new System.Drawing.Font("Lucida Console", 13.125F, System.Drawing.FontStyle.Bold);
             this.CompNum.ForeColor = System.Drawing.Color.Black;
-            this.CompNum.Location = new System.Drawing.Point(1351, 101);
+            this.CompNum.Location = new System.Drawing.Point(1899, 101);
             this.CompNum.Name = "CompNum";
             this.CompNum.Padding = new System.Windows.Forms.Padding(10);
             this.CompNum.Size = new System.Drawing.Size(116, 53);
@@ -248,12 +257,87 @@
             this.CompNum.Text = "23";
             this.CompNum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Controls.Add(this.Excel);
+            this.panel3.Controls.Add(this.Word);
+            this.panel3.Controls.Add(this.PDF);
+            this.panel3.Location = new System.Drawing.Point(1112, 12);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(443, 160);
+            this.panel3.TabIndex = 51;
+            // 
+            // Excel
+            // 
+            this.Excel.BackColor = System.Drawing.Color.Transparent;
+            this.Excel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Excel.BackgroundImage")));
+            this.Excel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Excel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Excel.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.Excel.ForeColor = System.Drawing.Color.Black;
+            this.Excel.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.Excel.IconColor = System.Drawing.Color.Black;
+            this.Excel.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.Excel.IconSize = 140;
+            this.Excel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Excel.Location = new System.Drawing.Point(315, 19);
+            this.Excel.Name = "Excel";
+            this.Excel.Size = new System.Drawing.Size(121, 117);
+            this.Excel.TabIndex = 1;
+            this.Excel.Tag = "CPK";
+            this.Excel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.Excel.UseVisualStyleBackColor = false;
+            // 
+            // Word
+            // 
+            this.Word.BackColor = System.Drawing.Color.Transparent;
+            this.Word.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Word.BackgroundImage")));
+            this.Word.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Word.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Word.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.Word.ForeColor = System.Drawing.Color.Black;
+            this.Word.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.Word.IconColor = System.Drawing.Color.Black;
+            this.Word.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.Word.IconSize = 140;
+            this.Word.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Word.Location = new System.Drawing.Point(158, 19);
+            this.Word.Name = "Word";
+            this.Word.Size = new System.Drawing.Size(131, 117);
+            this.Word.TabIndex = 1;
+            this.Word.Tag = "CPK";
+            this.Word.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.Word.UseVisualStyleBackColor = false;
+            // 
+            // PDF
+            // 
+            this.PDF.BackColor = System.Drawing.Color.Transparent;
+            this.PDF.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PDF.BackgroundImage")));
+            this.PDF.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.PDF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.PDF.Font = new System.Drawing.Font("Calibri", 13.875F, System.Drawing.FontStyle.Bold);
+            this.PDF.ForeColor = System.Drawing.Color.Black;
+            this.PDF.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.PDF.IconColor = System.Drawing.Color.Black;
+            this.PDF.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.PDF.IconSize = 100;
+            this.PDF.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.PDF.Location = new System.Drawing.Point(17, 19);
+            this.PDF.Name = "PDF";
+            this.PDF.Size = new System.Drawing.Size(115, 117);
+            this.PDF.TabIndex = 1;
+            this.PDF.Tag = "CPK";
+            this.PDF.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.PDF.UseVisualStyleBackColor = false;
+            // 
             // ListDesMachine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
-            this.ClientSize = new System.Drawing.Size(1480, 1079);
+            this.ClientSize = new System.Drawing.Size(2127, 1079);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.CompNum);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.iconButton2);
@@ -268,6 +352,7 @@
             this.Text = "List des machine";
             this.Load += new System.EventHandler(this.ListDesMachine_Load);
             ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).EndInit();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,5 +368,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private RoundedLabel CompNum;
+        private System.Windows.Forms.Panel panel3;
+        private FontAwesome.Sharp.IconButton Excel;
+        private FontAwesome.Sharp.IconButton Word;
+        private FontAwesome.Sharp.IconButton PDF;
     }
 }
